@@ -1,0 +1,105 @@
+@import '../../styles/global.scss';
+
+.notFound {
+  display: flex;
+  position: absolute;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  height: -webkit-fill-available;
+  width: 100%;
+
+  &__holder {
+    background: pink;
+    height: 100vh;
+    height: -webkit-fill-available;
+    width: 100%;
+    position: absolute;
+  }
+
+  h1 {
+    position: relative;
+    user-select: none;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+    animation-name: notFound;
+    animation-fill-mode: forwards;
+    will-change: transform, opacity;
+    transform: scale(0) rotate(0deg);
+    //font-size: 16vmin;
+  }
+}
+
+@keyframes notFound {
+  from {
+    transform: scale(0) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+    transform: scale(5) rotate(0deg);
+  }
+}
+
+$delay: 50ms;
+
+.notFound.red {
+  z-index: 15;
+
+  h1 {
+    animation-delay: $delay;
+    color: #ff1f00;
+    -webkit-text-stroke: 1px;
+  }
+}
+
+.notFound.orange {
+  z-index: 14;
+
+  h1 {
+    animation-delay: $delay * 2;
+    color: #ff8a00;
+  }
+}
+
+.notFound.yellow {
+  z-index: 13;
+
+  h1 {
+    animation-delay: $delay * 3;
+    color: #ffc800;
+  }
+}
+
+.notFound.green {
+  z-index: 12;
+
+  h1 {
+    animation-delay: $delay * 4;
+    color: #7bdc00;
+  }
+}
+
+.notFound.blue {
+  z-index: 11;
+
+  h1 {
+    animation-delay: $delay * 5;
+    color: #0094ff;
+  }
+}
+
+.notFound.fiollet {
+  z-index: 10;
+
+  h1 {
+    animation-delay: $delay * 6;
+    color: #9e00ff;
+  }
+}
