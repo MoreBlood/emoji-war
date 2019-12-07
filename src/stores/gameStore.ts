@@ -5,6 +5,7 @@ import { Pair } from '../types/pair';
 
 export class GameStore {
   public gameSize = 2;
+  private time = 2 * this.gameSize;
 
   @observable
   public firstPair: Pair = new Pair();
@@ -18,8 +19,32 @@ export class GameStore {
   @observable
   public scoreWrong: number = 0;
 
+  @observable
+  public timer: number = this.time;
+
+  @observable
+  public skinColor: number = 0;
+
+  private timerUpdater: NodeJS.Timeout = null;
+
   public constructor() {
     this.generate();
+  }
+
+  @action
+  private decrease(): void {
+    this.timer -= 1;
+    if (this.timer === 0) {
+      this.generate();
+      this.scoredWrong += 1;
+    }
+  }
+
+  private initTimer(): void {
+    if (this.timerUpdater) {
+      clearInterval(this.timerUpdater);
+    }
+    this.timerUpdater = setInterval(() => this.decrease(), 1000);
   }
 
   @action
@@ -46,6 +71,9 @@ export class GameStore {
 
     this.firstPair = new Pair(first);
     this.secondPair = new Pair(second);
+    this.skinColor = randomInteger(0, skin.length);
+    this.timer = this.time;
+    this.initTimer();
   }
 
   public static randomEmoji(): string {
@@ -56,12 +84,24 @@ export class GameStore {
     }
   }
 
+  private set scoredWrong(value: number) {
+    if (window.navigator && window.navigator.vibrate) {
+      window.navigator.vibrate(200);
+    }
+
+    this.scoreWrong = value;
+  }
+
+  private get scoredWrong(): number {
+    return this.scoreWrong;
+  }
+
   @action
   public voteForPairs(vote: boolean): void {
     if (this.comparePairs === vote) {
       this.scoreRight += 1;
     } else {
-      this.scoreWrong += 1;
+      this.scoredWrong += 1;
     }
     this.generate();
   }

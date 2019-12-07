@@ -41,7 +41,7 @@ class Game extends React.Component<PropsType> {
   private no = (): void => this.gameStore.voteForPairs(false);
 
   public render(): React.ReactNode {
-    const { firstPair, secondPair, gameSize, scoreRight, scoreWrong, comparePairs } = this.gameStore;
+    const { firstPair, secondPair, timer, scoreRight, scoreWrong, comparePairs, skinColor } = this.gameStore;
     return (
       <div className="App">
         <div className="gameField">
@@ -51,34 +51,51 @@ class Game extends React.Component<PropsType> {
             {secondPair.hash}
           </div> */}
           <div style={{ display: 'flex' }}>
-            <div className="blured score">{`✅: ${scoreRight}`}</div>
-            <div className="blured score">{`❌: ${scoreWrong}`}</div>
+            <TransitionGroup className="score-holder scale">
+              <CSSTransition key={scoreRight} timeout={500} classNames="scale">
+                <div className="blured score">{`✅: ${scoreRight}`}</div>
+              </CSSTransition>
+            </TransitionGroup>
+            <TransitionGroup className="score-holder scale timer">
+              <CSSTransition key={timer} timeout={500} classNames="scale">
+                <div className="blured score">{timer}</div>
+              </CSSTransition>
+            </TransitionGroup>
+            <TransitionGroup className="score-holder scale">
+              <CSSTransition key={scoreWrong} timeout={500} classNames="scale">
+                <div className="blured score">{`❌: ${scoreWrong}`}</div>
+              </CSSTransition>
+            </TransitionGroup>
           </div>
           <div className="pairs blured">
             {[firstPair, secondPair].map((pair, index) => {
               return (
-                <div className="pair" key={`pair_${pair.hash}_${index}`}>
-                  {pair.pair.map(rows => {
-                    return (
-                      <div className="emoji-row" key={rows.join('-')}>
-                        {rows.map(item => (
-                          <div key={item}>
-                            <Emoji>{item}</Emoji>
+                <TransitionGroup key={`${index}`} className="pair-holder scale">
+                  <CSSTransition key={pair.hash} timeout={500} classNames="scale">
+                    <div className="pair">
+                      {pair.pair.map(rows => {
+                        return (
+                          <div className="emoji-row" key={rows.join()}>
+                            {rows.map(item => (
+                              <div key={item}>
+                                <Emoji>{item}</Emoji>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    );
-                  })}
-                </div>
+                        );
+                      })}
+                    </div>
+                  </CSSTransition>
+                </TransitionGroup>
               );
             })}
           </div>
           <div className="blured buttons">
             <button className="thumb down" onClick={this.yes}>
-              <Emoji>{`👍${skin[randomInteger(0, skin.length)]}`}</Emoji>
+              <Emoji>{`👍${skin[skinColor]}`}</Emoji>
             </button>
             <button className="thumb up" onClick={this.no}>
-              <Emoji>{`👎${skin[randomInteger(0, skin.length)]}`}</Emoji>
+              <Emoji>{`👎${skin[skinColor]}`}</Emoji>
             </button>
           </div>
         </div>

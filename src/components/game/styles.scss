@@ -3,6 +3,7 @@
 .emoji-row {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .buttons {
@@ -19,10 +20,76 @@
   font-size: 2vh * $scaler;
   font-weight: bold;
   border-radius: 1vh * $scaler;
-  margin: 2vh * $scaler;
-  padding: 1vh * $scaler 1.5vh * $scaler;
+  // margin: 2vh * $scaler;
+  // padding: 1vh * $scaler 1.5vh * $scaler;
   background: rgba(0, 0, 0, 0.4) !important;
   box-shadow: 0 0 1vh * $scaler rgba(0, 0, 0, 0.62);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.scale {
+  &-enter {
+    opacity: 0;
+    transform: scale(0);
+
+    &-active {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+      transition: all 300ms ease-in-out 100ms;
+    }
+
+    &-done {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: scale(1);
+
+    &-active {
+      opacity: 0 !important;
+      transform: scale(0);
+      transition: all 300ms ease-in-out;
+    }
+
+    &-done {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+}
+
+.score-holder {
+  position: relative;
+  width: 8vh;
+  height: 4vh;
+  margin: 2vh * $scaler 1vh * $scaler;
+  padding: 1vh * $scaler 1.5vh * $scaler;
+
+  &.timer {
+    width: 4vh;
+  }
+}
+
+.pair-holder {
+  position: relative;
+  width: 23vh;
+  height: 23vh;
+
+  &:first-child {
+    border: none;
+    border-bottom: 0.2vh * $scaler dotted rgba(255, 255, 255, 0.425);
+    margin-bottom: 2.5vh * $scaler;
+    padding-bottom: 2.5vh * $scaler;
+  }
 }
 
 .debug {
@@ -35,7 +102,6 @@
   flex-direction: column;
   border-radius: 2vh * $scaler;
   padding: 2vh * $scaler;
-  position: relative;
 }
 
 .blured {
@@ -60,47 +126,12 @@
 }
 
 .pair {
-  &:first-child {
-    border: none;
-    border-bottom: 0.2vh * $scaler dotted rgba(255, 255, 255, 0.425);
-    margin-bottom: 2.5vh * $scaler;
-    padding-bottom: 2.5vh * $scaler;
-  }
-
+  width: 100%;
   display: flex;
   flex-direction: column;
-
-  &-enter {
-    opacity: 0;
-    // transform: scale(0);
-
-    &-active {
-      opacity: 1;
-      // transform: scale(1) rotate(0deg);
-      transition: all 500ms ease-in-out 100ms;
-    }
-
-    &-done {
-      opacity: 1;
-      // transform: scale(1);
-    }
-  }
-
-  &-exit {
-    opacity: 1;
-    // transform: scale(1);
-
-    &-active {
-      opacity: 0 !important;
-      // transform: scale(0);
-      transition: all 500ms ease-in-out;
-    }
-
-    &-done {
-      opacity: 0;
-      // transform: scale(0);
-    }
-  }
+  top: 0;
+  left: 0;
+  position: absolute;
 }
 
 .thumb {
@@ -110,12 +141,13 @@
   border-radius: 2vh * $scaler;
   cursor: pointer;
   user-select: none;
-  transition: all linear 150ms;
+  transition: all linear 100ms;
   padding: 0.5vh * $scaler;
   box-shadow: 0 0.4vh * $scaler 2vh * $scaler #be11fe;
+  touch-action: manipulation;
 
   &:active {
-    transform: scale(0.9);
+    transform: scale(0.8);
     opacity: 1;
   }
 
