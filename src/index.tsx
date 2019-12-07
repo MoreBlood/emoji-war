@@ -28,19 +28,19 @@ ReactDOM.render(router, document.getElementById('root'));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-function listener(): void {
-  switch (screen.orientation.type) {
-    case 'landscape-primary':
-      window.document.documentElement.requestFullscreen();
-      break;
-    default: {
-      if (window.document.fullscreen) {
-        window.document.exitFullscreen();
-      }
-    }
-  }
-}
+// function listener(): void {
+//   switch (screen.orientation.type) {
+//     case 'landscape-primary':
+//       window.document.documentElement.requestFullscreen();
+//       break;
+//     default: {
+//       if (window.document.fullscreen) {
+//         window.document.exitFullscreen();
+//       }
+//     }
+//   }
+// }
 
-if (window.screen && window.screen.orientation) {
-  window.screen.orientation.addEventListener('change', listener, false);
-}
+// if (window.screen && window.screen.orientation) {
+//   window.screen.orientation.addEventListener('change', listener, false);
+// }

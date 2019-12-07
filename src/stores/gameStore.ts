@@ -1,18 +1,22 @@
 import { observable, action, computed, toJS } from 'mobx';
 import { randomInteger, yes } from '../helpers/math';
-import { emoticons } from '../helpers/emojis';
+import { emoticons, skin, colorable } from '../helpers/emojis';
+import { Pair } from '../types/pair';
 
 export class GameStore {
   public gameSize = 2;
 
   @observable
-  public firstPair: string[][] = [];
+  public firstPair: Pair = new Pair();
 
   @observable
-  public secondPair: string[][] = [];
+  public secondPair: Pair = new Pair();
 
   @observable
-  public score: number = 0;
+  public scoreRight: number = 0;
+
+  @observable
+  public scoreWrong: number = 0;
 
   public constructor() {
     this.generate();
@@ -20,14 +24,16 @@ export class GameStore {
 
   @action
   private generate(): void {
+    const first: string[][] = [];
+    const second: string[][] = [];
     for (let i = 0; i < this.gameSize; i += 1) {
-      if (!Array.isArray(this.firstPair[i])) {
-        this.firstPair[i] = [];
-        this.secondPair[i] = [];
+      if (!Array.isArray(first[i])) {
+        first[i] = [];
+        second[i] = [];
       }
       for (let u = 0; u < this.gameSize; u += 1) {
-        this.firstPair[i][u] = GameStore.randomEmoji();
-        this.secondPair[i][u] = this.firstPair[i][u];
+        first[i][u] = GameStore.randomEmoji();
+        second[i][u] = first[i][u];
       }
     }
 
@@ -35,31 +41,34 @@ export class GameStore {
       const randomRow = randomInteger(0, this.gameSize);
       const randomColoumn = randomInteger(0, this.gameSize);
 
-      this.secondPair[randomRow][randomColoumn] = GameStore.randomEmoji();
+      second[randomRow][randomColoumn] = GameStore.randomEmoji();
     }
+
+    this.firstPair = new Pair(first);
+    this.secondPair = new Pair(second);
   }
 
   public static randomEmoji(): string {
-    return emoticons[randomInteger(0, emoticons.length)];
+    if (yes()) {
+      return colorable[randomInteger(0, colorable.length)];
+    } else {
+      return emoticons[randomInteger(0, emoticons.length)];
+    }
   }
 
   @action
   public voteForPairs(vote: boolean): void {
     if (this.comparePairs === vote) {
-      this.score += 1;
+      this.scoreRight += 1;
+    } else {
+      this.scoreWrong += 1;
     }
     this.generate();
   }
 
   @computed
   public get comparePairs(): boolean {
-    for (let i = 0; i < this.gameSize; i += 1) {
-      for (let u = 0; u < this.gameSize; u += 1) {
-        if (this.firstPair[i][u] !== this.secondPair[i][u]) return false;
-      }
-    }
-
-    return true;
+    return this.firstPair.hash === this.secondPair.hash;
   }
 }
 

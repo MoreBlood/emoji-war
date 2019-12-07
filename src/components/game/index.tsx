@@ -11,6 +11,7 @@ import '../../styles/adaptive.scss';
 import { GameStore } from '../../stores/gameStore';
 import Emoji from '../emoji';
 import { randomInteger } from '../../helpers/math';
+import { skin } from '../../helpers/emojis';
 
 interface KeyboardEvent {
   keyCode: number;
@@ -40,21 +41,27 @@ class Game extends React.Component<PropsType> {
   private no = (): void => this.gameStore.voteForPairs(false);
 
   public render(): React.ReactNode {
-    const { firstPair, secondPair, gameSize, score, comparePairs } = this.gameStore;
+    const { firstPair, secondPair, gameSize, scoreRight, scoreWrong, comparePairs } = this.gameStore;
     return (
       <div className="App">
-        {/* <div>{comparePairs ? '=' : '!='}</div> */}
         <div className="gameField">
-          <div className="blured score">Score: {score}</div>
+          {/* <div className="blured score debug">
+            {firstPair.hash}
+            {comparePairs ? ' = ' : ' != '}
+            {secondPair.hash}
+          </div> */}
+          <div className="blured score">
+            Correct: {scoreRight} | Wrong: {scoreWrong}
+          </div>
           <div className="pairs blured">
             {[firstPair, secondPair].map((pair, index) => {
               return (
-                <div key={`pair_${index}`} className="pair">
-                  {pair.map(rows => {
+                <div className="pair" key={`pair_${pair.hash}_${index}`}>
+                  {pair.pair.map(rows => {
                     return (
-                      <div className="emoji-row" style={{ order: randomInteger(0, gameSize) }} key={rows.join('-')}>
+                      <div className="emoji-row" key={rows.join('-')}>
                         {rows.map(item => (
-                          <div style={{ order: randomInteger(0, gameSize) }} key={item}>
+                          <div key={item}>
                             <Emoji>{item}</Emoji>
                           </div>
                         ))}
@@ -67,10 +74,10 @@ class Game extends React.Component<PropsType> {
           </div>
           <div className="blured buttons">
             <button className="thumb down" onClick={this.yes}>
-              <Emoji>👍</Emoji>
+              <Emoji>{`👍${skin[randomInteger(0, skin.length)]}`}</Emoji>
             </button>
             <button className="thumb up" onClick={this.no}>
-              <Emoji>👎</Emoji>
+              <Emoji>{`👎${skin[randomInteger(0, skin.length)]}`}</Emoji>
             </button>
           </div>
         </div>
