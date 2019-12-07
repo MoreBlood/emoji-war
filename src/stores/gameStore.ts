@@ -5,8 +5,9 @@ import { Pair } from '../types/pair';
 
 export class GameStore {
   @observable
-  public gameSize = 3;
+  public gameSize = 2;
 
+  @computed
   private get time(): number {
     return 3 * this.gameSize;
   }
