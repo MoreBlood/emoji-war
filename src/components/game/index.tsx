@@ -43,30 +43,36 @@ class Game extends React.Component<PropsType> {
     const { firstPair, secondPair, gameSize, score, comparePairs } = this.gameStore;
     return (
       <div className="App">
-        <div>Score: {score}</div>
         {/* <div>{comparePairs ? '=' : '!='}</div> */}
-        <div className="pairs">
-          {[firstPair, secondPair].map((pair, index) => {
-            return (
-              <div key={`pair_${index}`} className="pair">
-                {pair.map(rows => {
-                  return (
-                    <div className="emoji-row" style={{ order: randomInteger(0, gameSize) }} key={rows.join('-')}>
-                      {rows.map(item => (
-                        <div style={{ order: randomInteger(0, gameSize) }} key={item}>
-                          <Emoji>{item}</Emoji>
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-        <div className="buttons">
-          <button onClick={this.yes}>yes</button>
-          <button onClick={this.no}>no</button>
+        <div className="gameField">
+          <div className="blured score">Score: {score}</div>
+          <div className="pairs blured">
+            {[firstPair, secondPair].map((pair, index) => {
+              return (
+                <div key={`pair_${index}`} className="pair">
+                  {pair.map(rows => {
+                    return (
+                      <div className="emoji-row" style={{ order: randomInteger(0, gameSize) }} key={rows.join('-')}>
+                        {rows.map(item => (
+                          <div style={{ order: randomInteger(0, gameSize) }} key={item}>
+                            <Emoji>{item}</Emoji>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+          <div className="blured buttons">
+            <button className="thumb down" onClick={this.yes}>
+              <Emoji>👍</Emoji>
+            </button>
+            <button className="thumb up" onClick={this.no}>
+              <Emoji>👎</Emoji>
+            </button>
+          </div>
         </div>
       </div>
     );

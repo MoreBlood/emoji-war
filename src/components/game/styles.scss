@@ -5,17 +5,78 @@
 
 .buttons {
   display: flex;
+  margin: 50px;
+}
+
+.score {
+  display: flex;
+  color: white;
+  text-transform: uppercase;
+  font-size: small;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: 25px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.62);
 }
 
 .pairs {
-  justify-content: center;
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.blured {
+  background: rgba(0, 0, 0, 0.23);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.62);
+  // backdrop-filter: blur(20px);
+}
+
+.gameField {
+  display: flex;
+  user-select: none;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(140.67% 117.32% at 100% 98.5%, #00fff0 0%, #c0f 100%), #fff;
 }
 
 .pair {
+  &:first-child {
+    border: none;
+    border-bottom: 2px dotted rgba(255, 255, 255, 0.425);
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+  }
+
   display: flex;
   flex-direction: column;
+}
+
+.thumb {
+  background: #c0f;
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: all linear 150ms;
+  padding: 5px;
+  box-shadow: 0 4px 20px #be11fe;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &.up {
+    margin-left: 20px;
+  }
+
+  &.down {
+    margin-right: 20px;
+    background: #00fff0;
+    box-shadow: 0 4px 20px #1bdcf1;
+  }
 }

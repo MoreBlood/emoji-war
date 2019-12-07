@@ -1,11 +1,12 @@
-
 body {
   font-size: 3vmin;
 }
 
-@media all and (max-width: 1690px) {}
+@media all and (max-width: 1690px) {
+}
 
-@media all and (max-width: 1280px) {}
+@media all and (max-width: 1280px) {
+}
 
 @media all and (max-width: 980px) {
   body {
@@ -13,7 +14,7 @@ body {
   }
 }
 
-@media all and (max-width: 736px) { 
+@media all and (max-width: 736px) {
   body {
     font-size: 4.5vmin;
   }
@@ -25,7 +26,6 @@ body {
   }
 }
 
-
 a {
   color: white;
 }
@@ -36,22 +36,22 @@ button:disabled {
   pointer-events: none;
 }
 
-button:enabled {
-  opacity: 0.5 !important;
-  transition: opacity 300ms ease-in-out;
-}
+// button:enabled {
+//   opacity: 0.5 !important;
+//   transition: opacity 300ms ease-in-out;
+// }
 
-button:hover {
-  opacity: 1 !important;
-  transition: opacity 300ms ease-in-out;
-}
+// button:hover {
+//   opacity: 1 !important;
+//   transition: opacity 300ms ease-in-out;
+// }
 
 // $fullHeight: -webkit-fill-available;
 
-body,
-html {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  height: -webkit-fill-available;
-}
+// body,
+// html {
+//   position: fixed;
+//   width: 100%;
+//   height: 100vh;
+//   height: -webkit-fill-available;
+// }
