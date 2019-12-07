@@ -8,4 +8,11 @@ $size: 8vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.three {
+    font-size: $size / 1.5;
+    width: $size / 1.5;
+    height: $size / 1.5;
+    padding: $size / 5 / 1.5;
+  }
 }

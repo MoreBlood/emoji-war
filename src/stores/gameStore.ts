@@ -4,8 +4,24 @@ import { emoticons, skin, colorable } from '../helpers/emojis';
 import { Pair } from '../types/pair';
 
 export class GameStore {
-  public gameSize = 2;
-  private time = 3 * this.gameSize;
+  @observable
+  public gameSize = 3;
+
+  private get time(): number {
+    return 3 * this.gameSize;
+  }
+
+  @computed
+  public get gameSizeEmoji(): string {
+    switch (this.gameSize) {
+      case 2:
+        return '2️⃣';
+      case 3:
+        return '3️⃣';
+      default:
+        return '';
+    }
+  }
 
   @observable
   public firstPair: Pair = new Pair();
@@ -34,7 +50,7 @@ export class GameStore {
   @action
   private decrease(): void {
     this.timer -= 1;
-    if (this.timer === 0) {
+    if (this.timer < 0) {
       this.generate();
       this.scoredWrong += 1;
     }
@@ -62,11 +78,13 @@ export class GameStore {
       }
     }
 
-    if (yes()) {
-      const randomRow = randomInteger(0, this.gameSize);
-      const randomColoumn = randomInteger(0, this.gameSize);
+    for (let i = 0; i < this.gameSize - 1; i += 1) {
+      if (yes()) {
+        const randomRow = randomInteger(0, this.gameSize);
+        const randomColoumn = randomInteger(0, this.gameSize);
 
-      second[randomRow][randomColoumn] = GameStore.randomEmoji();
+        second[randomRow][randomColoumn] = GameStore.randomEmoji();
+      }
     }
 
     this.firstPair = new Pair(first);
@@ -74,6 +92,21 @@ export class GameStore {
     this.skinColor = randomInteger(0, skin.length);
     this.timer = this.time;
     this.initTimer();
+  }
+
+  public restart(): void {
+    this.scoreWrong = 0;
+    this.scoreRight = 0;
+    this.generate();
+  }
+
+  public switchGameMode(): void {
+    if (this.gameSize === 2) {
+      this.gameSize = 3;
+    } else {
+      this.gameSize = 2;
+    }
+    this.restart();
   }
 
   public static randomEmoji(): string {

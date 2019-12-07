@@ -69,13 +69,13 @@
 
 .score-holder {
   position: relative;
-  width: 8vh;
-  height: 4vh;
-  margin: 2vh * $scaler 1vh * $scaler;
-  padding: 1vh * $scaler 1.5vh * $scaler;
+  width: 6vh;
+  height: 3vh;
+  margin: 1.5vh * $scaler 0.65vh * $scaler;
+  padding: 0.75vh * $scaler 1vh * $scaler;
 
   &.timer {
-    width: 4vh;
+    width: 3vh;
   }
 }
 
@@ -83,6 +83,11 @@
   position: relative;
   width: 23vh;
   height: 23vh;
+
+  // &.three {
+  //   width: 23vh;
+  //   height: 34vh;
+  // }
 
   &:first-child {
     border: none;
@@ -153,6 +158,13 @@
 
   &.up {
     margin-left: 2vh * $scaler;
+  }
+
+  &.switch {
+    font-size: 3vh * $scaler;
+    background: none;
+    box-shadow: none;
+    padding: 0;
   }
 
   &.down {

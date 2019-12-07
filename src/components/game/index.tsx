@@ -39,9 +39,11 @@ class Game extends React.Component<PropsType> {
 
   private yes = (): void => this.gameStore.voteForPairs(true);
   private no = (): void => this.gameStore.voteForPairs(false);
+  private switch = (): void => this.gameStore.switchGameMode();
+  private restart = (): void => this.gameStore.restart();
 
   public render(): React.ReactNode {
-    const { firstPair, secondPair, timer, scoreRight, scoreWrong, comparePairs, skinColor } = this.gameStore;
+    const { firstPair, secondPair, timer, scoreRight, scoreWrong, gameSizeEmoji, gameSize, skinColor } = this.gameStore;
     return (
       <div className="App">
         <div className="gameField">
@@ -51,6 +53,14 @@ class Game extends React.Component<PropsType> {
             {secondPair.hash}
           </div> */}
           <div style={{ display: 'flex' }}>
+            <div className="score-holder timer">
+              <div className="blured score">
+                <button key={gameSizeEmoji} className="thumb switch" onClick={this.switch}>
+                  {gameSizeEmoji}
+                </button>
+              </div>
+            </div>
+
             <TransitionGroup className="score-holder scale">
               <CSSTransition key={scoreRight} timeout={500} classNames="scale">
                 <div className="blured score">{`✅: ${scoreRight}`}</div>
@@ -66,6 +76,13 @@ class Game extends React.Component<PropsType> {
                 <div className="blured score">{`❌: ${scoreWrong}`}</div>
               </CSSTransition>
             </TransitionGroup>
+            <div className="score-holder timer">
+              <div className="blured score">
+                <button className="thumb switch" onClick={this.restart}>
+                  🔄
+                </button>
+              </div>
+            </div>
           </div>
           <div className="pairs blured">
             {[firstPair, secondPair].map((pair, index) => {
@@ -78,7 +95,7 @@ class Game extends React.Component<PropsType> {
                           <div className="emoji-row" key={rows.join()}>
                             {rows.map(item => (
                               <div key={item}>
-                                <Emoji>{item}</Emoji>
+                                <Emoji gameSize={gameSize}>{item}</Emoji>
                               </div>
                             ))}
                           </div>
