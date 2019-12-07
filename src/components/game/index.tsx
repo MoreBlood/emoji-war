@@ -2,7 +2,7 @@ import React from 'react';
 import { Swipeable, EventData } from 'react-swipeable';
 import { inject, observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
 
 import './styles.scss';
 import '../../styles/global.scss';
@@ -50,8 +50,9 @@ class Game extends React.Component<PropsType> {
             {comparePairs ? ' = ' : ' != '}
             {secondPair.hash}
           </div> */}
-          <div className="blured score">
-            Correct: {scoreRight} | Wrong: {scoreWrong}
+          <div style={{ display: 'flex' }}>
+            <div className="blured score">{`✅: ${scoreRight}`}</div>
+            <div className="blured score">{`❌: ${scoreWrong}`}</div>
           </div>
           <div className="pairs blured">
             {[firstPair, secondPair].map((pair, index) => {

@@ -7,7 +7,7 @@
 
 .buttons {
   display: flex;
-  margin: 5vh * $scaler;
+  margin: 4vh * $scaler;
   border-radius: 2vh * $scaler;
   background: rgba(0, 0, 0, 0.4) !important;
 }
@@ -19,8 +19,8 @@
   font-size: 2vh * $scaler;
   font-weight: bold;
   border-radius: 1vh * $scaler;
-  margin: 2.5vh * $scaler;
-  padding: 1vh * $scaler;
+  margin: 2vh * $scaler;
+  padding: 1vh * $scaler 1.5vh * $scaler;
   background: rgba(0, 0, 0, 0.4) !important;
   box-shadow: 0 0 1vh * $scaler rgba(0, 0, 0, 0.62);
 }
