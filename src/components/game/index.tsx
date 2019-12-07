@@ -10,6 +10,7 @@ import '../../styles/adaptive.scss';
 
 import { GameStore } from '../../stores/gameStore';
 import Emoji from '../emoji';
+import { randomInteger } from '../../helpers/math';
 
 interface KeyboardEvent {
   keyCode: number;
@@ -35,10 +36,38 @@ class Game extends React.Component<PropsType> {
 
   public componentWillUnmount(): void {}
 
+  private yes = (): void => this.gameStore.voteForPairs(true);
+  private no = (): void => this.gameStore.voteForPairs(false);
+
   public render(): React.ReactNode {
+    const { firstPair, secondPair, gameSize, score, comparePairs } = this.gameStore;
     return (
       <div className="App">
-        <Emoji>👩‍❤️‍💋‍👩</Emoji>
+        <div>Score: {score}</div>
+        {/* <div>{comparePairs ? '=' : '!='}</div> */}
+        <div className="pairs">
+          {[firstPair, secondPair].map((pair, index) => {
+            return (
+              <div key={`pair_${index}`} className="pair">
+                {pair.map(rows => {
+                  return (
+                    <div className="emoji-row" style={{ order: randomInteger(0, gameSize) }} key={rows.join('-')}>
+                      {rows.map(item => (
+                        <div style={{ order: randomInteger(0, gameSize) }} key={item}>
+                          <Emoji>{item}</Emoji>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+        <div className="buttons">
+          <button onClick={this.yes}>yes</button>
+          <button onClick={this.no}>no</button>
+        </div>
       </div>
     );
   }

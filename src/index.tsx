@@ -5,7 +5,7 @@ import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Game from './components/game';
-import { GameStore as gameStore } from './stores/gameStore';
+import { store as gameStore } from './stores/gameStore';
 
 const stores = {
   gameStore,
