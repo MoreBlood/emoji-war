@@ -1,0 +1,124 @@
+@import '../../styles/global.scss';
+
+.about {
+  background: linear-gradient(
+      330.96deg,
+      #00f0ff 18.5%,
+      #ff8bca 18.51%,
+      #ff8bca 40.48%,
+      #ffffff 40.49%,
+      #ffffff 62.47%,
+      #ff8bca 62.48%,
+      #ff8bca 81.56%,
+      #ff8bca 81.57%,
+      #00e0ff 81.58%
+    ),
+    #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+
+  .all-buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10vh * $scaler;
+  }
+
+  @keyframes beat {
+    0% {
+      transform: scale(0.7);
+    }
+
+    50% {
+      transform: scale(1.2);
+    }
+
+    100% {
+      transform: scale(0.7);
+    }
+  }
+
+  .thanks {
+    width: 35vmax * $scaler;
+    margin: 1vh * $scaler;
+    padding: 3vh * $scaler;
+    font-size: 2.5vh * $scaler;
+    color: white;
+    border-radius: 2vh * $scaler;
+    text-align: center;
+    // backdrop-filter: blur(50px);
+    font-weight: 300;
+
+    big {
+      font-size: 4vh * $scaler;
+
+      &.heart {
+        display: inline-block;
+        margin-top: 2vh * $scaler;
+        // line-height: 10vh * $scaler;
+        animation: beat 1.5s;
+        animation-iteration-count: infinite;
+      }
+    }
+  }
+
+  .buttons {
+    margin: 1vh * $scaler;
+  }
+
+  .logo {
+    padding: 15vh * $scaler 0 5vh;
+    height: 15vh;
+    width: 15vh;
+  }
+
+  .button {
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 2vh * $scaler;
+    cursor: pointer;
+    user-select: none;
+    transition: all linear 100ms;
+    padding: 0.5vh * $scaler;
+    touch-action: manipulation;
+    height: 15vh * $scaler;
+    font-weight: 300;
+    color: white;
+    display: flex;
+    align-items: center;
+
+    .setting-item-text {
+      margin-left: 2vh * $scaler;
+    }
+
+    &.small {
+      height: 7vh * $scaler;
+      width: 35vmax * $scaler;
+      margin: 1vh * $scaler;
+      font-size: 3vh * $scaler;
+      padding-left: 2vh * $scaler;
+    }
+
+    &.back {
+      margin: 5vh * $scaler 1vh * $scaler 0;
+      height: 7.5vh * $scaler;
+      width: 7.5vh * $scaler;
+      font-size: 5vh * $scaler;
+      justify-content: center;
+    }
+
+    &:active {
+      transform: scale(0.8);
+      opacity: 1;
+    }
+
+    img {
+      height: 50%;
+      width: 50%;
+    }
+  }
+}

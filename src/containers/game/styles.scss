@@ -10,6 +10,10 @@
     justify-content: space-between;
   }
 
+  .topBar {
+    margin-top: 2vh * $scaler;
+  }
+
   .buttons {
     display: flex;
     margin: 4vh * $scaler;
@@ -86,8 +90,8 @@
 
   .pair-holder {
     position: relative;
-    width: 23vh;
-    height: 23vh;
+    width: 20vh;
+    height: 20vh;
 
     // &.three {
     //   width: 23vh;

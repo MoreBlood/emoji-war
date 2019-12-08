@@ -8,13 +8,20 @@ import * as serviceWorker from './serviceWorker';
 import Game from './containers/game';
 import { store as gameStore } from './stores/gameStore';
 import Menu from './containers/menu';
+import Settings from './containers/settings';
+import About from './containers/about';
 import { CSSTransition } from 'react-transition-group';
 
 const stores = {
   gameStore,
 };
 
-const routes = [{ path: '/game', Component: Game }, { path: '/', Component: Menu }];
+const routes = [
+  { path: '/about', Component: About },
+  { path: '/', Component: Menu },
+  { path: '/game', Component: Game },
+  { path: '/settings', Component: Settings },
+];
 
 const router = (
   <Provider {...stores}>

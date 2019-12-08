@@ -12,6 +12,9 @@ export class GameStore {
     return 3 * this.gameSize;
   }
 
+  @observable
+  public LGBTFriendly = true;
+
   @computed
   public get gameSizeEmoji(): string {
     switch (this.gameSize) {
@@ -58,6 +61,10 @@ export class GameStore {
       clearInterval(this.timerUpdater);
     }
     this.timerUpdater = setInterval(() => this.decrease(), 1000);
+  }
+
+  public switchLGBTFriendly(): void {
+    this.LGBTFriendly = !this.LGBTFriendly;
   }
 
   @action

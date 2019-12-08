@@ -51,7 +51,7 @@ class Game extends React.Component<PropsType, null> {
             {comparePairs ? ' = ' : ' != '}
             {secondPair.hash}
           </div> */}
-          <div style={{ display: 'flex' }}>
+          <div className="topBar" style={{ display: 'flex' }}>
             <div className="score-holder timer">
               <div className="blured score">
                 <button className="thumb switch" onClick={this.menu}>

@@ -1,0 +1,55 @@
+import React from 'react';
+import { Swipeable, EventData } from 'react-swipeable';
+import { inject, observer } from 'mobx-react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
+
+import './styles.scss';
+import '../../styles/global.scss';
+import '../../styles/adaptive.scss';
+
+import hmmmm from './images/hmmmmm.png';
+
+import { GameStore } from '../../stores/gameStore';
+import Emoji from '../../components/emoji';
+import { randomInteger } from '../../helpers/math';
+import { skin } from '../../helpers/emojis';
+
+type PropsType = RouteComponentProps<{}>;
+
+@(withRouter as any)
+@observer
+class About extends React.Component<PropsType> {
+  public constructor(props?: PropsType) {
+    super(props);
+  }
+
+  public componentWillMount(): void {}
+
+  public componentWillUnmount(): void {}
+
+  private start = (): void => this.props.history.push('game');
+  private menu = (): void => this.props.history.push('');
+
+  public render(): React.ReactNode {
+    return (
+      <div className="about">
+        <img className="logo" src={hmmmm}></img>
+        <div className="thanks blured">
+          I’ve made this for fun. <br />
+          <big>Big</big> thanks for my friends for greate advises and testing this little game <br />
+          <big className="heart">❤️</big>
+        </div>
+        <div className="all-buttons">
+          <div className="buttons">
+            <button className="button back blured" onClick={this.menu}>
+              ⏪
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default About;

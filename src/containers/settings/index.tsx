@@ -8,9 +8,7 @@ import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
-import play from './images/play-emoji.png';
-import logo from './images/logo.png';
-import logoSad from './images/logo-sad.png';
+import settings from './images/settings.png';
 
 import { GameStore } from '../../stores/gameStore';
 import Emoji from '../../components/emoji';
@@ -24,10 +22,10 @@ type PropsType = RouteComponentProps<{}> & {
 @(withRouter as any)
 @inject('gameStore')
 @observer
-class Menu extends React.Component<PropsType> {
+class Settings extends React.Component<PropsType> {
   private gameStore: GameStore;
 
-  public constructor(props: PropsType) {
+  public constructor(props?: PropsType) {
     super(props);
 
     this.gameStore = this.props.gameStore;
@@ -38,26 +36,28 @@ class Menu extends React.Component<PropsType> {
   public componentWillUnmount(): void {}
 
   private start = (): void => this.props.history.push('game');
-  private settings = (): void => this.props.history.push('settings');
-  private about = (): void => this.props.history.push('about');
+  private switchGameType = (): void => this.gameStore.switchGameMode();
+  private switchLGBTFriendly = (): void => this.gameStore.switchLGBTFriendly();
+  private menu = (): void => this.props.history.push('');
 
   public render(): React.ReactNode {
-    const { LGBTFriendly } = this.gameStore;
+    const { gameSizeEmoji, LGBTFriendly } = this.gameStore;
     return (
-      <div className="menu">
-        <img className="logo" src={LGBTFriendly ? logo : logoSad}></img>
+      <div className="settings">
+        <img className="logo" src={settings}></img>
         <div className="all-buttons">
+          <button className="button small blured" onClick={this.switchGameType}>
+            {gameSizeEmoji} <span className="setting-item-text">Game size</span>
+          </button>
+          <button className="button small blured" onClick={this.switchLGBTFriendly}>
+            🏳️‍🌈{' '}
+            <span style={{ textDecoration: !LGBTFriendly ? 'line-through' : 'none' }} className="setting-item-text">
+              LGBT Friendly
+            </span>
+          </button>
           <div className="buttons">
-            <button className="button play blured" onClick={this.start}>
-              <img src={play}></img>
-            </button>
-          </div>
-          <div className="buttons">
-            <button className="button small blured" onClick={this.about}>
-              🤔
-            </button>
-            <button className="button small blured" onClick={this.settings}>
-              ⚙️
+            <button className="button back blured" onClick={this.menu}>
+              ⏪
             </button>
           </div>
         </div>
@@ -66,4 +66,4 @@ class Menu extends React.Component<PropsType> {
   }
 }
 
-export default Menu as React.ComponentType<any>;
+export default Settings;

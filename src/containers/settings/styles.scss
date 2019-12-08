@@ -1,7 +1,16 @@
 @import '../../styles/global.scss';
 
-.menu {
-  background: radial-gradient(140.67% 117.32% at 100% 98.5%, #ffc700 0%, #ff00f5 100%), #fff;
+.settings {
+  background: linear-gradient(
+      331.31deg,
+      #ff4d00 9.37%,
+      #ff9900 25.15%,
+      #fff500 40.93%,
+      #61ff00 58.96%,
+      #00e0ff 76.99%,
+      #9e00ff 94.58%
+    ),
+    #ffffff;
   height: 100vh;
   display: flex;
   justify-content: flex-start;
@@ -22,8 +31,8 @@
 
   .logo {
     padding: 15vh * $scaler 0;
-    height: 15vh * $scaler;
-    width: 11vh * $scaler;
+    height: 15vh;
+    width: 15vh;
   }
 
   .button {
@@ -36,13 +45,29 @@
     padding: 0.5vh * $scaler;
     touch-action: manipulation;
     height: 15vh * $scaler;
-    width: 15vh * $scaler;
+    font-weight: 300;
+    color: white;
+    display: flex;
+    align-items: center;
+
+    .setting-item-text {
+      margin-left: 2vh * $scaler;
+    }
 
     &.small {
+      height: 7vh * $scaler;
+      width: 35vmax * $scaler;
+      margin: 1vh * $scaler;
+      font-size: 3vh * $scaler;
+      padding-left: 2vh * $scaler;
+    }
+
+    &.back {
+      margin: 5vh * $scaler 1vh * $scaler 0;
       height: 7.5vh * $scaler;
       width: 7.5vh * $scaler;
       font-size: 5vh * $scaler;
-      margin: 1vh * $scaler;
+      justify-content: center;
     }
 
     &:active {
