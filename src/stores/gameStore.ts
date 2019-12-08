@@ -44,10 +44,6 @@ export class GameStore {
 
   private timerUpdater: NodeJS.Timeout = null;
 
-  public constructor() {
-    this.generate();
-  }
-
   @action
   private decrease(): void {
     this.timer -= 1;

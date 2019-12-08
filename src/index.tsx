@@ -1,22 +1,35 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { Provider } from 'mobx-react';
 import ReactDOM from 'react-dom';
 import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import Game from './components/game';
+import Game from './containers/game';
 import { store as gameStore } from './stores/gameStore';
+import Menu from './containers/menu';
+import { CSSTransition } from 'react-transition-group';
 
 const stores = {
   gameStore,
 };
 
+const routes = [{ path: '/game', Component: Game }, { path: '/', Component: Menu }];
+
 const router = (
   <Provider {...stores}>
     <HashRouter>
-      <Switch>
-        <Route exact path="/" component={Game} />
-      </Switch>
+      {routes.map(({ path, Component }) => (
+        <Route key={path} exact path={path}>
+          {({ match }: { match: any }) => (
+            <CSSTransition in={match != null} timeout={300} classNames="page" unmountOnExit>
+              <div className="page">
+                <Component />
+              </div>
+            </CSSTransition>
+          )}
+        </Route>
+      ))}
     </HashRouter>
   </Provider>
 );

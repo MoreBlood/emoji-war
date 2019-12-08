@@ -1,0 +1,56 @@
+@import '../../styles/global.scss';
+
+.menu {
+  background: radial-gradient(140.67% 117.32% at 100% 98.5%, #ffc700 0%, #ff00f5 100%), #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+
+  .all-buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10vh * $scaler;
+  }
+
+  .buttons {
+    margin: 1vh * $scaler;
+  }
+
+  .logo {
+    padding: 15vh * $scaler 0;
+  }
+
+  .button {
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 2vh * $scaler;
+    cursor: pointer;
+    user-select: none;
+    transition: all linear 100ms;
+    padding: 0.5vh * $scaler;
+    touch-action: manipulation;
+    height: 15vh * $scaler;
+    width: 15vh * $scaler;
+
+    &.small {
+      height: 7.5vh * $scaler;
+      width: 7.5vh * $scaler;
+      font-size: 5vh * $scaler;
+      margin: 1vh * $scaler;
+    }
+
+    &:active {
+      transform: scale(0.8);
+      opacity: 1;
+    }
+
+    img {
+      height: 50%;
+      width: 50%;
+    }
+  }
+}

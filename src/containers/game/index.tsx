@@ -9,22 +9,18 @@ import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
 import { GameStore } from '../../stores/gameStore';
-import Emoji from '../emoji';
+import Emoji from '../../components/emoji';
 import { randomInteger } from '../../helpers/math';
 import { skin } from '../../helpers/emojis';
 
-interface KeyboardEvent {
-  keyCode: number;
-}
-
-type PropsType = RouteComponentProps<null> & {
-  gameStore: GameStore;
+type PropsType = RouteComponentProps<{}> & {
+  gameStore?: GameStore;
 };
 
 @(withRouter as any)
 @inject('gameStore')
 @observer
-class Game extends React.Component<PropsType> {
+class Game extends React.Component<PropsType, null> {
   private gameStore: GameStore;
 
   public constructor(props: PropsType) {
@@ -33,13 +29,16 @@ class Game extends React.Component<PropsType> {
     this.gameStore = this.props.gameStore;
   }
 
-  public componentWillMount(): void {}
+  public componentWillMount(): void {
+    this.gameStore.restart();
+  }
 
   public componentWillUnmount(): void {}
 
   private yes = (): void => this.gameStore.voteForPairs(true);
   private no = (): void => this.gameStore.voteForPairs(false);
   private switch = (): void => this.gameStore.switchGameMode();
+  private menu = (): void => this.props.history.push('');
   private restart = (): void => this.gameStore.restart();
 
   public render(): React.ReactNode {
@@ -55,12 +54,11 @@ class Game extends React.Component<PropsType> {
           <div style={{ display: 'flex' }}>
             <div className="score-holder timer">
               <div className="blured score">
-                <button key={gameSizeEmoji} className="thumb switch" onClick={this.switch}>
-                  {gameSizeEmoji}
+                <button className="thumb switch" onClick={this.menu}>
+                  ⏪
                 </button>
               </div>
             </div>
-
             <TransitionGroup className="score-holder scale">
               <CSSTransition key={scoreRight} timeout={500} classNames="scale">
                 <div className="blured score">{`✅: ${scoreRight}`}</div>
@@ -121,4 +119,4 @@ class Game extends React.Component<PropsType> {
   }
 }
 
-export default Game;
+export default Game as React.ComponentType<any>;
