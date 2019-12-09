@@ -132,6 +132,10 @@
     // background: radial-gradient(140.67% 117.32% at 100% 98.5%, #00fff0 0%, #c0f 100%), #fff;
   }
 
+  .life {
+    transition: opacity 0.3s linear;
+  }
+
   .pair {
     width: 100%;
     display: flex;
@@ -163,8 +167,12 @@
     }
 
     &.switch {
-      font-size: 3vh * $scaler;
       background: none;
+      border-radius: 0;
+      font-size: 2.9vh * $scaler;
+      width: 3.2vh * $scaler;
+      height: 3.2vh * $scaler;
+      line-height: 3vh * $scaler;
       box-shadow: none;
       padding: 0;
     }

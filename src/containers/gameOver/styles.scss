@@ -31,6 +31,8 @@
     border-bottom: 0.2vh * $scaler dotted rgba(255, 255, 255, 0.425);
     margin-bottom: 2.5vh * $scaler;
     padding-bottom: 2.5vh * $scaler;
+    letter-spacing: 0.6vh * $scaler;
+    pointer-events: none;
   }
 
   .logo {
@@ -39,39 +41,5 @@
 
   .buttons {
     margin: 1vh * $scaler;
-  }
-
-  .button {
-    -webkit-appearance: none;
-    border: none;
-    border-radius: 2vh * $scaler;
-    cursor: pointer;
-    user-select: none;
-    transition: all linear 100ms;
-    padding: 0.5vh * $scaler;
-    touch-action: manipulation;
-    height: 15vh * $scaler;
-    width: 15vh * $scaler;
-
-    &.small {
-      height: 7.5vh * $scaler;
-      width: 7.5vh * $scaler;
-      font-size: 5vh * $scaler;
-      margin: 1vh * $scaler;
-    }
-
-    &:active {
-      transform: scale(0.8);
-      opacity: 1;
-    }
-
-    &.play {
-      font-size: 7vh * $scaler;
-    }
-
-    img {
-      height: 50%;
-      width: 50%;
-    }
   }
 }

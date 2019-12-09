@@ -96,17 +96,15 @@ class Game extends React.Component<PropsType, null> {
                 <div className="blured score">{timer}</div>
               </CSSTransition>
             </TransitionGroup>
-            <TransitionGroup className="score-holder lifes scale">
-              <CSSTransition key={lifes} timeout={500} classNames="scale">
-                <div className="blured score">
-                  {Array.from({ length: gameLifes }, () => '❤️').map((heart, index) => (
-                    <span key={index} style={{ opacity: index < lifes ? 1 : 0.1 }}>
-                      {heart}
-                    </span>
-                  ))}
-                </div>
-              </CSSTransition>
-            </TransitionGroup>
+            <div className="score-holder lifes scale">
+              <div className="blured score">
+                {Array.from({ length: gameLifes }, () => '❤️').map((heart, index) => (
+                  <span key={index} className="life" style={{ opacity: index < lifes ? 1 : 0.1 }}>
+                    {heart}
+                  </span>
+                ))}
+              </div>
+            </div>
             <div className="score-holder timer">
               <div className="blured score">
                 <button className="thumb switch" onClick={this.restart}>

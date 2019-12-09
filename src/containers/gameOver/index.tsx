@@ -11,7 +11,7 @@ import '../../styles/adaptive.scss';
 import { GameStore } from '../../stores/gameStore';
 import Emoji from '../../components/emoji';
 import { randomInteger } from '../../helpers/math';
-import { skin, numberToEmojiString } from '../../helpers/emojis';
+import { skin, numberToEmojiString, emoticons } from '../../helpers/emojis';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -22,6 +22,7 @@ type PropsType = RouteComponentProps<{}> & {
 class GameOver extends React.Component<PropsType> {
   private gameStore: GameStore;
   private score = 0;
+  private emoji = emoticons[randomInteger(0, emoticons.length)];
 
   public constructor(props: PropsType) {
     super(props);
@@ -41,7 +42,7 @@ class GameOver extends React.Component<PropsType> {
   public render(): React.ReactNode {
     return (
       <div className="gameOver">
-        <div className="logo">🌶️</div>
+        <div className="logo">{this.emoji}</div>
         <button className="thanks">{numberToEmojiString(this.score)}</button>
         <div className="all-buttons">
           <div className="buttons">

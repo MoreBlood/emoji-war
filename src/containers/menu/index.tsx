@@ -8,14 +8,10 @@ import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
-import play from './images/play-emoji.png';
-import logo from './images/logo.png';
-import logoSad from './images/logo-sad.png';
-
 import { GameStore } from '../../stores/gameStore';
 import Emoji from '../../components/emoji';
 import { randomInteger } from '../../helpers/math';
-import { skin } from '../../helpers/emojis';
+import { skin, emoticons } from '../../helpers/emojis';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -26,6 +22,7 @@ type PropsType = RouteComponentProps<{}> & {
 @observer
 class Menu extends React.Component<PropsType> {
   private gameStore: GameStore;
+  private emoji = emoticons[randomInteger(0, emoticons.length)];
 
   public constructor(props: PropsType) {
     super(props);
@@ -45,7 +42,7 @@ class Menu extends React.Component<PropsType> {
     const { LGBTFriendly } = this.gameStore;
     return (
       <div className="menu">
-        <div className="logo">{LGBTFriendly ? '😃' : '😔'}</div>
+        <div className="logo">{LGBTFriendly ? this.emoji : '😔'}</div>
         <div className="all-buttons">
           <div className="buttons">
             <button className="button play blured" onClick={this.start}>

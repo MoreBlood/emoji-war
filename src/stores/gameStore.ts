@@ -21,7 +21,7 @@ export class GameStore {
 
   @computed
   private get time(): number {
-    return 3 * this.gameSize;
+    return 2 * this.gameSize;
   }
 
   @observable
