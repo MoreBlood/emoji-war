@@ -35,7 +35,7 @@ class About extends React.Component<PropsType> {
         <div className="logo">🤔</div>
         <div className="thanks blured">
           I’ve made this for fun. <br />
-          <big>Big</big> thanks for my friends for greate advises and testing this little game <br />
+          <big>Big</big> thanks to my friends for great advises and testing this little game <br />
           <big className="heart">❤️</big>
         </div>
         <div className="all-buttons">
