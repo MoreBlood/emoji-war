@@ -38,7 +38,7 @@ class Game extends React.Component<PropsType, null> {
       const { gameState } = this.gameStore;
       switch (gameState) {
         case GameState.gameOver:
-          this.menu();
+          setTimeout(() => this.over(), 1000);
           break;
         default:
           break;
@@ -54,6 +54,7 @@ class Game extends React.Component<PropsType, null> {
   private no = (): void => this.gameStore.voteForPairs(false);
   private switch = (): void => this.gameStore.switchGameMode();
   private menu = (): void => this.props.history.push('');
+  private over = (): void => this.props.history.push('/gameOver');
   private restart = (): void => this.gameStore.restart();
 
   public render(): React.ReactNode {

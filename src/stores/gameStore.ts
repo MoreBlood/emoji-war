@@ -66,8 +66,8 @@ export class GameStore {
   private decrease(): void {
     this.timer -= 1;
     if (this.timer < 0) {
+      this.scoredWrong = 1;
       this.generate();
-      this.scoredWrong += 1;
     }
   }
 
@@ -84,6 +84,9 @@ export class GameStore {
 
   @action
   private generate(): void {
+    if (this.lifes === 0) {
+      return this.stop();
+    }
     const first: string[][] = [];
     const second: string[][] = [];
     for (let i = 0; i < this.gameSize; i += 1) {
@@ -133,6 +136,7 @@ export class GameStore {
   private stop(): void {
     if (this.timerUpdater) {
       clearInterval(this.timerUpdater);
+      this.timer = 0;
     }
     this.gameState = GameState.gameOver;
   }
@@ -150,27 +154,19 @@ export class GameStore {
       window.navigator.vibrate(200);
     }
 
-    this.lifes -= value;
-  }
-
-  private get scoredWrong(): number {
-    return this.scoreWrong;
+    if (this.lifes > 0) {
+      this.lifes -= value;
+    }
   }
 
   @action
   public voteForPairs(vote: boolean): void {
     if (this.comparePairs === vote) {
-      this.scoreRight += (this.time - this.timer) * this.gameSize;
+      this.scoreRight += this.timer * this.gameSize;
     } else {
-      if (this.lifes > 0) {
-        this.scoredWrong = 1;
-      }
+      this.scoredWrong = 1;
     }
-    if (this.lifes === 0) {
-      this.stop();
-    } else {
-      this.generate();
-    }
+    this.generate();
   }
 
   @computed

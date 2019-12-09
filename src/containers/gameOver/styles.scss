@@ -1,0 +1,75 @@
+@import '../../styles/global.scss';
+
+.gameOver {
+  background: radial-gradient(80.51% 80.51% at 50.13% 80.51%, #FFD600 0%, #FF2E00 72.09%), #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+
+  .all-buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10vh * $scaler;
+  }
+
+  .thanks {
+    // width: 35vmax * $scaler;
+    margin: 1vh * $scaler;
+    padding: 3vh * $scaler;
+    border-radius: 2vh * $scaler;
+    text-align: center;
+    -webkit-appearance: none;
+    border: none;
+    font-size: 7vh * $scaler;
+    margin-bottom: 7vh * $scaler;
+  }
+
+  .buttons {
+    margin: 1vh * $scaler;
+  }
+
+  .logo {
+    padding: 15vh * $scaler 0;
+    padding-bottom: 10vh * $scaler;
+    height: 15vh * $scaler;
+    width: 15vh * $scaler;
+  }
+
+  .button {
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 2vh * $scaler;
+    cursor: pointer;
+    user-select: none;
+    transition: all linear 100ms;
+    padding: 0.5vh * $scaler;
+    touch-action: manipulation;
+    height: 15vh * $scaler;
+    width: 15vh * $scaler;
+
+    &.small {
+      height: 7.5vh * $scaler;
+      width: 7.5vh * $scaler;
+      font-size: 5vh * $scaler;
+      margin: 1vh * $scaler;
+    }
+
+    &:active {
+      transform: scale(0.8);
+      opacity: 1;
+    }
+
+    &.play {
+      font-size: 7vh * $scaler;
+    }
+
+    img {
+      height: 50%;
+      width: 50%;
+    }
+  }
+}
