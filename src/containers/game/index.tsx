@@ -68,6 +68,7 @@ class Game extends React.Component<PropsType, null> {
       gameLifes,
       gameSize,
       skinColor,
+      isPlaying,
       lifes,
     } = this.gameStore;
     return (
@@ -81,7 +82,7 @@ class Game extends React.Component<PropsType, null> {
           <div className="topBar" style={{ display: 'flex' }}>
             <div className="score-holder timer">
               <div className="blured score">
-                <button className="thumb switch" onClick={this.menu}>
+                <button disabled={!isPlaying} className="thumb switch" onClick={this.menu}>
                   ⏪
                 </button>
               </div>
@@ -107,7 +108,7 @@ class Game extends React.Component<PropsType, null> {
             </div>
             <div className="score-holder timer">
               <div className="blured score">
-                <button className="thumb switch" onClick={this.restart}>
+                <button disabled={!isPlaying} className="thumb switch" onClick={this.restart}>
                   🔄
                 </button>
               </div>
@@ -137,10 +138,10 @@ class Game extends React.Component<PropsType, null> {
             })}
           </div>
           <div className="blured buttons">
-            <button className="thumb down" onClick={this.yes}>
+            <button disabled={!isPlaying} className="thumb down" onClick={this.yes}>
               <Emoji>{`👍${skin[skinColor]}`}</Emoji>
             </button>
-            <button className="thumb up" onClick={this.no}>
+            <button disabled={!isPlaying} className="thumb up" onClick={this.no}>
               <Emoji>{`👎${skin[skinColor]}`}</Emoji>
             </button>
           </div>

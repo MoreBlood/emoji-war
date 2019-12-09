@@ -82,6 +82,11 @@ export class GameStore {
     this.LGBTFriendly = !this.LGBTFriendly;
   }
 
+  @computed
+  public get isPlaying(): boolean {
+    return this.gameState === GameState.playing;
+  }
+
   @action
   private generate(): void {
     if (this.lifes === 0) {
@@ -159,6 +164,8 @@ export class GameStore {
 
   @action
   public voteForPairs(vote: boolean): void {
+    if (this.gameState !== GameState.playing) return;
+
     if (this.comparePairs === vote) {
       this.scoreRight += this.gameSize;
     } else {

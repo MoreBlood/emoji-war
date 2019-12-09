@@ -51,6 +51,11 @@ $scaler: 1;
     opacity: 1;
   }
 
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   &.play {
     font-size: 10vh * $scaler;
   }
