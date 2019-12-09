@@ -19,13 +19,20 @@
   .thanks {
     min-width: 35vmax * $scaler;
     margin: 1vh * $scaler;
-    padding: 3vh * $scaler;
+    padding: 1.5vh * $scaler;
     border-radius: 2vh * $scaler;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     -webkit-appearance: none;
     border: none;
     font-size: 7vh * $scaler;
     margin-bottom: 7vh * $scaler;
+  }
+
+  .logo {
+    padding: 7.5vh * $scaler 0 7.5vh * $scaler;
   }
 
   .buttons {
