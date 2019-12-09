@@ -42,12 +42,12 @@ class Settings extends React.Component<PropsType> {
           <button className="button small blured" onClick={this.switchGameType}>
             {gameSizeEmoji} <span className="setting-item-text">Game size</span>
           </button>
-          <button className="button small blured" onClick={this.switchLGBTFriendly}>
+          {/* <button className="button small blured" onClick={this.switchLGBTFriendly}>
             🏳️‍🌈{' '}
             <span style={{ textDecoration: !LGBTFriendly ? 'line-through' : 'none' }} className="setting-item-text">
               LGBT Friendly
             </span>
-          </button>
+          </button> */}
           <div className="buttons">
             <button className="button back blured" onClick={this.menu}>
               ⏪
