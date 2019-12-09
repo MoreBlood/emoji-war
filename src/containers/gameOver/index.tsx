@@ -42,7 +42,7 @@ class GameOver extends React.Component<PropsType> {
     return (
       <div className="gameOver">
         <div className="logo">🌶️</div>
-        <button className="thanks blured">{numberToEmojiString(this.score)}</button>
+        <button className="thanks">{numberToEmojiString(this.score)}</button>
         <div className="all-buttons">
           <div className="buttons">
             <button className="button play blured" onClick={this.start}>

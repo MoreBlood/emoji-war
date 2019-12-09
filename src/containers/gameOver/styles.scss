@@ -1,7 +1,7 @@
 @import '../../styles/global.scss';
 
 .gameOver {
-  background: radial-gradient(80.51% 80.51% at 50.13% 80.51%, #FFD600 0%, #FF2E00 72.09%), #fff;
+  background: radial-gradient(80.51% 80.51% at 50.13% 80.51%, #ffd600 0%, #ff2e00 72.09%), #fff;
   height: 100vh;
   display: flex;
   justify-content: flex-start;
@@ -20,7 +20,6 @@
     min-width: 35vmax * $scaler;
     margin: 1vh * $scaler;
     padding: 1.5vh * $scaler;
-    border-radius: 2vh * $scaler;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +27,10 @@
     -webkit-appearance: none;
     border: none;
     font-size: 7vh * $scaler;
-    margin-bottom: 7vh * $scaler;
+    background: none;
+    border-bottom: 0.2vh * $scaler dotted rgba(255, 255, 255, 0.425);
+    margin-bottom: 2.5vh * $scaler;
+    padding-bottom: 2.5vh * $scaler;
   }
 
   .logo {
