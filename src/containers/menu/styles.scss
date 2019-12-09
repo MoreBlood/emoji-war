@@ -50,6 +50,10 @@
       opacity: 1;
     }
 
+    &.play {
+      font-size: 7vh * $scaler;
+    }
+
     img {
       height: 50%;
       width: 50%;

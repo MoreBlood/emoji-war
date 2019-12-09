@@ -8,8 +8,6 @@ import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
-import hmmmm from './images/hmmmmm.png';
-
 import { GameStore } from '../../stores/gameStore';
 import Emoji from '../../components/emoji';
 import { randomInteger } from '../../helpers/math';
@@ -29,12 +27,12 @@ class About extends React.Component<PropsType> {
   public componentWillUnmount(): void {}
 
   private start = (): void => this.props.history.push('game');
-  private menu = (): void => this.props.history.push('');
+  private menu = (): void => this.props.history.goBack();
 
   public render(): React.ReactNode {
     return (
       <div className="about">
-        <img className="logo" src={hmmmm}></img>
+        <div className="logo">🤔</div>
         <div className="thanks blured">
           I’ve made this for fun. <br />
           <big>Big</big> thanks for my friends for greate advises and testing this little game <br />

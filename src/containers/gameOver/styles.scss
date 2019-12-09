@@ -17,7 +17,7 @@
   }
 
   .thanks {
-    // width: 35vmax * $scaler;
+    min-width: 35vmax * $scaler;
     margin: 1vh * $scaler;
     padding: 3vh * $scaler;
     border-radius: 2vh * $scaler;
@@ -30,13 +30,6 @@
 
   .buttons {
     margin: 1vh * $scaler;
-  }
-
-  .logo {
-    padding: 15vh * $scaler 0;
-    padding-bottom: 10vh * $scaler;
-    height: 15vh * $scaler;
-    width: 15vh * $scaler;
   }
 
   .button {

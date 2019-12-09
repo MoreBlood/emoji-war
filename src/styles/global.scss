@@ -8,3 +8,13 @@ $scaler: 1;
   background: rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 2vh * $scaler rgba(0, 0, 0, 0.62);
 }
+
+.logo {
+  padding: 15vh * $scaler 0 10vh * $scaler;
+  height: 15vh * $scaler;
+  width: 15vh * $scaler;
+  font-size: 15vh * $scaler;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

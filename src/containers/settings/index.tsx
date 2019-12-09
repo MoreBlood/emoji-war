@@ -1,19 +1,12 @@
 import React from 'react';
-import { Swipeable, EventData } from 'react-swipeable';
 import { inject, observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
 
 import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
-import settings from './images/settings.png';
-
 import { GameStore } from '../../stores/gameStore';
-import Emoji from '../../components/emoji';
-import { randomInteger } from '../../helpers/math';
-import { skin } from '../../helpers/emojis';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -38,13 +31,13 @@ class Settings extends React.Component<PropsType> {
   private start = (): void => this.props.history.push('game');
   private switchGameType = (): void => this.gameStore.switchGameMode();
   private switchLGBTFriendly = (): void => this.gameStore.switchLGBTFriendly();
-  private menu = (): void => this.props.history.push('');
+  private menu = (): void => this.props.history.goBack();
 
   public render(): React.ReactNode {
     const { gameSizeEmoji, LGBTFriendly } = this.gameStore;
     return (
       <div className="settings">
-        <img className="logo" src={settings}></img>
+        <div className="logo">⚙️</div>
         <div className="all-buttons">
           <button className="button small blured" onClick={this.switchGameType}>
             {gameSizeEmoji} <span className="setting-item-text">Game size</span>

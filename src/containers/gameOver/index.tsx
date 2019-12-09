@@ -8,8 +8,6 @@ import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
-import logo from './images/chill.png';
-
 import { GameStore } from '../../stores/gameStore';
 import Emoji from '../../components/emoji';
 import { randomInteger } from '../../helpers/math';
@@ -37,16 +35,26 @@ class GameOver extends React.Component<PropsType> {
   public componentWillUnmount(): void {}
 
   private start = (): void => this.props.history.push('/game');
+  private menu = (): void => this.props.history.push('/');
+  private settings = (): void => this.props.history.push('/settings');
 
   public render(): React.ReactNode {
     return (
       <div className="gameOver">
-        <img className="logo" src={logo}></img>
+        <div className="logo">🌶️</div>
         <button className="thanks blured">{numberToEmojiString(this.score)}</button>
         <div className="all-buttons">
           <div className="buttons">
             <button className="button play blured" onClick={this.start}>
               🔄
+            </button>
+          </div>
+          <div className="buttons">
+            <button className="button small blured" onClick={this.menu}>
+              🏠
+            </button>
+            <button className="button small blured" onClick={this.settings}>
+              ⚙️
             </button>
           </div>
         </div>

@@ -100,13 +100,11 @@ export class GameStore {
       }
     }
 
-    for (let i = 0; i < this.gameSize - 1; i += 1) {
-      if (yes()) {
-        const randomRow = randomInteger(0, this.gameSize);
-        const randomColoumn = randomInteger(0, this.gameSize);
+    if (yes()) {
+      const randomRow = randomInteger(0, this.gameSize);
+      const randomColoumn = randomInteger(0, this.gameSize);
 
-        second[randomRow][randomColoumn] = GameStore.randomEmoji();
-      }
+      second[randomRow][randomColoumn] = GameStore.randomEmoji();
     }
 
     this.firstPair = new Pair(first);
@@ -162,7 +160,7 @@ export class GameStore {
   @action
   public voteForPairs(vote: boolean): void {
     if (this.comparePairs === vote) {
-      this.scoreRight += this.timer * this.gameSize;
+      this.scoreRight += this.gameSize;
     } else {
       this.scoredWrong = 1;
     }

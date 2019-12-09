@@ -45,11 +45,11 @@ class Menu extends React.Component<PropsType> {
     const { LGBTFriendly } = this.gameStore;
     return (
       <div className="menu">
-        <img className="logo" src={LGBTFriendly ? logo : logoSad}></img>
+        <div className="logo">{LGBTFriendly ? '😃' : '😔'}</div>
         <div className="all-buttons">
           <div className="buttons">
             <button className="button play blured" onClick={this.start}>
-              <img src={play}></img>
+              ▶️
             </button>
           </div>
           <div className="buttons">
