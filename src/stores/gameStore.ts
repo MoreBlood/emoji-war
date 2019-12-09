@@ -3,14 +3,29 @@ import { randomInteger, yes } from '../helpers/math';
 import { emoticons, skin, colorable } from '../helpers/emojis';
 import { Pair } from '../types/pair';
 
+export enum GameState {
+  gameOver,
+  pause,
+  playing,
+}
+
 export class GameStore {
   @observable
   public gameSize = 2;
+
+  @observable
+  public gameState: GameState = GameState.playing;
+
+  @observable
+  public gameLifes = 3;
 
   @computed
   private get time(): number {
     return 3 * this.gameSize;
   }
+
+  @observable
+  public lifes: number = this.gameLifes;
 
   @observable
   public LGBTFriendly = true;
@@ -96,11 +111,13 @@ export class GameStore {
     this.skinColor = randomInteger(0, skin.length);
     this.timer = this.time;
     this.initTimer();
+    this.gameState = GameState.playing;
   }
 
   public restart(): void {
     this.scoreWrong = 0;
     this.scoreRight = 0;
+    this.lifes = this.gameLifes;
     this.generate();
   }
 
@@ -111,6 +128,13 @@ export class GameStore {
       this.gameSize = 2;
     }
     this.restart();
+  }
+
+  private stop(): void {
+    if (this.timerUpdater) {
+      clearInterval(this.timerUpdater);
+    }
+    this.gameState = GameState.gameOver;
   }
 
   public static randomEmoji(): string {
@@ -126,7 +150,7 @@ export class GameStore {
       window.navigator.vibrate(200);
     }
 
-    this.scoreWrong = value;
+    this.lifes -= value;
   }
 
   private get scoredWrong(): number {
@@ -136,11 +160,17 @@ export class GameStore {
   @action
   public voteForPairs(vote: boolean): void {
     if (this.comparePairs === vote) {
-      this.scoreRight += 1;
+      this.scoreRight += (this.time - this.timer) * this.gameSize;
     } else {
-      this.scoredWrong += 1;
+      if (this.lifes > 0) {
+        this.scoredWrong = 1;
+      }
     }
-    this.generate();
+    if (this.lifes === 0) {
+      this.stop();
+    } else {
+      this.generate();
+    }
   }
 
   @computed

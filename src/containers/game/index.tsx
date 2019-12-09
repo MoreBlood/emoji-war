@@ -8,10 +8,11 @@ import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
-import { GameStore } from '../../stores/gameStore';
+import { GameStore, GameState } from '../../stores/gameStore';
 import Emoji from '../../components/emoji';
 import { randomInteger } from '../../helpers/math';
 import { skin } from '../../helpers/emojis';
+import { autorun, IReactionDisposer } from 'mobx';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -22,6 +23,7 @@ type PropsType = RouteComponentProps<{}> & {
 @observer
 class Game extends React.Component<PropsType, null> {
   private gameStore: GameStore;
+  private gameStateChanges: IReactionDisposer;
 
   public constructor(props: PropsType) {
     super(props);
@@ -31,9 +33,22 @@ class Game extends React.Component<PropsType, null> {
 
   public componentWillMount(): void {
     this.gameStore.restart();
+
+    this.gameStateChanges = autorun(() => {
+      const { gameState } = this.gameStore;
+      switch (gameState) {
+        case GameState.gameOver:
+          this.menu();
+          break;
+        default:
+          break;
+      }
+    });
   }
 
-  public componentWillUnmount(): void {}
+  public componentWillUnmount(): void {
+    this.gameStateChanges();
+  }
 
   private yes = (): void => this.gameStore.voteForPairs(true);
   private no = (): void => this.gameStore.voteForPairs(false);
@@ -42,7 +57,18 @@ class Game extends React.Component<PropsType, null> {
   private restart = (): void => this.gameStore.restart();
 
   public render(): React.ReactNode {
-    const { firstPair, secondPair, timer, scoreRight, scoreWrong, gameSizeEmoji, gameSize, skinColor } = this.gameStore;
+    const {
+      firstPair,
+      secondPair,
+      timer,
+      scoreRight,
+      scoreWrong,
+      gameSizeEmoji,
+      gameLifes,
+      gameSize,
+      skinColor,
+      lifes,
+    } = this.gameStore;
     return (
       <div className="App">
         <div className="gameField">
@@ -61,7 +87,7 @@ class Game extends React.Component<PropsType, null> {
             </div>
             <TransitionGroup className="score-holder scale">
               <CSSTransition key={scoreRight} timeout={500} classNames="scale">
-                <div className="blured score">{`✅: ${scoreRight}`}</div>
+                <div className="blured score">{`🔥 ${scoreRight}`}</div>
               </CSSTransition>
             </TransitionGroup>
             <TransitionGroup className="score-holder scale timer">
@@ -69,9 +95,15 @@ class Game extends React.Component<PropsType, null> {
                 <div className="blured score">{timer}</div>
               </CSSTransition>
             </TransitionGroup>
-            <TransitionGroup className="score-holder scale">
-              <CSSTransition key={scoreWrong} timeout={500} classNames="scale">
-                <div className="blured score">{`❌: ${scoreWrong}`}</div>
+            <TransitionGroup className="score-holder lifes scale">
+              <CSSTransition key={lifes} timeout={500} classNames="scale">
+                <div className="blured score">
+                  {Array.from({ length: gameLifes }, () => '❤️').map((heart, index) => (
+                    <span key={index} style={{ opacity: index < lifes ? 1 : 0.1 }}>
+                      {heart}
+                    </span>
+                  ))}
+                </div>
               </CSSTransition>
             </TransitionGroup>
             <div className="score-holder timer">
