@@ -3,7 +3,7 @@ import React from 'react';
 import { Provider } from 'mobx-react';
 import ReactDOM from 'react-dom';
 import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
-import './index.css';
+import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import Game from './containers/game';
 import { store as gameStore } from './stores/gameStore';
