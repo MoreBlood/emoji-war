@@ -183,9 +183,9 @@ export const colorable = [
   '🤾',
   '🤹',
   '🧘',
-  '👭',
-  '👫',
-  '👬',
+  // '👭',
+  // '👫',
+  // '👬',
   '💏',
   '💑',
   '👪',
@@ -193,40 +193,8 @@ export const colorable = [
 ];
 
 function getNumberEmoji(num: number): string {
-  switch (num) {
-    case 1:
-      return '1️⃣';
-      break;
-    case 2:
-      return '2️⃣';
-      break;
-    case 3:
-      return '3️⃣';
-      break;
-    case 4:
-      return '4️⃣';
-      break;
-    case 5:
-      return '5️⃣';
-      break;
-    case 6:
-      return '6️⃣';
-      break;
-    case 7:
-      return '7️⃣';
-      break;
-    case 8:
-      return '8️⃣';
-      break;
-    case 9:
-      return '9️⃣';
-      break;
-    case 0:
-      return '0️⃣';
-      break;
-    default:
-      return '';
-  }
+  const numbers = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣'];
+  return numbers[num];
 }
 
 export function numberToEmojiString(num: number): string[] {

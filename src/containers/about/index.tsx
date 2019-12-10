@@ -34,7 +34,7 @@ class About extends React.Component<PropsType> {
       <div className="about">
         <div className="logo">🤔</div>
         <div className="thanks blured">
-          I’ve made this for fun. <br />
+          <big>FAQ:</big> Compare shuffled emoticons from top to bottom <br />
           <big>Big</big> thanks to my friends for great advises and testing this little game <br />
           <big className="heart">❤️</big>
           <big className="heart">🧡</big>
@@ -42,6 +42,8 @@ class About extends React.Component<PropsType> {
           <big className="heart">💚</big>
           <big className="heart">💙</big>
           <big className="heart">💜</big>
+          <br />
+          I’ve made this for fun.
         </div>
         <div className="all-buttons">
           <div className="buttons">

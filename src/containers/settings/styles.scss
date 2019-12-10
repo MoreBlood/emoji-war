@@ -4,13 +4,13 @@
   background: linear-gradient(
       331.31deg,
       #ff4d00 9.37%,
-      #ff9900 25.15%,
+      #f90 25.15%,
       #fff500 40.93%,
       #61ff00 58.96%,
       #00e0ff 76.99%,
       #9e00ff 94.58%
     ),
-    #ffffff;
+    #fff;
   height: 100vh;
   display: flex;
   justify-content: flex-start;
@@ -30,7 +30,7 @@
   }
 
   .button {
-    height: 15vh * $scaler;
+    // height: 15vh * $scaler;
     font-weight: 300;
     color: white;
     display: flex;
