@@ -1,17 +1,13 @@
 import React from 'react';
-import { Swipeable, EventData } from 'react-swipeable';
-import { inject, observer } from 'mobx-react';
+import { inject } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
 
 import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
 import { GameStore } from '../../stores/gameStore';
-import Emoji from '../../components/emoji';
-import { randomInteger } from '../../helpers/math';
-import { skin, numberToEmojiString, emoticons } from '../../helpers/emojis';
+import { numberToEmojiString } from '../../helpers/emojis';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -22,7 +18,7 @@ type PropsType = RouteComponentProps<{}> & {
 class GameOver extends React.Component<PropsType> {
   private gameStore: GameStore;
   private score = 0;
-  private emoji = emoticons[randomInteger(0, emoticons.length)];
+  private emoji = this.props.gameStore.randomSadOrHappyEmoticon;
 
   public constructor(props: PropsType) {
     super(props);

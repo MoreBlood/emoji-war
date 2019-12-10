@@ -22,7 +22,7 @@ type PropsType = RouteComponentProps<{}> & {
 @observer
 class Menu extends React.Component<PropsType> {
   private gameStore: GameStore;
-  private emoji = emoticons[randomInteger(0, emoticons.length)];
+  private emoji = this.props.gameStore.randomSadOrHappyEmoticon;
 
   public constructor(props: PropsType) {
     super(props);
@@ -39,10 +39,9 @@ class Menu extends React.Component<PropsType> {
   private about = (): void => this.props.history.push('about');
 
   public render(): React.ReactNode {
-    const { LGBTFriendly } = this.gameStore;
     return (
       <div className="menu">
-        <div className="logo">{LGBTFriendly ? this.emoji : '😔'}</div>
+        <div className="logo">{this.emoji}</div>
         <div className="all-buttons">
           <div className="buttons">
             <button className="button play blured" onClick={this.start}>

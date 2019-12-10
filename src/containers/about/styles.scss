@@ -6,14 +6,14 @@
   background: linear-gradient(
       330.96deg,
       #00f0ff 18.5%,
-      #ff8bca 18.51%,
-      #ff8bca 40.48%,
-      #fff 40.49%,
-      #fff 62.47%,
-      #ff8bca 62.48%,
-      #ff8bca 81.56%,
-      #ff8bca 81.57%,
-      #00e0ff 81.58%
+      #ff8bca 18.5%,
+      #ff8bca 40%,
+      #fff 40%,
+      #fff 62%,
+      #ff8bca 62%,
+      #ff8bca 81%,
+      #ff8bca 81%,
+      #00e0ff 81%
     ),
     #fff;
   height: 100vh;
@@ -48,6 +48,10 @@
     }
   }
 
+  .blured {
+    backdrop-filter: blur(25px);
+  }
+
   .thanks {
     width: 35vmax * $scaler;
     margin: 1vh * $scaler;
@@ -56,7 +60,6 @@
     color: white;
     border-radius: 2vh * $scaler;
     text-align: center;
-    // backdrop-filter: blur(50px);
     font-weight: 300;
 
     big {
@@ -65,6 +68,7 @@
       &.heart {
         display: inline-block;
         margin-top: 2vh * $scaler;
+        margin-bottom: 0.5vh * $scaler;
         // line-height: 10vh * $scaler;
         animation: beat 1.5s;
         animation-iteration-count: infinite;

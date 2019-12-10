@@ -31,7 +31,8 @@
 
   .button {
     // height: 15vh * $scaler;
-    font-weight: 300;
+    font-weight: 100;
+    // text-transform: lowercase;
     color: white;
     display: flex;
     align-items: center;
@@ -43,7 +44,7 @@
     &.small {
       height: 7vh * $scaler;
       width: 35vmax * $scaler;
-      margin: 1vh * $scaler;
+      margin: 0.5vh * $scaler;
       font-size: 3vh * $scaler;
       padding-left: 2vh * $scaler;
     }

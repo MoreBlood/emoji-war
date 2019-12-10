@@ -10,13 +10,19 @@ import '../../styles/adaptive.scss';
 
 import { GameStore, GameState } from '../../stores/gameStore';
 import Emoji from '../../components/emoji';
-import { randomInteger } from '../../helpers/math';
 import { skin } from '../../helpers/emojis';
-import { autorun, IReactionDisposer } from 'mobx';
+import { autorun, IReactionDisposer, observable } from 'mobx';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
 };
+
+enum Direction {
+  'Left',
+  'Right',
+  'Up',
+  'Down',
+}
 
 @(withRouter as any)
 @inject('gameStore')
@@ -25,11 +31,25 @@ class Game extends React.Component<PropsType, null> {
   private gameStore: GameStore;
   private gameStateChanges: IReactionDisposer;
 
+  @observable
+  private isAnimating = false;
+
+  @observable
+  private isSwiping = false;
+
   public constructor(props: PropsType) {
     super(props);
 
     this.gameStore = this.props.gameStore;
   }
+
+  private startedAnimating = (): void => {
+    this.isAnimating = true;
+  };
+
+  private stopeAnimating = (): void => {
+    this.isAnimating = false;
+  };
 
   public componentWillMount(): void {
     this.gameStore.restart();
@@ -50,6 +70,28 @@ class Game extends React.Component<PropsType, null> {
     this.gameStateChanges();
   }
 
+  public onSwipe = (e: EventData): void => {
+    const { isPlaying, swipesDisabled } = this.gameStore;
+
+    if (this.isSwiping || !isPlaying || this.isAnimating || swipesDisabled) return;
+
+    switch (Direction[e.dir]) {
+      case Direction.Left:
+        this.no();
+        break;
+      case Direction.Right:
+        this.yes();
+        break;
+      default:
+        break;
+    }
+    this.isSwiping = true;
+  };
+
+  public onSwiped = (): void => {
+    this.isSwiping = false;
+  };
+
   private yes = (): void => this.gameStore.voteForPairs(true);
   private no = (): void => this.gameStore.voteForPairs(false);
   private switch = (): void => this.gameStore.switchGameMode();
@@ -63,17 +105,16 @@ class Game extends React.Component<PropsType, null> {
       secondPair,
       timer,
       scoreRight,
-      scoreWrong,
-      gameSizeEmoji,
       gameLifes,
       gameSize,
       skinColor,
       isPlaying,
       lifes,
     } = this.gameStore;
+
     return (
       <div className="App">
-        <div className="gameField">
+        <Swipeable className="gameField" delta={75} onSwiping={this.onSwipe} onSwiped={(): void => this.onSwiped()}>
           {/* <div className="blured score debug">
             {firstPair.hash}
             {comparePairs ? ' = ' : ' != '}
@@ -118,7 +159,14 @@ class Game extends React.Component<PropsType, null> {
             {[firstPair, secondPair].map((pair, index) => {
               return (
                 <TransitionGroup key={`${index}`} className="pair-holder scale">
-                  <CSSTransition key={pair.hash} timeout={500} classNames="scale">
+                  <CSSTransition
+                    key={pair.hash}
+                    timeout={500}
+                    classNames="scale"
+                    unmountOnExit
+                    onEnter={this.startedAnimating}
+                    onExited={this.stopeAnimating}
+                  >
                     <div className="pair">
                       {pair.pair.map(rows => {
                         return (
@@ -138,14 +186,14 @@ class Game extends React.Component<PropsType, null> {
             })}
           </div>
           <div className="blured buttons">
-            <button disabled={!isPlaying} className="thumb down" onClick={this.yes}>
+            <button disabled={!isPlaying || this.isAnimating} className="thumb down" onClick={this.yes}>
               <Emoji>{`👍${skin[skinColor]}`}</Emoji>
             </button>
-            <button disabled={!isPlaying} className="thumb up" onClick={this.no}>
+            <button disabled={!isPlaying || this.isAnimating} className="thumb up" onClick={this.no}>
               <Emoji>{`👎${skin[skinColor]}`}</Emoji>
             </button>
           </div>
-        </div>
+        </Swipeable>
       </div>
     );
   }

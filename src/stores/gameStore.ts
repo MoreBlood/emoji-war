@@ -1,6 +1,6 @@
 import { observable, action, computed, toJS } from 'mobx';
 import { randomInteger, yes } from '../helpers/math';
-import { emoticons, skin, colorable } from '../helpers/emojis';
+import { emoticons, skin, colorable, sadEmoticons, happyEmoticons } from '../helpers/emojis';
 import { Pair } from '../types/pair';
 
 export enum GameState {
@@ -29,6 +29,9 @@ export class GameStore {
 
   @observable
   public LGBTFriendly = true;
+
+  @observable
+  public swipesDisabled = true;
 
   @computed
   public get gameSizeEmoji(): string {
@@ -82,6 +85,10 @@ export class GameStore {
     this.LGBTFriendly = !this.LGBTFriendly;
   }
 
+  public switchSwipesDisabled(): void {
+    this.swipesDisabled = !this.swipesDisabled;
+  }
+
   @computed
   public get isPlaying(): boolean {
     return this.gameState === GameState.playing;
@@ -100,7 +107,7 @@ export class GameStore {
         second[i] = [];
       }
       for (let u = 0; u < this.gameSize; u += 1) {
-        first[i][u] = GameStore.randomEmoji();
+        first[i][u] = this.randomEmoji();
         second[i][u] = first[i][u];
       }
     }
@@ -109,7 +116,7 @@ export class GameStore {
       const randomRow = randomInteger(0, this.gameSize);
       const randomColoumn = randomInteger(0, this.gameSize);
 
-      second[randomRow][randomColoumn] = GameStore.randomEmoji();
+      second[randomRow][randomColoumn] = this.randomEmoji();
     }
 
     this.firstPair = new Pair(first);
@@ -144,11 +151,21 @@ export class GameStore {
     this.gameState = GameState.gameOver;
   }
 
-  public static randomEmoji(): string {
+  public get randomEmoticon(): string {
+    const emojis = this.LGBTFriendly ? emoticons : sadEmoticons;
+    return emojis[randomInteger(0, emojis.length)];
+  }
+
+  public get randomSadOrHappyEmoticon(): string {
+    const emojis = this.LGBTFriendly ? happyEmoticons : sadEmoticons;
+    return emojis[randomInteger(0, emojis.length)];
+  }
+
+  private randomEmoji(): string {
     if (yes()) {
       return colorable[randomInteger(0, colorable.length)];
     } else {
-      return emoticons[randomInteger(0, emoticons.length)];
+      return this.randomEmoticon;
     }
   }
 
