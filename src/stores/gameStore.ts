@@ -31,7 +31,7 @@ export class GameStore {
   public LGBTFriendly = true;
 
   @observable
-  public swipesDisabled = true;
+  public swipesDisabled = false;
 
   @computed
   public get gameSizeEmoji(): string {

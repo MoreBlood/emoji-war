@@ -7,7 +7,7 @@
   .emoji-row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .topBar {
@@ -94,8 +94,8 @@
 
   .pair-holder {
     position: relative;
-    width: 20vh;
-    height: 20vh;
+    width: 22vh;
+    height: 21vh;
 
     // &.three {
     //   width: 23vh;
@@ -120,6 +120,8 @@
     flex-direction: column;
     border-radius: 2vh * $scaler;
     padding: 2vh * $scaler;
+    transition: background 0.2s linear;
+    will-change: transform, background;
   }
 
   .gameField {
@@ -163,7 +165,7 @@
     }
 
     &.up {
-      margin-left: 2vh * $scaler;
+      margin-right: 2vh * $scaler;
     }
 
     &.switch {
@@ -178,7 +180,7 @@
     }
 
     &.down {
-      margin-right: 2vh * $scaler;
+      margin-left: 2vh * $scaler;
       background: #00fff0;
       box-shadow: 0 0.4vh * $scaler 2vh * $scaler #1bdcf1;
     }

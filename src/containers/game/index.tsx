@@ -30,9 +30,16 @@ enum Direction {
 class Game extends React.Component<PropsType, null> {
   private gameStore: GameStore;
   private gameStateChanges: IReactionDisposer;
+  private pairs = React.createRef<HTMLDivElement>();
 
   @observable
   private isAnimating = false;
+
+  @observable
+  private offsetX = 0;
+
+  @observable
+  private offsetY = 0;
 
   @observable
   private isSwiping = false;
@@ -73,24 +80,67 @@ class Game extends React.Component<PropsType, null> {
   public onSwipe = (e: EventData): void => {
     const { isPlaying, swipesDisabled } = this.gameStore;
 
-    if (this.isSwiping || !isPlaying || this.isAnimating || swipesDisabled) return;
-
-    switch (Direction[e.dir]) {
-      case Direction.Left:
-        this.no();
-        break;
-      case Direction.Right:
-        this.yes();
-        break;
-      default:
-        break;
-    }
+    if (!isPlaying || swipesDisabled) return;
+    this.pairs.current.style.transition = '';
     this.isSwiping = true;
+
+    this.offsetX = -e.deltaX;
+    this.offsetY = -e.deltaY;
+
+    const screenWidth = window.innerWidth / 2;
+
+    const maxRotation = (this.offsetX / screenWidth) * 5;
+    const maxColor = Math.abs(this.offsetX / screenWidth) + 0.5;
+
+    if (this.offsetX > 0) {
+      this.pairs.current.style.background = `rgba(104, 125, 247, ${maxColor})`;
+    } else {
+      this.pairs.current.style.background = `rgba(179, 31, 253, ${maxColor})`;
+    }
+
+    this.pairs.current.style.transform = `translateX(${this.offsetX}px) scale(1.05) translateY(${this.offsetY}px) rotate(${maxRotation}deg)`;
   };
 
   public onSwiped = (): void => {
     this.isSwiping = false;
+
+    this.pairs.current.style.transition = 'all 0.2s linear';
+    const screenWidth = window.innerWidth / 2;
+
+    if (Math.abs(this.offsetX / screenWidth) < 0.5) {
+      this.resetPairsPosition(true);
+    } else {
+      this.pairs.current.style.transform = `
+        translateX(${Math.sign(this.offsetX) * window.innerWidth}px)
+        translateY(${this.offsetY}px)
+        rotate(${Math.sign(this.offsetX) * 10}deg)
+       `;
+
+      this.pairs.current.style.background = '';
+
+      if (this.offsetX > 0) {
+        this.yes();
+      } else {
+        this.no();
+      }
+
+      setTimeout(() => {
+        this.resetPairsPosition();
+      }, 300);
+    }
   };
+
+  private resetPairsPosition(withAnimation = false): void {
+    if (!withAnimation) {
+      this.pairs.current.style.transition = '';
+    }
+
+    this.offsetX = 0;
+    this.offsetY = 0;
+
+    this.pairs.current.style.background = '';
+    this.pairs.current.style.transform = 'translateX(0px) rotate(0deg) scale(1)';
+  }
 
   private yes = (): void => this.gameStore.voteForPairs(true);
   private no = (): void => this.gameStore.voteForPairs(false);
@@ -114,7 +164,7 @@ class Game extends React.Component<PropsType, null> {
 
     return (
       <div className="App">
-        <Swipeable className="gameField" delta={75} onSwiping={this.onSwipe} onSwiped={(): void => this.onSwiped()}>
+        <Swipeable className="gameField" onSwiping={this.onSwipe} onSwiped={this.onSwiped}>
           {/* <div className="blured score debug">
             {firstPair.hash}
             {comparePairs ? ' = ' : ' != '}
@@ -155,7 +205,7 @@ class Game extends React.Component<PropsType, null> {
               </div>
             </div>
           </div>
-          <div className="pairs blured">
+          <div ref={this.pairs} className="pairs blured">
             {[firstPair, secondPair].map((pair, index) => {
               return (
                 <TransitionGroup key={`${index}`} className="pair-holder scale">
@@ -186,11 +236,11 @@ class Game extends React.Component<PropsType, null> {
             })}
           </div>
           <div className="blured buttons">
-            <button disabled={!isPlaying || this.isAnimating} className="thumb down" onClick={this.yes}>
-              <Emoji>{`👍${skin[skinColor]}`}</Emoji>
-            </button>
             <button disabled={!isPlaying || this.isAnimating} className="thumb up" onClick={this.no}>
               <Emoji>{`👎${skin[skinColor]}`}</Emoji>
+            </button>
+            <button disabled={!isPlaying || this.isAnimating} className="thumb down" onClick={this.yes}>
+              <Emoji>{`👍${skin[skinColor]}`}</Emoji>
             </button>
           </div>
         </Swipeable>
