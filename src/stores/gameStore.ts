@@ -130,6 +130,11 @@ export class GameStore {
     return this.gameState === GameState.playing;
   }
 
+  @computed
+  public get isPaused(): boolean {
+    return this.gameState === GameState.pause;
+  }
+
   @action
   private generate(): void {
     if (this.lifes === 0) {
@@ -170,6 +175,19 @@ export class GameStore {
     this.generate();
   }
 
+  public switchPause(): void {
+    if (this.gameState === GameState.playing) {
+      if (this.timerUpdater) {
+        clearInterval(this.timerUpdater);
+      }
+      this.gameState = GameState.pause;
+    } else if (this.gameState !== GameState.gameOver) {
+      this.gameState = GameState.playing;
+      this.decrease(); // anti-abuse pause super system
+      this.initTimer();
+    }
+  }
+
   @action
   public switchGameMode(): void {
     const currentGameSizeIndex = this.gameSizes.indexOf(this.gameSize);
@@ -179,11 +197,11 @@ export class GameStore {
   }
 
   private stop(): void {
+    this.gameState = GameState.gameOver;
+    this.timer = 0;
     if (this.timerUpdater) {
       clearInterval(this.timerUpdater);
-      this.timer = 0;
     }
-    this.gameState = GameState.gameOver;
   }
 
   public get randomEmoticon(): string {

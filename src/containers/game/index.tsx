@@ -151,7 +151,7 @@ class Game extends React.Component<PropsType, null> {
   private switch = (): void => this.gameStore.switchGameMode();
   private menu = (): void => this.props.history.push('');
   private over = (): void => this.props.history.push('/gameOver');
-  private restart = (): void => this.gameStore.restart();
+  private togglePause = (): void => this.gameStore.switchPause();
 
   public render(): React.ReactNode {
     const {
@@ -164,90 +164,106 @@ class Game extends React.Component<PropsType, null> {
       skinColor,
       isPlaying,
       lifes,
+      isPaused,
     } = this.gameStore;
 
     return (
-      <div className="App">
-        <Swipeable className="gameField" onSwiping={this.onSwipe} onSwiped={this.onSwiped}>
-          {/* <div className="blured score debug">
+      <div className="game">
+        <TransitionGroup>
+          <CSSTransition key={isPaused ? 'paused' : 'not-paused'} timeout={600} classNames="scale">
+            <div className="pause">
+              {isPaused ? (
+                <button className="button play blured scale" onClick={this.togglePause}>
+                  ▶️
+                </button>
+              ) : null}
+            </div>
+          </CSSTransition>
+        </TransitionGroup>
+        <div className={isPaused ? 'paused gameFieldHolder' : 'gameFieldHolder'}>
+          <div className="gameField">
+            {/* <div className="blured score debug">
             {firstPair.hash}
             {comparePairs ? ' = ' : ' != '}
             {secondPair.hash}
           </div> */}
-          <div className="topBar" style={{ display: 'flex' }}>
-            <div className="score-holder timer">
-              <div className="blured score">
-                <button disabled={!isPlaying} className="thumb switch" onClick={this.menu}>
-                  ⏪
-                </button>
+            <div className="topBar" style={{ display: 'flex' }}>
+              <div className="score-holder timer">
+                <div className="blured score">
+                  <button disabled={!isPlaying} className="thumb switch" onClick={this.menu}>
+                    ⏪
+                  </button>
+                </div>
+              </div>
+              <TransitionGroup className="score-holder scale">
+                <CSSTransition key={scoreRight} timeout={500} classNames="scale">
+                  <div className="blured score">{`🔥 ${scoreRight}`}</div>
+                </CSSTransition>
+              </TransitionGroup>
+              <TransitionGroup className="score-holder scale timer">
+                <CSSTransition key={timer} timeout={500} classNames="scale">
+                  <div className="blured score">{timer}</div>
+                </CSSTransition>
+              </TransitionGroup>
+              <div className="score-holder lifes scale">
+                <div className="blured score">
+                  {Array.from({ length: gameLifes }, () => '❤️').map((heart, index) => (
+                    <span key={index} className="life" style={{ opacity: index < lifes ? 1 : 0.1 }}>
+                      {heart}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="score-holder timer">
+                <div className="blured score">
+                  <button disabled={!isPlaying} className="thumb switch" onClick={this.togglePause}>
+                    ⏸️
+                  </button>
+                </div>
               </div>
             </div>
-            <TransitionGroup className="score-holder scale">
-              <CSSTransition key={scoreRight} timeout={500} classNames="scale">
-                <div className="blured score">{`🔥 ${scoreRight}`}</div>
-              </CSSTransition>
-            </TransitionGroup>
-            <TransitionGroup className="score-holder scale timer">
-              <CSSTransition key={timer} timeout={500} classNames="scale">
-                <div className="blured score">{timer}</div>
-              </CSSTransition>
-            </TransitionGroup>
-            <div className="score-holder lifes scale">
-              <div className="blured score">
-                {Array.from({ length: gameLifes }, () => '❤️').map((heart, index) => (
-                  <span key={index} className="life" style={{ opacity: index < lifes ? 1 : 0.1 }}>
-                    {heart}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="score-holder timer">
-              <div className="blured score">
-                <button disabled={!isPlaying} className="thumb switch" onClick={this.restart}>
-                  🔄
-                </button>
-              </div>
-            </div>
-          </div>
-          <div ref={this.pairs} className="pairs blured">
-            {[firstPair, secondPair].map((pair, index) => {
-              return (
-                <TransitionGroup key={`${index}`} className="pair-holder scale">
-                  <CSSTransition
-                    key={pair.hash}
-                    timeout={500}
-                    classNames="scale"
-                    unmountOnExit
-                    onEnter={this.startedAnimating}
-                    onExited={this.stopeAnimating}
-                  >
-                    <div className="pair">
-                      {pair.pair.map(rows => {
-                        return (
-                          <div className="emoji-row" key={rows.join()}>
-                            {rows.map((item, index) => (
-                              <div key={item + index}>
-                                <Emoji gameSize={gameSize}>{item}</Emoji>
+            <Swipeable className="gameField" onSwiping={this.onSwipe} onSwiped={this.onSwiped}>
+              <div ref={this.pairs} className="pairs blured">
+                {[firstPair, secondPair].map((pair, index) => {
+                  return (
+                    <TransitionGroup key={`${index}`} className="pair-holder scale">
+                      <CSSTransition
+                        key={pair.hash}
+                        timeout={500}
+                        classNames="scale"
+                        unmountOnExit
+                        onEnter={this.startedAnimating}
+                        onExited={this.stopeAnimating}
+                      >
+                        <div className="pair">
+                          {pair.pair.map(rows => {
+                            return (
+                              <div className="emoji-row" key={rows.join()}>
+                                {rows.map((item, index) => (
+                                  <div key={item + index}>
+                                    <Emoji gameSize={gameSize}>{item}</Emoji>
+                                  </div>
+                                ))}
                               </div>
-                            ))}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </CSSTransition>
-                </TransitionGroup>
-              );
-            })}
+                            );
+                          })}
+                        </div>
+                      </CSSTransition>
+                    </TransitionGroup>
+                  );
+                })}
+              </div>
+            </Swipeable>
+            <div className="blured buttons">
+              <button disabled={!isPlaying || this.isAnimating} className="thumb up" onClick={this.no}>
+                <Emoji>{`👎${skin[skinColor]}`}</Emoji>
+              </button>
+              <button disabled={!isPlaying || this.isAnimating} className="thumb down" onClick={this.yes}>
+                <Emoji>{`👍${skin[skinColor]}`}</Emoji>
+              </button>
+            </div>
           </div>
-          <div className="blured buttons">
-            <button disabled={!isPlaying || this.isAnimating} className="thumb up" onClick={this.no}>
-              <Emoji>{`👎${skin[skinColor]}`}</Emoji>
-            </button>
-            <button disabled={!isPlaying || this.isAnimating} className="thumb down" onClick={this.yes}>
-              <Emoji>{`👍${skin[skinColor]}`}</Emoji>
-            </button>
-          </div>
-        </Swipeable>
+        </div>
       </div>
     );
   }
