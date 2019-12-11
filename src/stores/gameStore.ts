@@ -175,7 +175,6 @@ export class GameStore {
     const currentGameSizeIndex = this.gameSizes.indexOf(this.gameSize);
     const nextGameSize = (currentGameSizeIndex + 1) % this.gameSizes.length;
     this.gameSize = this.gameSizes[nextGameSize];
-    console.log(currentGameSizeIndex, nextGameSize, this.gameSize);
     this.restart();
   }
 

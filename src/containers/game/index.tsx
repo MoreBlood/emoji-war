@@ -80,7 +80,7 @@ class Game extends React.Component<PropsType, null> {
   public onSwipe = (e: EventData): void => {
     const { isPlaying, swipesDisabled } = this.gameStore;
 
-    if (!isPlaying || swipesDisabled) return;
+    if (!isPlaying || swipesDisabled || !this.pairs.current) return;
     this.pairs.current.style.transition = '';
     this.isSwiping = true;
 
@@ -92,10 +92,12 @@ class Game extends React.Component<PropsType, null> {
     const maxRotation = (this.offsetX / screenWidth) * 5;
     const maxColor = Math.abs(this.offsetX / screenWidth) + 0.5;
 
-    if (this.offsetX > 0) {
+    if (this.offsetX / screenWidth > 0.2) {
       this.pairs.current.style.background = `rgba(104, 125, 247, ${maxColor})`;
-    } else {
+    } else if (this.offsetX / screenWidth < -0.2) {
       this.pairs.current.style.background = `rgba(179, 31, 253, ${maxColor})`;
+    } else {
+      this.pairs.current.style.background = '';
     }
 
     this.pairs.current.style.transform = `translateX(${this.offsetX}px) scale(1.05) translateY(${this.offsetY}px) rotate(${maxRotation}deg)`;
@@ -103,6 +105,8 @@ class Game extends React.Component<PropsType, null> {
 
   public onSwiped = (): void => {
     this.isSwiping = false;
+
+    if (!this.pairs.current) return;
 
     this.pairs.current.style.transition = 'all 0.2s linear';
     const screenWidth = window.innerWidth / 2;
