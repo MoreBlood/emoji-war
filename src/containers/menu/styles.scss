@@ -8,6 +8,11 @@
   flex-direction: column;
   align-items: center;
 
+  .blured {
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 2vh * $scaler #ffd50086;
+  }
+
   .all-buttons {
     display: flex;
     justify-content: center;

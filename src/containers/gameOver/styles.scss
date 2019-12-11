@@ -8,6 +8,10 @@
   flex-direction: column;
   align-items: center;
 
+  .blured {
+    box-shadow: 0 0 2vh * $scaler #ffd500c5;
+  }
+
   .all-buttons {
     display: flex;
     justify-content: center;
@@ -35,6 +39,10 @@
     letter-spacing: 0.6vh * $scaler;
     padding-left: 2.1vh * $scaler;
     pointer-events: none;
+
+    &.blured {
+      box-shadow: 0 0 2vh * $scaler #ff2e00;
+    }
   }
 
   .highscore {
@@ -44,6 +52,10 @@
     border-radius: 2vh * $scaler;
     padding: 1.5vh * $scaler 2vh * $scaler;
     font-weight: 200;
+
+    &.blured {
+      box-shadow: 0 0 2vh * $scaler #ff2e00;
+    }
   }
 
   .logo {

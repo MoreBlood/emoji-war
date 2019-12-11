@@ -23,6 +23,12 @@
     z-index: 100;
     pointer-events: none;
 
+    .logo {
+      margin: 0;
+      margin-bottom: 20vh * $scaler;
+      padding: 0;
+    }
+
     button {
       pointer-events: all;
     }
@@ -41,7 +47,7 @@
   }
 
   .topBar {
-    margin-top: 2vh * $scaler;
+    margin-top: 3vh * $scaler;
   }
 
   .buttons {
@@ -60,8 +66,8 @@
     border-radius: 1vh * $scaler;
     // margin: 2vh * $scaler;
     // padding: 1vh * $scaler 1.5vh * $scaler;
-    background: rgba(0, 0, 0, 0.4) !important;
-    box-shadow: 0 0 1vh * $scaler rgba(0, 0, 0, 0.62);
+    // background: rgba(0, 0, 0, 0.4) !important;
+    // box-shadow: 0 0 1vh * $scaler rgba(0, 0, 0, 0.62);
     position: absolute;
     top: 0;
     left: 0;

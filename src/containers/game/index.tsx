@@ -173,9 +173,12 @@ class Game extends React.Component<PropsType, null> {
           <CSSTransition key={isPaused ? 'paused' : 'not-paused'} timeout={600} classNames="scale">
             <div className="pause">
               {isPaused ? (
-                <button className="button play blured scale" onClick={this.togglePause}>
-                  ▶️
-                </button>
+                <div>
+                  <div className="logo">😴</div>
+                  <button className="button play blured scale" onClick={this.togglePause}>
+                    ▶️
+                  </button>
+                </div>
               ) : null}
             </div>
           </CSSTransition>
