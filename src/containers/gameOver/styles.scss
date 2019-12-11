@@ -27,16 +27,26 @@
     -webkit-appearance: none;
     border: none;
     font-size: 7vh * $scaler;
-    background: none;
-    border-bottom: 0.2vh * $scaler dotted rgba(255, 255, 255, 0.425);
+    // background: none;
+    // border-bottom: 0.2vh * $scaler dotted rgba(255, 255, 255, 0.425);
+    margin-top: 10vh * $scaler;
     margin-bottom: 2.5vh * $scaler;
-    padding-bottom: 2.5vh * $scaler;
+    border-radius: 2vh * $scaler;
     letter-spacing: 0.6vh * $scaler;
     pointer-events: none;
   }
 
+  .highscore {
+    color: white;
+    font-size: 3vh * $scaler;
+    margin-bottom: 15vh * $scaler;
+    border-radius: 2vh * $scaler;
+    padding: 1.5vh * $scaler 2vh * $scaler;
+    font-weight: 200;
+  }
+
   .logo {
-    padding: 7.5vh * $scaler 0 7.5vh * $scaler;
+    padding: 5vh * $scaler 0 5vh * $scaler;
   }
 
   .buttons {

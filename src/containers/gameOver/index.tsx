@@ -36,10 +36,17 @@ class GameOver extends React.Component<PropsType> {
   private settings = (): void => this.props.history.push('/settings');
 
   public render(): React.ReactNode {
+    const { highScore } = this.gameStore;
+    const isTop = this.score === highScore;
     return (
       <div className="gameOver">
-        <div className="logo">{this.emoji}</div>
-        <button className="thanks">{numberToEmojiString(this.score)}</button>
+        <button className="blured thanks">
+          {isTop ? '👑 ' : ''}
+          {numberToEmojiString(this.score)}
+        </button>
+        <div className="blured highscore" style={{ visibility: isTop ? 'hidden' : 'visible' }}>
+          👑 {highScore}
+        </div>
         <div className="all-buttons">
           <div className="buttons">
             <button className="button play blured" onClick={this.start}>

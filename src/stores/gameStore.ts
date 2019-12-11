@@ -1,7 +1,8 @@
 import { observable, action, computed, toJS } from 'mobx';
 import { randomInteger, yes } from '../helpers/math';
-import { emoticons, skin, colorable, sadEmoticons, happyEmoticons } from '../helpers/emojis';
+import { emoticons, skin, colorable, sadEmoticons, happyEmoticons, numberToEmojiString } from '../helpers/emojis';
 import { Pair } from '../types/pair';
+import { SavedSettingProperty } from '../helpers/localStorage';
 
 export enum GameState {
   gameOver,
@@ -10,8 +11,18 @@ export enum GameState {
 }
 
 export class GameStore {
-  @observable
-  public gameSize = 2;
+  private gameSizes = [2, 3, 4];
+  private _gameSize = new SavedSettingProperty('gameSize', 2, 'number');
+
+  @computed
+  public get gameSize(): number {
+    const { value } = this._gameSize;
+    return value as number;
+  }
+
+  public set gameSize(value: number) {
+    this._gameSize.value = value;
+  }
 
   @observable
   public gameState: GameState = GameState.playing;
@@ -21,28 +32,53 @@ export class GameStore {
 
   @computed
   private get time(): number {
-    return 2 * this.gameSize;
+    return 2 * this.gameSize + 1;
   }
 
   @observable
   public lifes: number = this.gameLifes;
 
-  @observable
-  public LGBTFriendly = true;
+  private _LGBTFriendly = new SavedSettingProperty('LGBTFriendly', true, 'bool');
 
-  @observable
-  public swipesDisabled = false;
+  @computed
+  public get LGBTFriendly(): boolean {
+    const { value } = this._LGBTFriendly;
+    return value as boolean;
+  }
+
+  public set LGBTFriendly(value: boolean) {
+    this._LGBTFriendly.value = value;
+  }
+
+  private _swipesDisabled = new SavedSettingProperty('swipesDisabled', false, 'bool');
+
+  @computed
+  public get swipesDisabled(): boolean {
+    const { value } = this._swipesDisabled;
+    return value as boolean;
+  }
+
+  public set swipesDisabled(value: boolean) {
+    this._swipesDisabled.value = value;
+  }
+
+  private _highScore = new SavedSettingProperty('highScore', 0, 'number');
+
+  @computed
+  public get highScore(): number {
+    const { value } = this._highScore;
+    return value as number;
+  }
+
+  public set highScore(value: number) {
+    if (value > this._highScore.value) {
+      this._highScore.value = value;
+    }
+  }
 
   @computed
   public get gameSizeEmoji(): string {
-    switch (this.gameSize) {
-      case 2:
-        return '2️⃣';
-      case 3:
-        return '3️⃣';
-      default:
-        return '';
-    }
+    return numberToEmojiString(this.gameSize).join('');
   }
 
   @observable
@@ -134,12 +170,12 @@ export class GameStore {
     this.generate();
   }
 
+  @action
   public switchGameMode(): void {
-    if (this.gameSize === 2) {
-      this.gameSize = 3;
-    } else {
-      this.gameSize = 2;
-    }
+    const currentGameSizeIndex = this.gameSizes.indexOf(this.gameSize);
+    const nextGameSize = (currentGameSizeIndex + 1) % this.gameSizes.length;
+    this.gameSize = this.gameSizes[nextGameSize];
+    console.log(currentGameSizeIndex, nextGameSize, this.gameSize);
     this.restart();
   }
 
@@ -185,6 +221,7 @@ export class GameStore {
 
     if (this.comparePairs === vote) {
       this.scoreRight += this.gameSize;
+      this.highScore = this.scoreRight;
     } else {
       this.scoredWrong = 1;
     }

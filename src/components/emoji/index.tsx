@@ -6,8 +6,19 @@ interface Props {
   gameSize?: number;
 }
 
+const getClass = (size: number): string => {
+  switch (size) {
+    case 3:
+      return 'three';
+    case 4:
+      return 'four';
+    default:
+      return '';
+  }
+};
+
 const Emoji: React.FC<Props> = props => {
-  return <div className={`${props.gameSize === 3 ? 'three' : ''} emoji__holder`}>{props.children}</div>;
+  return <div className={`${getClass(props.gameSize)} emoji__holder`}>{props.children}</div>;
 };
 
 export default Emoji;

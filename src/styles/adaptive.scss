@@ -31,8 +31,8 @@ a {
 }
 
 button:disabled {
-  opacity: 0.5;
-  transition: opacity 300ms ease-in-out;
+  opacity: 0.9;
+  // transition: opacity 100ms ease-in-out;
   pointer-events: none;
 }
 

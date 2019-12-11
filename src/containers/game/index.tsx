@@ -221,8 +221,8 @@ class Game extends React.Component<PropsType, null> {
                       {pair.pair.map(rows => {
                         return (
                           <div className="emoji-row" key={rows.join()}>
-                            {rows.map(item => (
-                              <div key={item}>
+                            {rows.map((item, index) => (
+                              <div key={item + index}>
                                 <Emoji gameSize={gameSize}>{item}</Emoji>
                               </div>
                             ))}
