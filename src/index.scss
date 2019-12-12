@@ -102,7 +102,7 @@ code {
 
 .blured {
   background: rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 2vh * $scaler rgba(0, 0, 0, 0.62);
+  // box-shadow: 0 0 2vh * $scaler rgba(0, 0, 0, 0.62);
 }
 
 .logo {
@@ -153,5 +153,73 @@ code {
 
   &.play {
     font-size: 10vh * $scaler;
+  }
+}
+
+.scale {
+  &-enter {
+    opacity: 0;
+    transform: scale(0);
+
+    &-active {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+      transition: all 300ms ease-in-out 100ms;
+    }
+
+    &-done {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: scale(1);
+
+    &-active {
+      opacity: 0 !important;
+      transform: scale(0);
+      transition: all 300ms ease-in-out;
+    }
+
+    &-done {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+}
+
+.opacity {
+  &-enter {
+    opacity: 0;
+    transform: scale(0.8);
+
+    &-active {
+      opacity: 1;
+      transform: scale(1);
+      transition: all 300ms ease-in-out 100ms;
+    }
+
+    &-done {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: scale(1);
+
+    &-active {
+      opacity: 0 !important;
+      transform: scale(1.2);
+      transition: all 200ms ease-in-out;
+    }
+
+    &-done {
+      opacity: 0;
+      transform: scale(1.2);
+    }
   }
 }

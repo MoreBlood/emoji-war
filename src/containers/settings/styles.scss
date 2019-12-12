@@ -29,6 +29,11 @@
     margin: 1vh * $scaler;
   }
 
+  .logo {
+    padding: 7.5vh * $scaler;
+    position: relative;
+  }
+
   .button {
     // height: 15vh * $scaler;
     font-weight: 100;
@@ -43,10 +48,11 @@
 
     &.small {
       height: 7vh * $scaler;
-      width: 35vmax * $scaler;
+      width: 40vmax * $scaler;
       margin: 0.5vh * $scaler;
-      font-size: 3vh * $scaler;
-      padding-left: 2vh * $scaler;
+      font-size: 2.2vh * $scaler;
+      padding: 0 2vh * $scaler;
+      display: flex;
     }
   }
 }

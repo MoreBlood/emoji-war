@@ -1,0 +1,104 @@
+@import '../../styles/global.scss';
+
+.store {
+  background: linear-gradient(180deg, #04f9cd 0%, #ff00d6 100%), #ffffff;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+
+  .all-buttons {
+    display: flex;
+    // justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    max-height: 40vh * $scaler;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+
+  .logo {
+    padding: 7.5vh * $scaler;
+    position: relative;
+  }
+
+  .highscore {
+    color: white;
+    font-size: 3vh * $scaler;
+    border-radius: 2vh * $scaler;
+    padding: 1.5vh * $scaler 2vh * $scaler;
+    font-weight: 200;
+    position: absolute;
+    bottom: 17.25vh * $scaler;
+    right: -5.75vh * $scaler;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .buttons {
+    margin: 1vh * $scaler;
+  }
+
+  .button {
+    // height: 15vh * $scaler;
+
+    // text-transform: lowercase;
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    .setting-item-text {
+      margin-left: 1vh * $scaler;
+      font-weight: 100;
+    }
+
+    &.blured {
+      box-shadow: none;
+    }
+
+    &:disabled {
+      filter: saturate(0);
+      color: #ffffff50;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .price {
+      font-weight: 600;
+
+      &.low {
+        color: #e81224;
+      }
+    }
+
+    .emoji {
+      font-size: 3vh * $scaler;
+    }
+
+    &.small {
+      height: 7vh * $scaler;
+      width: 40vmax * $scaler;
+      margin: 0.5vh * $scaler;
+      font-size: 2.2vh * $scaler;
+      padding: 0 2vh * $scaler;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+
+      &.dev {
+        &::after {
+          content: 'in dev';
+          display: flex;
+          position: absolute;
+          font-size: 1.5vh * $scaler;
+          top: -0.5vh * $scaler;
+          right: -0.5vh * $scaler;
+          background: white;
+          color: black;
+          padding: 0.5vh * $scaler 1vh * $scaler;
+          border-radius: 1vh * $scaler;
+        }
+      }
+    }
+  }
+}

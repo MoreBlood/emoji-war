@@ -1,8 +1,19 @@
-import { observable, action, computed, toJS } from 'mobx';
+import { observable, action, computed, toJS, ObservableMap } from 'mobx';
 import { randomInteger, yes } from '../helpers/math';
-import { emoticons, skin, colorable, sadEmoticons, happyEmoticons, numberToEmojiString } from '../helpers/emojis';
+import {
+  emoticons,
+  skin,
+  colorable,
+  sadEmoticons,
+  happyEmoticons,
+  numberToEmojiString,
+  pewEmoticons,
+  tarantinoEmoticons,
+} from '../helpers/emojis';
 import { Pair } from '../types/pair';
 import { SavedSettingProperty } from '../helpers/localStorage';
+import { StoreItem } from '../types/storeItem';
+import { inGameStoreItems } from './data/inGameStoreItems';
 
 export enum GameState {
   gameOver,
@@ -10,8 +21,16 @@ export enum GameState {
   playing,
 }
 
+export enum GameModes {
+  REGULAR_GAME_MODE,
+  TARANTINO_GAME_MODE,
+  PEW_GAME_MODE,
+}
+
 export class GameStore {
   private gameSizes = [2, 3, 4];
+  private gameModes = Object.keys(GameModes);
+
   private _gameSize = new SavedSettingProperty('gameSize', 2, 'number');
 
   @computed
@@ -24,11 +43,34 @@ export class GameStore {
     this._gameSize.value = value;
   }
 
+  private _gameMode = new SavedSettingProperty('gameMode', GameModes.REGULAR_GAME_MODE, 'number');
+
+  @computed
+  public get gameMode(): GameModes {
+    const { value } = this._gameMode;
+    return value as number;
+  }
+
+  public set gameMode(value: GameModes) {
+    this._gameMode.value = value;
+  }
+
+  @computed
+  public get gameModeItem(): StoreItem {
+    const { value } = this._gameMode;
+    const item = this.storeItems.get(GameModes[value as number]);
+    return item;
+  }
+
   @observable
   public gameState: GameState = GameState.playing;
 
-  @observable
-  public gameLifes = 3;
+  @computed
+  public get gameLifes(): number {
+    const purchased = this.storeItems.get('EXTRA_LIFE').bought;
+
+    return purchased ? 4 : 3;
+  }
 
   @computed
   private get time(): number {
@@ -36,7 +78,7 @@ export class GameStore {
   }
 
   @observable
-  public lifes: number = this.gameLifes;
+  public lifes: number;
 
   private _LGBTFriendly = new SavedSettingProperty('LGBTFriendly', true, 'bool');
 
@@ -81,6 +123,10 @@ export class GameStore {
     return numberToEmojiString(this.gameSize).join('');
   }
 
+  public constructor() {
+    this.initStore();
+  }
+
   @observable
   public firstPair: Pair = new Pair();
 
@@ -100,6 +146,56 @@ export class GameStore {
   public skinColor: number = 0;
 
   private timerUpdater: NodeJS.Timeout = null;
+
+  @observable
+  public storeItems: Map<string, StoreItem> = new Map();
+
+  private _boughtItems = new SavedSettingProperty('boughtItems', [], 'array');
+
+  @computed
+  public get boughtItems(): string[] {
+    const { value } = this._boughtItems;
+    return value as string[];
+  }
+
+  public set boughtItems(value: string[]) {
+    console.log(value);
+    this._boughtItems.value = value;
+  }
+
+  private _money = new SavedSettingProperty('money', 20, 'number');
+
+  @computed
+  public get money(): number {
+    const { value } = this._money;
+    return value as number;
+  }
+
+  public set money(value: number) {
+    this._money.value = value;
+  }
+
+  @action
+  public initStore(): void {
+    inGameStoreItems.forEach(item => {
+      this.storeItems.set(item.id, item);
+    });
+
+    this.boughtItems.forEach(item => {
+      this.storeItems.get(item).bought = true;
+    });
+  }
+
+  @action
+  public buyItem(id: string): void {
+    const item = this.storeItems.get(id);
+    if (item && this.money >= item.price && !item.bought) {
+      item.bought = true;
+      this.money -= item.price;
+      const newBought = [...this.boughtItems, id];
+      this.boughtItems = newBought;
+    }
+  }
 
   @action
   private decrease(): void {
@@ -189,10 +285,26 @@ export class GameStore {
   }
 
   @action
-  public switchGameMode(): void {
+  public switchGameSize(): void {
     const currentGameSizeIndex = this.gameSizes.indexOf(this.gameSize);
     const nextGameSize = (currentGameSizeIndex + 1) % this.gameSizes.length;
     this.gameSize = this.gameSizes[nextGameSize];
+    this.restart();
+  }
+
+  @action
+  public switchGameMode(): void {
+    const avaible = [GameModes.REGULAR_GAME_MODE];
+
+    if (this.storeItems.get('TARANTINO_GAME_MODE').bought) {
+      avaible.push(GameModes.TARANTINO_GAME_MODE);
+    }
+    if (this.storeItems.get('PEW_GAME_MODE').bought) {
+      avaible.push(GameModes.PEW_GAME_MODE);
+    }
+    const currentGameSizeIndex = avaible.indexOf(this.gameMode);
+    const nextGameSize = (currentGameSizeIndex + 1) % avaible.length;
+    this.gameMode = avaible[nextGameSize];
     this.restart();
   }
 
@@ -216,9 +328,15 @@ export class GameStore {
 
   private randomEmoji(): string {
     if (yes()) {
-      return colorable[randomInteger(0, colorable.length)];
-    } else {
       return this.randomEmoticon;
+    }
+    switch (this.gameMode) {
+      case GameModes.PEW_GAME_MODE:
+        return pewEmoticons[randomInteger(0, pewEmoticons.length)];
+      case GameModes.TARANTINO_GAME_MODE:
+        return tarantinoEmoticons[randomInteger(0, tarantinoEmoticons.length)];
+      default:
+        return colorable[randomInteger(0, colorable.length)];
     }
   }
 
@@ -239,6 +357,7 @@ export class GameStore {
     if (this.comparePairs === vote) {
       this.scoreRight += this.gameSize;
       this.highScore = this.scoreRight;
+      this.money += 1;
     } else {
       this.scoredWrong = 1;
     }
@@ -248,6 +367,15 @@ export class GameStore {
   @computed
   public get comparePairs(): boolean {
     return this.firstPair.hash === this.secondPair.hash;
+  }
+
+  public reset(): void {
+    for (var key in window.localStorage) {
+      if (key.indexOf('EMOJI_WAR_') == 0) {
+        window.localStorage.removeItem(key);
+      }
+    }
+    window.location.reload();
   }
 }
 

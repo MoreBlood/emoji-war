@@ -37,6 +37,7 @@ class Menu extends React.Component<PropsType> {
   private start = (): void => this.props.history.push('game');
   private settings = (): void => this.props.history.push('settings');
   private about = (): void => this.props.history.push('about');
+  private store = (): void => this.props.history.push('store');
 
   public render(): React.ReactNode {
     return (
@@ -51,6 +52,9 @@ class Menu extends React.Component<PropsType> {
           <div className="buttons">
             <button className="button small blured" onClick={this.about}>
               🤔
+            </button>
+            <button className="button small blured" onClick={this.store}>
+              🛒
             </button>
             <button className="button small blured" onClick={this.settings}>
               ⚙️

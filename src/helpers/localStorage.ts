@@ -11,11 +11,11 @@ export class SavedSettingProperty {
 
   private static appPrefix = 'EMOJI_WAR_';
 
-  public constructor(name: string, defaultValue: Storable, type = 'string') {
+  public constructor(name: string, defaultValue: Storable, type = 'string', hard = false) {
     this.name = SavedSettingProperty.appPrefix + name;
     this.type = type;
 
-    if (window.localStorage.getItem(this.name) === null) {
+    if (window.localStorage.getItem(this.name) === null || hard) {
       this.value = defaultValue;
     }
   }

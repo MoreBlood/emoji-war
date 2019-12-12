@@ -148,7 +148,7 @@ class Game extends React.Component<PropsType, null> {
 
   private yes = (): void => this.gameStore.voteForPairs(true);
   private no = (): void => this.gameStore.voteForPairs(false);
-  private switch = (): void => this.gameStore.switchGameMode();
+  private switch = (): void => this.gameStore.switchGameSize();
   private menu = (): void => this.props.history.push('');
   private over = (): void => this.props.history.push('/gameOver');
   private togglePause = (): void => this.gameStore.switchPause();
@@ -170,7 +170,7 @@ class Game extends React.Component<PropsType, null> {
     return (
       <div className="game">
         <TransitionGroup>
-          <CSSTransition key={isPaused ? 'paused' : 'not-paused'} timeout={600} classNames="scale">
+          <CSSTransition key={isPaused ? 'paused' : 'not-paused'} timeout={600} classNames="opacity">
             <div className="pause">
               {isPaused ? (
                 <div>
@@ -208,14 +208,12 @@ class Game extends React.Component<PropsType, null> {
                   <div className="blured score">{timer}</div>
                 </CSSTransition>
               </TransitionGroup>
-              <div className="score-holder lifes scale">
-                <div className="blured score">
-                  {Array.from({ length: gameLifes }, () => '❤️').map((heart, index) => (
-                    <span key={index} className="life" style={{ opacity: index < lifes ? 1 : 0.1 }}>
-                      {heart}
-                    </span>
-                  ))}
-                </div>
+              <div className="score-holder lifes blured">
+                {Array.from({ length: gameLifes }, () => '❤️').map((heart, index) => (
+                  <span key={index} className="life" style={{ opacity: index < lifes ? 1 : 0.1 }}>
+                    {heart}
+                  </span>
+                ))}
               </div>
               <div className="score-holder timer">
                 <div className="blured score">

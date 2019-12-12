@@ -11,6 +11,7 @@ import Menu from './containers/menu';
 import Settings from './containers/settings';
 import About from './containers/about';
 import GameOver from './containers/gameOver';
+import Store from './containers/store';
 import { CSSTransition } from 'react-transition-group';
 
 const stores = {
@@ -23,6 +24,7 @@ const routes = [
   { path: '/game', Component: Game },
   { path: '/settings', Component: Settings },
   { path: '/gameOver', Component: GameOver },
+  { path: '/store', Component: Store },
 ];
 
 const router = (

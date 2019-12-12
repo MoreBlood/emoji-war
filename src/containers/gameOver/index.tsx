@@ -34,6 +34,7 @@ class GameOver extends React.Component<PropsType> {
   private start = (): void => this.props.history.push('/game');
   private menu = (): void => this.props.history.push('/');
   private settings = (): void => this.props.history.push('/settings');
+  private store = (): void => this.props.history.push('store');
 
   public render(): React.ReactNode {
     const { highScore } = this.gameStore;
@@ -56,6 +57,9 @@ class GameOver extends React.Component<PropsType> {
           <div className="buttons">
             <button className="button small blured" onClick={this.menu}>
               🏠
+            </button>
+            <button className="button small blured" onClick={this.store}>
+              🛒
             </button>
             <button className="button small blured" onClick={this.settings}>
               ⚙️

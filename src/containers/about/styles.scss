@@ -56,14 +56,14 @@
     width: 35vmax * $scaler;
     margin: 1vh * $scaler;
     padding: 3vh * $scaler;
-    font-size: 2.5vh * $scaler;
+    font-size: 2vh * $scaler;
     color: white;
     border-radius: 2vh * $scaler;
     text-align: center;
     font-weight: 300;
 
     big {
-      font-size: 4vh * $scaler;
+      font-size: 3vh * $scaler;
 
       &.heart {
         display: inline-block;
