@@ -40,14 +40,15 @@ class Store extends React.Component<PropsType> {
     const { storeItems, money } = this.gameStore;
     return (
       <div className="store">
-        <div className="logo">
-          🛒 <div className="blured highscore">{money} 💵</div>
+        <div className="logo">🛒</div>
+        <div className="money-holder">
+          <div className="blured highscore">{money} 💵</div>
         </div>
 
         <div className="all-buttons">
           {Array.from(storeItems.values())
             .filter(e => !e.hidden)
-            .sort(e => (e.bought ? 1 : -1))
+            // .sort(e => (e.bought ? 1 : -1))
             .map(item => {
               return (
                 <button
