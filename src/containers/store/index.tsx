@@ -60,9 +60,9 @@ class Store extends React.Component<PropsType> {
                   <span>
                     <span className="emoji">{item.icon}</span> <span className="setting-item-text">{item.name}</span>
                   </span>{' '}
-                  {!item.bought ? (
-                    <span className={`price ${item.price > money ? 'low' : ''}`}>{`${item.price} 💵`}</span>
-                  ) : null}
+                  <span className={`price ${item.price > money ? 'low' : ''}`}>
+                    {item.bought ? '🤑' : `${item.price} 💵`}
+                  </span>
                 </button>
               );
             })}
