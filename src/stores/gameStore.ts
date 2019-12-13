@@ -8,6 +8,7 @@ import {
   happyEmoticons,
   pewEmoticons,
   tarantinoEmoticons,
+  tarantinoLegs,
 } from '../helpers/emojis';
 import { Pair } from '../types/pair';
 import { SettingsStore, GameModes } from './settingsStore';
@@ -159,15 +160,18 @@ export class GameStore {
   }
 
   private randomEmoji(): string {
-    if (yes()) {
-      return this.randomEmoticon;
-    }
     switch (this.settingsStore.gameMode) {
       case GameModes.PEW_GAME_MODE:
         return pewEmoticons[randomInteger(0, pewEmoticons.length)];
       case GameModes.TARANTINO_GAME_MODE:
+        if (yes()) {
+          return tarantinoLegs[randomInteger(0, tarantinoLegs.length)];
+        }
         return tarantinoEmoticons[randomInteger(0, tarantinoEmoticons.length)];
       default:
+        if (yes()) {
+          return this.randomEmoticon;
+        }
         return colorable[randomInteger(0, colorable.length)];
     }
   }

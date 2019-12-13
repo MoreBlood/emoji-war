@@ -73,7 +73,8 @@ export const happyEmoticons = [
 
 export const pewEmoticons = ['✊', '👊', '🤛', '🤜', '🧔', '👏', '👌'];
 
-export const tarantinoEmoticons = [/*'🦵',*/ '🦶', '💋', '😗', '😘', '😚', '😙', '😽', '👄'];
+export const tarantinoLegs = [/*'🦵',*/ '🦶'];
+export const tarantinoEmoticons = ['💋', '😗', '😘', '😚', '😙', '😽', '👄'];
 
 export const emoticons = Array.from(new Set([...sadEmoticons, ...happyEmoticons]).values()).sort(
   () => Math.random() - 0.5,
