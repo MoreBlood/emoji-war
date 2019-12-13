@@ -1,21 +1,14 @@
 import React from 'react';
-import { Swipeable, EventData } from 'react-swipeable';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
 
 import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
-import { GameStore } from '../../stores/gameStore';
-import Emoji from '../../components/emoji';
-import { randomInteger } from '../../helpers/math';
-import { skin } from '../../helpers/emojis';
-
 type PropsType = RouteComponentProps<{}>;
 
-@(withRouter as any)
+@withRouter
 @observer
 class About extends React.Component<PropsType> {
   public constructor(props?: PropsType) {

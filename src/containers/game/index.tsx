@@ -2,7 +2,7 @@ import React from 'react';
 import { Swipeable, EventData } from 'react-swipeable';
 import { inject, observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import './styles.scss';
 import '../../styles/global.scss';
@@ -19,14 +19,7 @@ type PropsType = RouteComponentProps<{}> & {
   settingsStore: SettingsStore;
 };
 
-enum Direction {
-  'Left',
-  'Right',
-  'Up',
-  'Down',
-}
-
-@(withRouter as any)
+@withRouter
 @inject('gameStore', 'settingsStore')
 @observer
 class Game extends React.Component<PropsType, null> {
@@ -276,4 +269,4 @@ class Game extends React.Component<PropsType, null> {
   }
 }
 
-export default Game as React.ComponentType<any>;
+export default Game;

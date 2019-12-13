@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider } from 'mobx-react';
 import ReactDOM from 'react-dom';
-import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import Game from './containers/game';
@@ -40,7 +40,7 @@ const router = (
     <HashRouter>
       {routes.map(({ path, Component }) => (
         <Route key={path} exact path={path}>
-          {({ match }: { match: any }) => (
+          {({ match }: { match: string[] }) => (
             <CSSTransition in={match != null} timeout={300} classNames="page" unmountOnExit>
               <div className="page">
                 <Component />

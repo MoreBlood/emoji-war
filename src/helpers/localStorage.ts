@@ -1,5 +1,6 @@
 import { observable, computed } from 'mobx';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Storable = boolean | number | object | any[] | string;
 
 export class SavedSettingProperty {

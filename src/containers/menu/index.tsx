@@ -1,23 +1,18 @@
 import React from 'react';
-import { Swipeable, EventData } from 'react-swipeable';
 import { inject, observer } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { CSSTransition, TransitionGroup, SwitchTransition } from 'react-transition-group';
 
 import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
 import { GameStore } from '../../stores/gameStore';
-import Emoji from '../../components/emoji';
-import { randomInteger } from '../../helpers/math';
-import { skin, emoticons } from '../../helpers/emojis';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
 };
 
-@(withRouter as any)
+@withRouter
 @inject('gameStore')
 @observer
 class Menu extends React.Component<PropsType> {
@@ -66,4 +61,5 @@ class Menu extends React.Component<PropsType> {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default Menu as React.ComponentType<any>;

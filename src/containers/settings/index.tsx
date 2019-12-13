@@ -14,7 +14,7 @@ type PropsType = RouteComponentProps<{}> & {
   settingsStore?: SettingsStore;
 };
 
-@(withRouter as any)
+@withRouter
 @inject('gameStore', 'settingsStore')
 @observer
 class Settings extends React.Component<PropsType> {
@@ -41,7 +41,7 @@ class Settings extends React.Component<PropsType> {
   private menu = (): void => this.props.history.goBack();
 
   public render(): React.ReactNode {
-    const { gameSizeEmoji, LGBTFriendly, swipesDisabled, gameModeItem } = this.settingsStore;
+    const { gameSizeEmoji, swipesDisabled, gameModeItem } = this.settingsStore;
     return (
       <div className="settings">
         <div className="logo">⚙️</div>

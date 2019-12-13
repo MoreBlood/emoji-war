@@ -16,7 +16,7 @@ type PropsType = RouteComponentProps<{}> & {
   shopStore?: ShopStore;
 };
 
-@(withRouter as any)
+@withRouter
 @inject('gameStore', 'settingsStore', 'shopStore')
 @observer
 class Store extends React.Component<PropsType> {

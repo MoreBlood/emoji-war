@@ -15,7 +15,7 @@ type PropsType = RouteComponentProps<{}> & {
   settingsStore?: SettingsStore;
 };
 
-@(withRouter as any)
+@withRouter
 @inject('gameStore', 'settingsStore')
 class GameOver extends React.Component<PropsType> {
   private gameStore: GameStore;
@@ -75,4 +75,4 @@ class GameOver extends React.Component<PropsType> {
   }
 }
 
-export default GameOver as React.ComponentType<any>;
+export default GameOver;
