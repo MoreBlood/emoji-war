@@ -6,16 +6,24 @@ import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import Game from './containers/game';
-import { store as gameStore } from './stores/gameStore';
+import { GameStore } from './stores/gameStore';
 import Menu from './containers/menu';
 import Settings from './containers/settings';
 import About from './containers/about';
 import GameOver from './containers/gameOver';
 import Store from './containers/store';
 import { CSSTransition } from 'react-transition-group';
+import { SettingsStore } from './stores/settingsStore';
+import { ShopStore } from './stores/shopStore';
+
+const shopStore = new ShopStore();
+const settingsStore = new SettingsStore(shopStore);
+const gameStore = new GameStore(settingsStore, shopStore);
 
 const stores = {
+  settingsStore,
   gameStore,
+  shopStore,
 };
 
 const routes = [

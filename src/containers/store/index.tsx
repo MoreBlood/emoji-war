@@ -6,38 +6,46 @@ import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
-import { GameStore, store } from '../../stores/gameStore';
+import { GameStore } from '../../stores/gameStore';
+import { SettingsStore } from '../../stores/settingsStore';
+import { ShopStore } from '../../stores/shopStore';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
+  settingsStore?: SettingsStore;
+  shopStore?: ShopStore;
 };
 
 @(withRouter as any)
-@inject('gameStore')
+@inject('gameStore', 'settingsStore', 'shopStore')
 @observer
 class Store extends React.Component<PropsType> {
   private gameStore: GameStore;
+  private settingsStore: SettingsStore;
+  private shopStore: ShopStore;
 
   public constructor(props?: PropsType) {
     super(props);
 
     this.gameStore = this.props.gameStore;
+    this.settingsStore = this.props.settingsStore;
+    this.shopStore = this.props.shopStore;
   }
 
   public componentWillMount(): void {
-    this.gameStore.initStore();
+    // this.shopStore.initStore();
   }
 
   public componentWillUnmount(): void {}
 
   private start = (): void => this.props.history.push('game');
-  private switchGameType = (): void => this.gameStore.switchGameSize();
-  private switchLGBTFriendly = (): void => this.gameStore.switchLGBTFriendly();
-  private switchSwipesDisabled = (): void => this.gameStore.switchSwipesDisabled();
+  private switchGameType = (): void => this.settingsStore.switchGameSize();
+  private switchLGBTFriendly = (): void => this.settingsStore.switchLGBTFriendly();
+  private switchSwipesDisabled = (): void => this.settingsStore.switchSwipesDisabled();
   private menu = (): void => this.props.history.goBack();
 
   public render(): React.ReactNode {
-    const { storeItems, money } = this.gameStore;
+    const { storeItems, money } = this.shopStore;
     return (
       <div className="store">
         <div className="logo">🛒</div>
@@ -55,7 +63,7 @@ class Store extends React.Component<PropsType> {
                   key={item.id}
                   disabled={item.bought || item.inDev}
                   className={`button small blured ${item.inDev ? 'dev' : ''}`}
-                  onClick={(): void => this.gameStore.buyItem(item.id)}
+                  onClick={(): void => this.shopStore.buyItem(item.id)}
                 >
                   <span>
                     <span className="emoji">{item.icon}</span> <span className="setting-item-text">{item.name}</span>

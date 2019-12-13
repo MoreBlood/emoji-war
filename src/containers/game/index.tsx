@@ -12,9 +12,11 @@ import { GameStore, GameState } from '../../stores/gameStore';
 import Emoji from '../../components/emoji';
 import { skin } from '../../helpers/emojis';
 import { autorun, IReactionDisposer, observable } from 'mobx';
+import { SettingsStore } from '../../stores/settingsStore';
 
 type PropsType = RouteComponentProps<{}> & {
-  gameStore?: GameStore;
+  gameStore: GameStore;
+  settingsStore: SettingsStore;
 };
 
 enum Direction {
@@ -25,10 +27,11 @@ enum Direction {
 }
 
 @(withRouter as any)
-@inject('gameStore')
+@inject('gameStore', 'settingsStore')
 @observer
 class Game extends React.Component<PropsType, null> {
   private gameStore: GameStore;
+  private settingsStore: SettingsStore;
   private gameStateChanges: IReactionDisposer;
   private pairs = React.createRef<HTMLDivElement>();
 
@@ -48,6 +51,7 @@ class Game extends React.Component<PropsType, null> {
     super(props);
 
     this.gameStore = this.props.gameStore;
+    this.settingsStore = this.props.settingsStore;
   }
 
   private startedAnimating = (): void => {
@@ -78,7 +82,8 @@ class Game extends React.Component<PropsType, null> {
   }
 
   public onSwipe = (e: EventData): void => {
-    const { isPlaying, swipesDisabled } = this.gameStore;
+    const { isPlaying } = this.gameStore;
+    const { swipesDisabled } = this.settingsStore;
 
     if (!isPlaying || swipesDisabled || !this.pairs.current) return;
     this.pairs.current.style.transition = '';
@@ -148,7 +153,7 @@ class Game extends React.Component<PropsType, null> {
 
   private yes = (): void => this.gameStore.voteForPairs(true);
   private no = (): void => this.gameStore.voteForPairs(false);
-  private switch = (): void => this.gameStore.switchGameSize();
+  private switch = (): void => this.settingsStore.switchGameSize();
   private menu = (): void => this.props.history.push('');
   private over = (): void => this.props.history.push('/gameOver');
   private togglePause = (): void => this.gameStore.switchPause();
@@ -160,12 +165,13 @@ class Game extends React.Component<PropsType, null> {
       timer,
       scoreRight,
       gameLifes,
-      gameSize,
       skinColor,
       isPlaying,
       lifes,
       isPaused,
     } = this.gameStore;
+
+    const { gameSize } = this.settingsStore;
 
     return (
       <div className="game">

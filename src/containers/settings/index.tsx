@@ -6,22 +6,26 @@ import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
-import { GameStore, GameModes } from '../../stores/gameStore';
+import { GameStore } from '../../stores/gameStore';
+import { SettingsStore } from '../../stores/settingsStore';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
+  settingsStore?: SettingsStore;
 };
 
 @(withRouter as any)
-@inject('gameStore')
+@inject('gameStore', 'settingsStore')
 @observer
 class Settings extends React.Component<PropsType> {
   private gameStore: GameStore;
+  private settingsStore: SettingsStore;
 
   public constructor(props?: PropsType) {
     super(props);
 
     this.gameStore = this.props.gameStore;
+    this.settingsStore = this.props.settingsStore;
   }
 
   public componentWillMount(): void {}
@@ -29,15 +33,15 @@ class Settings extends React.Component<PropsType> {
   public componentWillUnmount(): void {}
 
   private start = (): void => this.props.history.push('game');
-  private switchGameType = (): void => this.gameStore.switchGameSize();
-  private switchGameMode = (): void => this.gameStore.switchGameMode();
-  private switchLGBTFriendly = (): void => this.gameStore.switchLGBTFriendly();
-  private switchSwipesDisabled = (): void => this.gameStore.switchSwipesDisabled();
-  private reset = (): void => this.gameStore.reset();
+  private switchGameType = (): void => this.settingsStore.switchGameSize();
+  private switchGameMode = (): void => this.settingsStore.switchGameMode();
+  private switchLGBTFriendly = (): void => this.settingsStore.switchLGBTFriendly();
+  private switchSwipesDisabled = (): void => this.settingsStore.switchSwipesDisabled();
+  private reset = (): void => this.settingsStore.reset();
   private menu = (): void => this.props.history.goBack();
 
   public render(): React.ReactNode {
-    const { gameSizeEmoji, LGBTFriendly, swipesDisabled, gameModeItem } = this.gameStore;
+    const { gameSizeEmoji, LGBTFriendly, swipesDisabled, gameModeItem } = this.settingsStore;
     return (
       <div className="settings">
         <div className="logo">⚙️</div>

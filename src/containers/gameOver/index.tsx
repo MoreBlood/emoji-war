@@ -8,15 +8,18 @@ import '../../styles/adaptive.scss';
 
 import { GameStore } from '../../stores/gameStore';
 import { numberToEmojiString } from '../../helpers/emojis';
+import { SettingsStore } from '../../stores/settingsStore';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
+  settingsStore?: SettingsStore;
 };
 
 @(withRouter as any)
-@inject('gameStore')
+@inject('gameStore', 'settingsStore')
 class GameOver extends React.Component<PropsType> {
   private gameStore: GameStore;
+  private settingsStore: SettingsStore;
   private score = 0;
   private emoji = this.props.gameStore.randomSadOrHappyEmoticon;
 
@@ -24,6 +27,7 @@ class GameOver extends React.Component<PropsType> {
     super(props);
 
     this.gameStore = this.props.gameStore;
+    this.settingsStore = this.props.settingsStore;
     this.score = this.gameStore.scoreRight;
   }
 
@@ -37,7 +41,7 @@ class GameOver extends React.Component<PropsType> {
   private store = (): void => this.props.history.push('store');
 
   public render(): React.ReactNode {
-    const { highScore } = this.gameStore;
+    const { highScore } = this.settingsStore;
     const isTop = this.score === highScore;
     return (
       <div className="gameOver">

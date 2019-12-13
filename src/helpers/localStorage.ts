@@ -9,7 +9,7 @@ export class SavedSettingProperty {
   @observable
   private _value: Storable;
 
-  private static appPrefix = 'EMOJI_WAR_';
+  public static appPrefix = 'EMOJI_WAR_';
 
   public constructor(name: string, defaultValue: Storable, type = 'string', hard = false) {
     this.name = SavedSettingProperty.appPrefix + name;
