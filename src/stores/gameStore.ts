@@ -8,7 +8,6 @@ import {
   happyEmoticons,
   pewEmoticons,
   tarantinoEmoticons,
-  tarantinoLegs,
 } from '../helpers/emojis';
 import { Pair } from '../types/pair';
 import { SettingsStore, GameModes } from './settingsStore';
@@ -160,18 +159,15 @@ export class GameStore {
   }
 
   private randomEmoji(): string {
+    if (yes()) {
+      return this.randomEmoticon;
+    }
     switch (this.settingsStore.gameMode) {
       case GameModes.PEW_GAME_MODE:
         return pewEmoticons[randomInteger(0, pewEmoticons.length)];
       case GameModes.TARANTINO_GAME_MODE:
-        if (yes()) {
-          return tarantinoLegs[randomInteger(0, tarantinoLegs.length)];
-        }
         return tarantinoEmoticons[randomInteger(0, tarantinoEmoticons.length)];
       default:
-        if (yes()) {
-          return this.randomEmoticon;
-        }
         return colorable[randomInteger(0, colorable.length)];
     }
   }
@@ -186,17 +182,27 @@ export class GameStore {
     }
   }
 
+  private checkLogic(): void {
+    if (this.scoreRight === 30 || this.scoreRight === 75) {
+      this.settingsStore.switchGameSize();
+      if (this.lifes < this.gameLifes) {
+        this.lifes += 1;
+      }
+    }
+  }
+
   @action
   public voteForPairs(vote: boolean): void {
     if (this.gameState !== GameState.playing) return;
 
     if (this.comparePairs === vote) {
       this.scoreRight += this.settingsStore.gameSize;
+      this.shopStore.money += this.settingsStore.gameSize;
       this.settingsStore.highScore = this.scoreRight;
-      this.shopStore.money += 1;
     } else {
       this.scoredWrong = 1;
     }
+    this.checkLogic();
     this.generate();
   }
 

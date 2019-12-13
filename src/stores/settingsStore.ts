@@ -1,4 +1,4 @@
-import { action, computed } from 'mobx';
+import { action, computed, observable } from 'mobx';
 
 import { SavedSettingProperty } from '../helpers/localStorage';
 import { StoreItem } from '../types/storeItem';
@@ -20,17 +20,8 @@ export class SettingsStore {
 
   private static gameSizes = [2, 3, 4];
 
-  private _gameSize = new SavedSettingProperty('gameSize', 2, 'number');
-
-  @computed
-  public get gameSize(): number {
-    const { value } = this._gameSize;
-    return value as number;
-  }
-
-  public set gameSize(value: number) {
-    this._gameSize.value = value;
-  }
+  @observable
+  public gameSize: number = SettingsStore.gameSizes[0];
 
   @computed
   public get gameSizeEmoji(): string {
@@ -116,12 +107,12 @@ export class SettingsStore {
 
   @action
   public switchGameMode(): void {
-    const avaible = [GameModes.REGULAR_GAME_MODE];
+    const avaible: GameModes[] = [GameModes.REGULAR_GAME_MODE];
 
-    if (this.shopStore.storeItems.get('TARANTINO_GAME_MODE').bought) {
+    if (this.shopStore.storeItems.get(GameModes[GameModes.TARANTINO_GAME_MODE]).bought) {
       avaible.push(GameModes.TARANTINO_GAME_MODE);
     }
-    if (this.shopStore.storeItems.get('PEW_GAME_MODE').bought) {
+    if (this.shopStore.storeItems.get(GameModes[GameModes.PEW_GAME_MODE]).bought) {
       avaible.push(GameModes.PEW_GAME_MODE);
     }
     const currentGameSizeIndex = avaible.indexOf(this.gameMode);

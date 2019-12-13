@@ -41,7 +41,7 @@ class Settings extends React.Component<PropsType> {
   private menu = (): void => this.props.history.goBack();
 
   public render(): React.ReactNode {
-    const { gameSizeEmoji, swipesDisabled, gameModeItem } = this.settingsStore;
+    const { /* gameSizeEmoji, */ swipesDisabled, gameModeItem } = this.settingsStore;
     return (
       <div className="settings">
         <div className="logo">⚙️</div>
@@ -49,9 +49,9 @@ class Settings extends React.Component<PropsType> {
           <button className="button small blured" onClick={this.switchGameMode}>
             {gameModeItem.icon} <span className="setting-item-text">{gameModeItem.name}</span>
           </button>
-          <button className="button small blured" onClick={this.switchGameType}>
+          {/*<button className="button small blured" onClick={this.switchGameType}>
             {gameSizeEmoji} <span className="setting-item-text">Game size</span>
-          </button>
+          </button> */}
           <button className="button small blured" onClick={this.switchSwipesDisabled}>
             👆{' '}
             <span style={{ textDecoration: swipesDisabled ? 'line-through' : 'none' }} className="setting-item-text">
