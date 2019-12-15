@@ -73,7 +73,7 @@ export const happyEmoticons = [
 
 export const pewEmoticons = ['✊', '👊', '🤛', '🤜', '🧔', '👏', '👌'];
 
-export const tarantinoEmoticons = ['🦶', '💋', '😗', '😘', '😚', '😙', '😽', '👄'];
+export const tarantinoEmoticons = ['🦶', '🦶', '🦶', '🦶', '🦶', '🦶', '😗', '😘', '😚', '😙', '😽'];
 
 export const emoticons = Array.from(new Set([...sadEmoticons, ...happyEmoticons]).values()).sort(
   () => Math.random() - 0.5,
@@ -88,7 +88,6 @@ export const colorable = [
   '✋',
   '🖖',
   '👌',
-  '🤏',
   '✌',
   '🤞',
   '🤟',
@@ -118,7 +117,6 @@ export const colorable = [
   '🦵',
   '🦶',
   '👂',
-  '🦻',
   '👃',
   '👶',
   '🧒',
@@ -138,7 +136,6 @@ export const colorable = [
   '🙆',
   '💁',
   '🙋',
-  '🧏',
   '🙇',
   '🤦',
   '🤷',
@@ -168,13 +165,11 @@ export const colorable = [
   '💆',
   '💇',
   '🚶',
-  '🧍',
-  '🧎',
   '🏃',
   '💃',
   '🕺',
   '🕴',
-  '👯',
+  // '👯',
   '🧖',
   '🧗',
   '🏇',
@@ -195,10 +190,10 @@ export const colorable = [
   // '👭',
   // '👫',
   // '👬',
-  '💏',
-  '💑',
-  '👪',
-  '🤼',
+  // '💏',
+  // '💑',
+  // '👪',
+  // '🤼',
 ];
 
 export function getNumberEmoji(num: number): string {
