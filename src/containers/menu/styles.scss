@@ -1,7 +1,13 @@
-@import '../../styles/global.scss';
+@import "../../styles/global.scss";
 
 .menu {
-  background: radial-gradient(80.51% 80.51% at 50.13% 65%, #ffd600 0%, #ff00f5 72.09%), #fff;
+  background:
+    radial-gradient(
+      80.51% 80.51% at 50.13% 65%,
+      #ffd600 0%,
+      #ff00f5 72.09%
+    ),
+    #fff;
   height: 100vh;
   display: flex;
   justify-content: flex-start;

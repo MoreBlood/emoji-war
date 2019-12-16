@@ -1,9 +1,10 @@
 @use 'src/styles/buttons';
 
-@import '../../styles/global.scss';
+@import "../../styles/global.scss";
 
 .about {
-  background: linear-gradient(
+  background:
+    linear-gradient(
       330.96deg,
       #00f0ff 18.5%,
       #ff8bca 18.5%,
