@@ -1,15 +1,9 @@
-@import "../../styles/global.scss";
+@import '../../styles/global.scss';
 
 .game {
   height: 100vh;
   // height: fill-available;
-  background:
-    radial-gradient(
-      140.67% 117.32% at 100% 98.5%,
-      #00fff0 0%,
-      #c0f 100%
-    ),
-    #fff;
+  background: radial-gradient(140.67% 117.32% at 100% 98.5%, #00fff0 0%, #c0f 100%), #fff;
 
   .gameFieldHolder {
     transition: filter 0.1s linear;
