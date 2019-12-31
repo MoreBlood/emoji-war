@@ -66,7 +66,8 @@ class Store extends React.Component<PropsType> {
                   onClick={(): void => this.shopStore.buyItem(item.id)}
                 >
                   <span>
-                    <span className="emoji">{item.icon}</span> <span className="setting-item-text">{item.name}</span>
+                    <span className="emoji">{item.icon}</span>{' '}
+                    <span className="setting-item-text">{item.name}</span>
                   </span>{' '}
                   <span className={`price ${item.price > money ? 'low' : ''}`}>
                     {item.bought ? '🤑' : `${item.price} 💵`}

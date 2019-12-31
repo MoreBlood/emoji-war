@@ -169,7 +169,11 @@ class Game extends React.Component<PropsType, null> {
     return (
       <div className="game">
         <TransitionGroup>
-          <CSSTransition key={isPaused ? 'paused' : 'not-paused'} timeout={600} classNames="opacity">
+          <CSSTransition
+            key={isPaused ? 'paused' : 'not-paused'}
+            timeout={600}
+            classNames="opacity"
+          >
             <div className="pause">
               {isPaused ? (
                 <div>
@@ -255,10 +259,18 @@ class Game extends React.Component<PropsType, null> {
               </div>
             </Swipeable>
             <div className="blured buttons">
-              <button disabled={!isPlaying || this.isAnimating} className="thumb up" onClick={this.no}>
+              <button
+                disabled={!isPlaying || this.isAnimating}
+                className="thumb up"
+                onClick={this.no}
+              >
                 <Emoji>{`👎${skin[skinColor]}`}</Emoji>
               </button>
-              <button disabled={!isPlaying || this.isAnimating} className="thumb down" onClick={this.yes}>
+              <button
+                disabled={!isPlaying || this.isAnimating}
+                className="thumb down"
+                onClick={this.yes}
+              >
                 <Emoji>{`👍${skin[skinColor]}`}</Emoji>
               </button>
             </div>

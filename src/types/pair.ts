@@ -38,7 +38,9 @@ export class Pair {
         this.pair[i] = [];
       }
       for (let u = 0; u < this.originalPair[i].length; u += 1) {
-        const skinModifier = colorable.includes(shuffled[counter]) ? skin[randomInteger(0, skin.length)] : '';
+        const skinModifier = colorable.includes(shuffled[counter])
+          ? skin[randomInteger(0, skin.length)]
+          : '';
         this.pair[i][u] = shuffled[counter] + skinModifier;
         counter += 1;
       }

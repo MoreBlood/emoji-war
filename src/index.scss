@@ -24,6 +24,11 @@ body {
   position: relative;
 }
 
+span {
+  display: inline-flex;
+  align-items: center;
+}
+
 pre {
   overflow: auto;
 }

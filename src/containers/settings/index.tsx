@@ -54,7 +54,10 @@ class Settings extends React.Component<PropsType> {
           </button> */}
           <button className="button small blured" onClick={this.switchSwipesDisabled}>
             👆{' '}
-            <span style={{ textDecoration: swipesDisabled ? 'line-through' : 'none' }} className="setting-item-text">
+            <span
+              style={{ textDecoration: swipesDisabled ? 'line-through' : 'none' }}
+              className="setting-item-text"
+            >
               Swipes
             </span>
           </button>
