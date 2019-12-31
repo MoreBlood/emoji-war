@@ -140,6 +140,15 @@ export class GameStore {
     }
   }
 
+  public pause(): void {
+    if (this.gameState === GameState.playing) {
+      if (this.timerUpdater) {
+        clearInterval(this.timerUpdater);
+      }
+      this.gameState = GameState.pause;
+    }
+  }
+
   private stop(): void {
     this.gameState = GameState.gameOver;
     this.timer = 0;

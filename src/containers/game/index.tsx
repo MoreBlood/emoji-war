@@ -51,12 +51,13 @@ class Game extends React.Component<PropsType, null> {
     this.isAnimating = true;
   };
 
-  private stopeAnimating = (): void => {
+  private stopedAnimating = (): void => {
     this.isAnimating = false;
   };
 
   public componentWillMount(): void {
     this.gameStore.restart();
+    document.addEventListener('pause', this.pause, false);
 
     this.gameStateChanges = autorun(() => {
       const { gameState } = this.gameStore;
@@ -71,6 +72,7 @@ class Game extends React.Component<PropsType, null> {
   }
 
   public componentWillUnmount(): void {
+    document.removeEventListener('pause', this.pause, false);
     this.gameStateChanges();
   }
 
@@ -149,7 +151,12 @@ class Game extends React.Component<PropsType, null> {
   private switch = (): void => this.settingsStore.switchGameSize();
   private menu = (): void => this.props.history.push('');
   private over = (): void => this.props.history.push('/gameOver');
-  private togglePause = (): void => this.gameStore.switchPause();
+  private togglePause = (): void => {
+    if (!this.isAnimating) this.gameStore.switchPause();
+  };
+  private pause = (): void => {
+    this.gameStore.pause();
+  };
 
   public render(): React.ReactNode {
     const {
@@ -172,6 +179,8 @@ class Game extends React.Component<PropsType, null> {
           <CSSTransition
             key={isPaused ? 'paused' : 'not-paused'}
             timeout={600}
+            onEnter={this.startedAnimating}
+            onExited={this.stopedAnimating}
             classNames="opacity"
           >
             <div className="pause">
@@ -237,7 +246,7 @@ class Game extends React.Component<PropsType, null> {
                         classNames="scale"
                         unmountOnExit
                         onEnter={this.startedAnimating}
-                        onExited={this.stopeAnimating}
+                        onExited={this.stopedAnimating}
                       >
                         <div className="pair">
                           {pair.pair.map(rows => {
