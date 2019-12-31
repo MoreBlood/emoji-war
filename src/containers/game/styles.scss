@@ -2,6 +2,8 @@
 
 .game {
   height: 100vh;
+  padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
+  padding-top: env(safe-area-inset-top); /* iOS 11.2 */
   // height: fill-available;
   background: radial-gradient(140.67% 117.32% at 100% 98.5%, #00fff0 0%, #c0f 100%), #fff;
 

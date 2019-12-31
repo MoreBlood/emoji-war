@@ -2,15 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, width=device-width, height=device-height, viewport-fit=cover, user-scalable=no, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
+    />
+
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon-16x16.png" sizes="16x16" />
-
+    <script src="./fastclick.min.js"></script>
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="viewport"
-      content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
-    />
     <meta name="theme-color" content="#000000" />
     <meta property="og:title" content="😃 Emoji War ⚔️" />
     <meta property="og:description" content="Do you have enough attention? Let's check it out!" />
@@ -52,4 +53,7 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+    FastClick.attach(document.body);
+  </script>
 </html>

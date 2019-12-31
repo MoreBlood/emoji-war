@@ -9,6 +9,16 @@ declare namespace NodeJS {
   }
 }
 
+declare interface FastClickCommonJS {
+  (layer: any, options?: FastClickOptions): FastClickObject;
+  FastClick: FastClickStatic;
+}
+
+declare module 'fastclick' {
+  var exports: FastClickCommonJS | FastClickStatic;
+  export = exports;
+}
+
 declare module '*.bmp' {
   const src: string;
   export default src;
@@ -78,5 +88,7 @@ export * from '@types/react-router';
 export { RouteComponentProps } from 'react-router';
 
 declare module 'react-router-dom' {
-  export function withRouter<T extends RouteComponentProps<any>>(component?: React.ComponentType<T>): any;
+  export function withRouter<T extends RouteComponentProps<any>>(
+    component?: React.ComponentType<T>,
+  ): any;
 }

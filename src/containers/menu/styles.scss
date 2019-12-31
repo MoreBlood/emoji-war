@@ -1,6 +1,8 @@
 @import '../../styles/global.scss';
 
 .menu {
+  padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
+  padding-top: env(safe-area-inset-top); /* iOS 11.2 */
   background: radial-gradient(80.51% 80.51% at 50.13% 65%, #ffd600 0%, #ff00f5 72.09%), #fff;
   height: 100vh;
   display: flex;
