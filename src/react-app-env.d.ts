@@ -9,6 +9,13 @@ declare namespace NodeJS {
   }
 }
 
+declare global {
+  interface Window {
+    plugins: any;
+    TapticEngine: any;
+  }
+}
+
 declare interface FastClickCommonJS {
   (layer: any, options?: FastClickOptions): FastClickObject;
   FastClick: FastClickStatic;

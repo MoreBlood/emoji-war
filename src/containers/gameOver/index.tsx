@@ -39,10 +39,29 @@ class GameOver extends React.Component<PropsType> {
   private menu = (): void => this.props.history.push('/');
   private settings = (): void => this.props.history.push('/settings');
   private store = (): void => this.props.history.push('store');
+  private share = (): void => {
+    const { scoreRight } = this.gameStore;
+    const { highScore } = this.settingsStore;
+
+    const message = `Hey, just scored ${scoreRight} in EmojiWar 🔥\nMy top is ${highScore} 👑\nhttps://moreblood.github.io/emoji-war/build/`;
+
+    var options = {
+      message, // not supported on some apps (Facebook, Instagram)
+      text: message,
+      subject: message, // fi. for email
+      // files: ['www/og-image.jpg'],
+      // url: 'https://moreblood.github.io/emoji-war/build/',
+      chooserTitle: 'EmojiWar 🔥', // Android only, you can override the default share sheet title
+    };
+
+    window.plugins.socialsharing.shareWithOptions(options);
+  };
 
   public render(): React.ReactNode {
     const { highScore } = this.settingsStore;
     const isTop = this.score === highScore;
+    const showShare = window.plugins && window.plugins.socialsharing;
+
     return (
       <div className="gameOver">
         <button className="blured thanks">
@@ -65,6 +84,11 @@ class GameOver extends React.Component<PropsType> {
             <button className="button small blured" onClick={this.store}>
               🛒
             </button>
+            {showShare ? (
+              <button className="button small blured" onClick={this.share}>
+                🔗
+              </button>
+            ) : null}
             <button className="button small blured" onClick={this.settings}>
               ⚙️
             </button>

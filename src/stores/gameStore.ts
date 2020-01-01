@@ -182,8 +182,10 @@ export class GameStore {
   }
 
   private set scoredWrong(value: number) {
-    if (window.navigator && window.navigator.vibrate) {
-      window.navigator.vibrate(200);
+    if (window.TapticEngine && window.TapticEngine.unofficial) {
+      window.TapticEngine.unofficial.burst();
+    } else if (window.navigator && window.navigator.vibrate) {
+      window.navigator.vibrate(50);
     }
 
     if (this.lifes > 0) {
