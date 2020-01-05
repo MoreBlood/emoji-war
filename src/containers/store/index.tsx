@@ -9,6 +9,8 @@ import '../../styles/adaptive.scss';
 import { GameStore } from '../../stores/gameStore';
 import { SettingsStore } from '../../stores/settingsStore';
 import { ShopStore } from '../../stores/shopStore';
+import List from '../../components/list';
+import { ListItemInterface } from '../../types/listItem';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -52,30 +54,14 @@ class Store extends React.Component<PropsType> {
         <div className="money-holder">
           <div className="blured highscore">{money} 💵</div>
         </div>
-
-        <div className="all-buttons">
-          {Array.from(storeItems.values())
+        <List
+          listItems={Array.from(storeItems.values())
             .filter(e => !e.hidden)
-            // .sort(e => (e.bought ? 1 : -1))
-            .map(item => {
-              return (
-                <button
-                  key={item.id}
-                  disabled={item.bought || item.inDev}
-                  className={`button small blured ${item.inDev ? 'dev' : ''}`}
-                  onClick={(): void => this.shopStore.buyItem(item.id)}
-                >
-                  <span>
-                    <span className="emoji">{item.icon}</span>{' '}
-                    <span className="setting-item-text">{item.name}</span>
-                  </span>{' '}
-                  <span className={`price ${item.price > money ? 'low' : ''}`}>
-                    {item.bought ? '🤑' : `${item.price} 💵`}
-                  </span>
-                </button>
-              );
+            .map((e: ListItemInterface) => {
+              e.onClick = (): void => this.shopStore.buyItem(e.id);
+              return e;
             })}
-        </div>
+        />
         <div className="buttons">
           <button className="button back blured" onClick={this.menu}>
             ⏪

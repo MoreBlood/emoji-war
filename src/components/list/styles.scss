@@ -1,0 +1,54 @@
+@import '../../styles/global.scss';
+
+.list_holder {
+  display: flex;
+  // justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  overflow-y: auto;
+
+  .button {
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    .setting-item-text {
+      margin-left: 1vh * $scaler;
+      font-weight: 100;
+    }
+
+    &:disabled {
+      * {
+        opacity: 0.5;
+      }
+
+      filter: saturate(0);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    &.blured {
+      box-shadow: none;
+    }
+
+    .price {
+      font-weight: 600;
+    }
+
+    .emoji {
+      font-size: 3vh * $scaler;
+    }
+
+    &.small {
+      height: 7vh * $scaler;
+      min-width: 40vmax * $scaler;
+      margin: 0.5vh * $scaler;
+      font-size: 2.2vh * $scaler;
+      padding: 0 2vh * $scaler;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+  }
+}
