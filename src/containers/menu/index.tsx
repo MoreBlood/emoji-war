@@ -7,6 +7,7 @@ import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 
 import { GameStore } from '../../stores/gameStore';
+import { vibrate, VibrationType } from '../../helpers/vibrate';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -29,10 +30,10 @@ class Menu extends React.Component<PropsType> {
 
   public componentWillUnmount(): void {}
 
-  private start = (): void => this.props.history.push('game');
-  private settings = (): void => this.props.history.push('settings');
-  private about = (): void => this.props.history.push('about');
-  private store = (): void => this.props.history.push('store');
+  private start = (): void => vibrate(VibrationType.tap) && this.props.history.push('game');
+  private settings = (): void => vibrate(VibrationType.tap) && this.props.history.push('settings');
+  private about = (): void => vibrate(VibrationType.tap) && this.props.history.push('about');
+  private store = (): void => vibrate(VibrationType.tap) && this.props.history.push('store');
 
   public render(): React.ReactNode {
     return (

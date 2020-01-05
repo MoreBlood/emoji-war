@@ -12,6 +12,8 @@ import {
 import { Pair } from '../types/pair';
 import { SettingsStore, GameModes } from './settingsStore';
 import { ShopStore } from './shopStore';
+import { isIOs, isAndroid } from '../helpers/platform';
+import { vibrate, VibrationType } from '../helpers/vibrate';
 
 export enum GameState {
   gameOver,
@@ -123,7 +125,9 @@ export class GameStore {
   public restart(): void {
     this.scoreWrong = 0;
     this.scoreRight = 0;
+    this.logicChanges = [];
     this.lifes = this.gameLifes;
+    this.settingsStore.resetGameSize();
     this.generate();
   }
 
@@ -149,7 +153,7 @@ export class GameStore {
     }
   }
 
-  private stop(): void {
+  public stop(): void {
     this.gameState = GameState.gameOver;
     this.timer = 0;
     if (this.timerUpdater) {
@@ -182,23 +186,25 @@ export class GameStore {
   }
 
   private set scoredWrong(value: number) {
-    if (window.TapticEngine && window.TapticEngine.unofficial) {
-      window.TapticEngine.unofficial.burst();
-    } else if (window.navigator && window.navigator.vibrate) {
-      window.navigator.vibrate(50);
-    }
+    vibrate(VibrationType.wrong);
 
     if (this.lifes > 0) {
       this.lifes -= value;
     }
   }
 
+  private logicChanges: number[] = [];
+
   private checkLogic(): void {
-    if (this.scoreRight === 30 || this.scoreRight === 75) {
+    if (
+      (this.scoreRight === 30 || this.scoreRight === 75) &&
+      !this.logicChanges.includes(this.scoreRight)
+    ) {
       this.settingsStore.switchGameSize();
       if (this.lifes < this.gameLifes) {
         this.lifes += 1;
       }
+      this.logicChanges.push(this.scoreRight);
     }
   }
 

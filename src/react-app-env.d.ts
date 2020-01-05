@@ -12,6 +12,7 @@ declare namespace NodeJS {
 declare global {
   interface Window {
     plugins: any;
+    device: any;
     TapticEngine: any;
   }
 }

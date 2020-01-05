@@ -74,6 +74,7 @@ class Game extends React.Component<PropsType, null> {
   public componentWillUnmount(): void {
     document.removeEventListener('pause', this.pause, false);
     this.gameStateChanges();
+    this.gameStore.stop();
   }
 
   public onSwipe = (e: EventData): void => {

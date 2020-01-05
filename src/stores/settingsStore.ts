@@ -14,8 +14,22 @@ export enum GameModes {
 export class SettingsStore {
   private shopStore: ShopStore;
 
+  @observable
+  public platform: string = 'DEFAULT_BROWSER';
+
   public constructor(shopStore: ShopStore) {
     this.shopStore = shopStore;
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOMContentLoaded');
+      document.addEventListener(
+        'deviceready',
+        () => {
+          console.log('deviceready');
+          this.platform = window.device.platform;
+        },
+        false,
+      );
+    });
   }
 
   private static gameSizes = [2, 3, 4];
@@ -103,6 +117,11 @@ export class SettingsStore {
     const currentGameSizeIndex = SettingsStore.gameSizes.indexOf(this.gameSize);
     const nextGameSize = (currentGameSizeIndex + 1) % SettingsStore.gameSizes.length;
     this.gameSize = SettingsStore.gameSizes[nextGameSize];
+  }
+
+  @action
+  public resetGameSize(): void {
+    this.gameSize = SettingsStore.gameSizes[0];
   }
 
   @action

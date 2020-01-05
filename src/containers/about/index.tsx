@@ -1,18 +1,26 @@
 import React from 'react';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
+import { SettingsStore } from '../../stores/settingsStore';
+import { isIOs } from '../../helpers/platform';
 
-type PropsType = RouteComponentProps<{}>;
+type PropsType = RouteComponentProps<{}> & {
+  settingsStore: SettingsStore;
+};
 
 @withRouter
+@inject('settingsStore')
 @observer
-class About extends React.Component<PropsType> {
+class About extends React.Component<PropsType, null> {
+  private settingsStore: SettingsStore;
+
   public constructor(props?: PropsType) {
     super(props);
+    this.settingsStore = this.props.settingsStore;
   }
 
   public componentWillMount(): void {}
@@ -23,6 +31,8 @@ class About extends React.Component<PropsType> {
   private menu = (): void => this.props.history.goBack();
 
   public render(): React.ReactNode {
+    const { platform } = this.settingsStore;
+
     return (
       <div className="about">
         <div className="logo">🤔</div>
@@ -37,6 +47,8 @@ class About extends React.Component<PropsType> {
           <big className="heart">💜</big>
           <br />
           I’ve made this for fun.
+          <br />
+          Platform: {platform}
         </div>
         <div className="all-buttons">
           <div className="buttons">

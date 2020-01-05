@@ -13,6 +13,7 @@
     <preference name="Fullscreen" value="true" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="DisallowOverscroll" value="true" />
+    <preference name="Orientation" value="portrait" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
