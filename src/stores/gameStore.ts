@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-parameter-properties */
 import { observable, action, computed } from 'mobx';
 import { randomInteger, yes } from '../helpers/math';
 import {
@@ -8,6 +9,7 @@ import {
   happyEmoticons,
   pewEmoticons,
   tarantinoEmoticons,
+  covidEmoticons,
 } from '../helpers/emojis';
 import { Pair } from '../types/pair';
 import { SettingsStore, GameModes } from './settingsStore';
@@ -22,13 +24,7 @@ export enum GameState {
 }
 
 export class GameStore {
-  private settingsStore: SettingsStore;
-  private shopStore: ShopStore;
-
-  public constructor(settingsStore: SettingsStore, shopStore: ShopStore) {
-    this.settingsStore = settingsStore;
-    this.shopStore = shopStore;
-  }
+  public constructor(private settingsStore: SettingsStore, private shopStore: ShopStore) {}
 
   @observable
   public gameState: GameState = GameState.playing;
@@ -94,8 +90,10 @@ export class GameStore {
     if (this.lifes === 0) {
       return this.stop();
     }
+
     const first: string[][] = [];
     const second: string[][] = [];
+
     for (let i = 0; i < this.settingsStore.gameSize; i += 1) {
       if (!Array.isArray(first[i])) {
         first[i] = [];
@@ -180,6 +178,8 @@ export class GameStore {
         return pewEmoticons[randomInteger(0, pewEmoticons.length)];
       case GameModes.TARANTINO_GAME_MODE:
         return tarantinoEmoticons[randomInteger(0, tarantinoEmoticons.length)];
+      case GameModes.COVID_GAME_MODE:
+        return covidEmoticons[randomInteger(0, covidEmoticons.length)];
       default:
         return colorable[randomInteger(0, colorable.length)];
     }

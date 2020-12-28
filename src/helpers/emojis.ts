@@ -87,6 +87,8 @@ export const tarantinoEmoticons = [
   '😽',
 ];
 
+export const covidEmoticons = ['🦠', '🧼', '🖐️', '👏', '🧴', '🤲', '🚰', '💦', '💧', '🧪', '😷'];
+
 export const emoticons = Array.from(new Set([...sadEmoticons, ...happyEmoticons]).values()).sort(
   () => Math.random() - 0.5,
 );

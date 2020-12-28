@@ -54,6 +54,7 @@ class Store extends React.Component<PropsType> {
         <div className="money-holder">
           <div className="blured highscore">{money} 💵</div>
         </div>
+        <p>Game modes can be enabled in ⚙️ page</p>
         <List
           listItems={Array.from(storeItems.values())
             .filter(e => !e.hidden)

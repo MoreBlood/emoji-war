@@ -8,6 +8,7 @@ import { ShopStore } from './shopStore';
 export enum GameModes {
   REGULAR_GAME_MODE,
   TARANTINO_GAME_MODE,
+  COVID_GAME_MODE,
   PEW_GAME_MODE,
 }
 
@@ -130,6 +131,9 @@ export class SettingsStore {
 
     if (this.shopStore.storeItems.get(GameModes[GameModes.TARANTINO_GAME_MODE]).bought) {
       avaible.push(GameModes.TARANTINO_GAME_MODE);
+    }
+    if (this.shopStore.storeItems.get(GameModes[GameModes.COVID_GAME_MODE]).bought) {
+      avaible.push(GameModes.COVID_GAME_MODE);
     }
     if (this.shopStore.storeItems.get(GameModes[GameModes.PEW_GAME_MODE]).bought) {
       avaible.push(GameModes.PEW_GAME_MODE);
