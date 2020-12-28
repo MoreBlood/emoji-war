@@ -204,7 +204,7 @@ class Game extends React.Component<PropsType, null> {
             {secondPair.hash}
           </div> */}
             <div className="topBar" style={{ display: 'flex' }}>
-              <div className="score-holder timer">
+              <div className="score-holder button-holder">
                 <div className="blured score">
                   <button disabled={!isPlaying} className="thumb switch" onClick={this.menu}>
                     ⏪
@@ -216,7 +216,10 @@ class Game extends React.Component<PropsType, null> {
                   <div className="blured score">{`🔥 ${scoreRight}`}</div>
                 </CSSTransition>
               </TransitionGroup>
-              <TransitionGroup className="score-holder scale timer">
+              <TransitionGroup
+                className="score-holder scale timer"
+                style={{ width: `${timer.toString().length * 1.4}vh` }}
+              >
                 <CSSTransition key={timer} timeout={500} classNames="scale">
                   <div className="blured score">{timer}</div>
                 </CSSTransition>
@@ -228,7 +231,7 @@ class Game extends React.Component<PropsType, null> {
                   </span>
                 ))}
               </div>
-              <div className="score-holder timer">
+              <div className="score-holder button-holder">
                 <div className="blured score">
                   <button disabled={!isPlaying} className="thumb switch" onClick={this.togglePause}>
                     ⏸️

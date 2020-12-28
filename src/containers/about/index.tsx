@@ -28,7 +28,7 @@ class About extends React.Component<PropsType, null> {
   public componentWillUnmount(): void {}
 
   private start = (): void => this.props.history.push('game');
-  private menu = (): void => this.props.history.goBack();
+  private menu = (): void => this.props.history.push('/');
 
   public render(): React.ReactNode {
     const { platform } = this.settingsStore;

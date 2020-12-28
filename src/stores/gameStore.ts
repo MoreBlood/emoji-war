@@ -165,14 +165,20 @@ export class GameStore {
   }
 
   public get randomSadOrHappyEmoticon(): string {
-    const emojis = this.settingsStore.LGBTFriendly ? happyEmoticons : sadEmoticons;
-    return emojis[randomInteger(0, emojis.length)];
+    const emoji = this.settingsStore.LGBTFriendly
+      ? this.getEmoji()
+      : sadEmoticons[randomInteger(0, sadEmoticons.length)];
+    return emoji;
   }
 
   private randomEmoji(): string {
     if (yes()) {
       return this.randomEmoticon;
     }
+    return this.getEmoji();
+  }
+
+  private getEmoji(): string {
     switch (this.settingsStore.gameMode) {
       case GameModes.PEW_GAME_MODE:
         return pewEmoticons[randomInteger(0, pewEmoticons.length)];

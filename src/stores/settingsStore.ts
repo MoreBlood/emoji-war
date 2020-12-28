@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-parameter-properties */
 import { action, computed, observable } from 'mobx';
 
 import { SavedSettingProperty } from '../helpers/localStorage';
@@ -13,12 +14,11 @@ export enum GameModes {
 }
 
 export class SettingsStore {
-  private shopStore: ShopStore;
-
   @observable
   public platform: string = 'DEFAULT_BROWSER';
 
-  public constructor(shopStore: ShopStore) {
+  public constructor(private shopStore: ShopStore) {
+    this.shopStore.settingsStore = this;
     this.shopStore = shopStore;
     document.addEventListener('DOMContentLoaded', () => {
       console.log('DOMContentLoaded');
@@ -141,6 +141,11 @@ export class SettingsStore {
     const currentGameSizeIndex = avaible.indexOf(this.gameMode);
     const nextGameSize = (currentGameSizeIndex + 1) % avaible.length;
     this.gameMode = avaible[nextGameSize];
+  }
+
+  @action
+  public setGameMode(mode: GameModes): void {
+    this.gameMode = mode;
   }
 
   public reset(): void {

@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/no-parameter-properties */
 import { observable, action, computed } from 'mobx';
+import { Parser } from '../helpers/enum';
 
 import { SavedSettingProperty } from '../helpers/localStorage';
 import { StoreItem } from '../types/storeItem';
 import { inGameStoreItems } from './data/inGameStoreItems';
+import { GameModes, SettingsStore } from './settingsStore';
 
 export class ShopStore {
+  public settingsStore!: SettingsStore;
+
   public constructor() {
     this.initStore();
   }
@@ -55,6 +60,10 @@ export class ShopStore {
       this.money -= item.price;
       const newBought = [...this.boughtItems, id];
       this.boughtItems = newBought;
+
+      if (Object.keys(GameModes).includes(item.id)) {
+        this.settingsStore.setGameMode(Parser.parseEnum(item.id, GameModes));
+      }
     }
   }
 }

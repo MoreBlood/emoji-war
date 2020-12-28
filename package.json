@@ -72,7 +72,6 @@
     "workbox-webpack-plugin": "4.2.0"
   },
   "devDependencies": {
-    "@ahovakimyan/cordova-plugin-wkwebviewxhrfix": "git+https://github.com/AraHovakimyan/cordova-plugin-wkwebviewxhrfix.git",
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
@@ -183,8 +182,7 @@
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
       },
       "cordova-plugin-taptic-engine": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-wkwebviewxhrfix": {}
+      "cordova-plugin-device": {}
     },
     "platforms": [
       "ios"

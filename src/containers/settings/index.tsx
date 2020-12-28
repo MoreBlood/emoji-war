@@ -38,7 +38,7 @@ class Settings extends React.Component<PropsType> {
   private switchLGBTFriendly = (): void => this.settingsStore.switchLGBTFriendly();
   private switchSwipesDisabled = (): void => this.settingsStore.switchSwipesDisabled();
   private reset = (): void => this.settingsStore.reset();
-  private menu = (): void => this.props.history.goBack();
+  private menu = (): void => this.props.history.push('/');
 
   public render(): React.ReactNode {
     const { /* gameSizeEmoji, */ swipesDisabled, gameModeItem } = this.settingsStore;

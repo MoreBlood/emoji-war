@@ -124,6 +124,10 @@
       width: 3vh;
     }
 
+    &.button-holder {
+      width: 4vh;
+    }
+
     &.lifes {
       width: auto;
       padding: 0.75vh * $scaler 1vh * $scaler;
@@ -211,8 +215,8 @@
       background: none;
       border-radius: 0;
       font-size: 2.9vh * $scaler;
-      width: 3.2vh * $scaler;
-      height: 3.2vh * $scaler;
+      // width: 3.2vh * $scaler;
+      height: 3.5vh * $scaler;
       line-height: 3vh * $scaler;
       box-shadow: none;
       padding: 0;

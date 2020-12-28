@@ -44,7 +44,9 @@ class Store extends React.Component<PropsType> {
   private switchGameType = (): void => this.settingsStore.switchGameSize();
   private switchLGBTFriendly = (): void => this.settingsStore.switchLGBTFriendly();
   private switchSwipesDisabled = (): void => this.settingsStore.switchSwipesDisabled();
-  private menu = (): void => this.props.history.goBack();
+  private menu = (): void => {
+    this.props.history.push('/');
+  };
 
   public render(): React.ReactNode {
     const { storeItems, money } = this.shopStore;
