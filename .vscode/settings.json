@@ -1,1 +1,41 @@
-{}
+{
+  "stylelint.enable": true,
+  "css.validate": false,
+  "scss.validate": false,
+  "prettier.stylelintIntegration": true,
+  "stylelint.autoFixOnSave": false,
+  "javascript": {
+    "implicitProjectConfig": {
+      "experimentalDecorators": true
+    }
+  },
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
