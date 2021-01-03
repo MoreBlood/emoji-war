@@ -26,9 +26,17 @@ class Menu extends React.Component<PropsType> {
     this.gameStore = this.props.gameStore;
   }
 
-  public componentWillMount(): void {}
+  public componentWillMount(): void {
+    try {
+      window.admob?.banner.show();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  public componentWillUnmount(): void {}
+  public componentWillUnmount(): void {
+    window.admob?.banner.hide();
+  }
 
   private start = (): void => vibrate(VibrationType.tap) && this.props.history.push('game');
   private settings = (): void => vibrate(VibrationType.tap) && this.props.history.push('settings');

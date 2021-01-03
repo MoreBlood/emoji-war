@@ -14,6 +14,8 @@ declare global {
     plugins: any;
     device: any;
     TapticEngine: any;
+    ga: any;
+    admob: any;
   }
 }
 

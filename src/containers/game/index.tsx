@@ -14,7 +14,7 @@ import { skin } from '../../helpers/emojis';
 import { autorun, IReactionDisposer, observable } from 'mobx';
 import { SettingsStore } from '../../stores/settingsStore';
 
-type PropsType = RouteComponentProps<{}> & {
+type PropsType = RouteComponentProps<{ mode?: string }> & {
   gameStore: GameStore;
   settingsStore: SettingsStore;
 };
@@ -45,6 +45,12 @@ class Game extends React.Component<PropsType, null> {
 
     this.gameStore = this.props.gameStore;
     this.settingsStore = this.props.settingsStore;
+
+    const search = this.props.location.search;
+    const params = new URLSearchParams(search);
+    const mode = params.get('mode'); //
+
+    this.settingsStore.setMode(mode);
   }
 
   private startedAnimating = (): void => {

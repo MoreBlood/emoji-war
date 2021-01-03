@@ -28,7 +28,9 @@ class Settings extends React.Component<PropsType> {
     this.settingsStore = this.props.settingsStore;
   }
 
-  public componentWillMount(): void {}
+  public componentWillMount(): void {
+    window.ga?.trackView('Settings');
+  }
 
   public componentWillUnmount(): void {}
 

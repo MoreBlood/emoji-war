@@ -12,6 +12,7 @@ import Settings from './containers/settings';
 import About from './containers/about';
 import GameOver from './containers/gameOver';
 import Store from './containers/store';
+import Download from './containers/download';
 import { CSSTransition } from 'react-transition-group';
 import { SettingsStore } from './stores/settingsStore';
 import { ShopStore } from './stores/shopStore';
@@ -33,6 +34,7 @@ const routes = [
   { path: '/settings', Component: Settings },
   { path: '/gameOver', Component: GameOver },
   { path: '/store', Component: Store },
+  { path: '/download', Component: Download },
 ];
 
 const router = (

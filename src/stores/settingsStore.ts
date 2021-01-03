@@ -5,6 +5,8 @@ import { SavedSettingProperty } from '../helpers/localStorage';
 import { StoreItem } from '../types/storeItem';
 import { numberToEmojiString } from '../helpers/emojis';
 import { ShopStore } from './shopStore';
+import { initAd } from '../helpers/admob';
+import { GameStore } from './gameStore';
 
 export enum GameModes {
   REGULAR_GAME_MODE,
@@ -27,6 +29,9 @@ export class SettingsStore {
         () => {
           console.log('deviceready');
           this.platform = window.device.platform;
+
+          window.ga.startTrackerWithId(process.env.REACT_APP_GA_UA_ID);
+          initAd();
         },
         false,
       );
@@ -62,9 +67,19 @@ export class SettingsStore {
     return item;
   }
 
+  @observable public isDemo = false;
+
+  @action
+  public setMode(mode: string): void {
+    if (mode === 'demo') {
+      this.isDemo = true;
+    }
+  }
+
   @computed
   public get time(): number {
-    return 2 * this.gameSize + 1;
+    const additionalTime = this.isDemo ? 10 : 0;
+    return 2 * this.gameSize + 1 + additionalTime;
   }
 
   private _LGBTFriendly = new SavedSettingProperty('LGBTFriendly', true, 'bool');
