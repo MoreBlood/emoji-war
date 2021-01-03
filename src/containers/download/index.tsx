@@ -52,7 +52,7 @@ class About extends React.Component<PropsType, null> {
         <p className="secondary-text">if the top emojies are the same as bottom</p>
         <div className="game-wrap">
           <div className="iphone"></div>
-          <iframe ref={this.iframe} src="/#/game?mode=demo"></iframe>
+          <iframe ref={this.iframe} src="./#/game?mode=demo"></iframe>
         </div>
       </div>
     );
