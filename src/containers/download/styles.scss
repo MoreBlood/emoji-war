@@ -5,12 +5,21 @@
 .download {
   padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
   padding-top: env(safe-area-inset-top); /* iOS 11.2 */
-  background: radial-gradient(125.82% 125.82% at 50% 138%, #2502ff 0%, #ffffff 100%), #ffffff;
+
   height: 100vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #8453e3;
+  }
 
   .top-text {
     font-style: normal;

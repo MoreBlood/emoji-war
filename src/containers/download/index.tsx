@@ -81,10 +81,25 @@ class Download extends React.Component<PropsType, null> {
     const duration = 5000;
 
     anime({
+      targets: '.background',
+      background: ['#8453E3', '#0EEDF1'],
+      duration: duration * 3,
+      easing: 'linear',
+      // round: 1,
+      loop: true,
+      direction: 'alternate',
+      update: (a): void => {
+        const { currentValue } = a.animations[0] as any;
+        const { target } = a.animatables[0] as any;
+        target.style.background = `radial-gradient(125.82% 125.82% at 50% 138%, ${currentValue} 0%, #fff 100%)`;
+      },
+    });
+
+    anime({
       targets: '.app-store-button',
       scale: [0, 1],
       opacity: [0, 1],
-      delay: 1500,
+      delay: 1000,
     });
 
     timeline
@@ -207,6 +222,7 @@ class Download extends React.Component<PropsType, null> {
 
     return (
       <div className="download">
+        <div className="background"></div>
         <div className="text">
           <div className="text-wrap first">
             <h2 className="top-text">Decide</h2>
