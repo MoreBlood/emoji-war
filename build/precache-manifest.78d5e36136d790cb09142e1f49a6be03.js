@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b4a6bd5d25543e7bec939381516ab218",
+    "revision": "b68a4bad34c7a1fba85bda2ed4b0dc9b",
     "url": "./index.html"
   },
   {
-    "revision": "96573e1a16b14ff98393",
-    "url": "./static/css/main.cc5425b4.chunk.css"
+    "revision": "0c39fd7b7c61af8f2425",
+    "url": "./static/css/main.35814549.chunk.css"
   },
   {
     "revision": "191742e762b3ec964128",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/js/2.a645afc8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "96573e1a16b14ff98393",
+    "revision": "0c39fd7b7c61af8f2425",
     "url": "./static/js/main.ae0083bf.chunk.js"
   },
   {
@@ -28,8 +28,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.2928664f.svg"
   },
   {
-    "revision": "2a66895ea441cf9aaec252fe28120572",
-    "url": "./static/media/iphone.2a66895e.png"
+    "revision": "64b9f5c666284daaca6f6b1361fa6aa3",
+    "url": "./static/media/iphone-min.64b9f5c6.png"
   },
   {
     "revision": "6cdfccd95122053d00efdc0f7544ab85",
