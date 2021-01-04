@@ -18,7 +18,7 @@
     font-size: 6.4vh;
     text-align: center;
     margin: 0;
-    margin-top: 4vh;
+    // margin-top: 4vh;
   }
 
   .secondary-text {
@@ -33,6 +33,21 @@
 
   $height: 70vh;
 
+  .text {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+
+    &-wrap {
+      &.second,
+      &.third {
+        position: absolute;
+        top: 0;
+      }
+    }
+  }
+
   .game-wrap {
     width: $height / 2;
     // max-width: 50vh;
@@ -41,7 +56,7 @@
     display: flex;
     justify-content: center;
     // margin-top: (100vh - $height) / 1.2;
-    margin-top: 4vh;
+    margin-top: 2vh;
 
     iframe {
       // position: absolute;
@@ -66,6 +81,45 @@
       background-position: center;
       z-index: 1;
       pointer-events: none;
+    }
+
+    .helper {
+      position: absolute;
+      right: -4vh;
+      bottom: 20vh;
+      background-image: url('./try.svg');
+      width: 15vh;
+      height: 10vh;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center left;
+      z-index: 1;
+      // transition: 0.5s ease-in-out opacity 1s, 0.5s ease-in-out transform 1s;
+      pointer-events: none;
+      transform-origin: left bottom;
+
+      &.hidden {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    }
+  }
+
+  .app-store-button {
+    width: 11.7vh;
+    height: 3.9vh;
+    min-width: 117px;
+    min-height: 39px;
+    margin-bottom: 0;
+    background-image: url('./Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &-wrap {
+      margin-top: 2vh;
     }
   }
 }
