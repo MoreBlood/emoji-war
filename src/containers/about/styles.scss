@@ -3,8 +3,7 @@
 @import '../../styles/global.scss';
 
 .about {
-  padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
-  padding-top: env(safe-area-inset-top); /* iOS 11.2 */
+  @include safe-ios();
   background: linear-gradient(
       330.96deg,
       #00f0ff 18.5%,
@@ -38,15 +37,15 @@
 
   @keyframes beat {
     0% {
-      transform: scale(0.7);
-    }
-
-    50% {
       transform: scale(1);
     }
 
-    100% {
+    50% {
       transform: scale(0.7);
+    }
+
+    100% {
+      transform: scale(1);
     }
   }
 
@@ -69,33 +68,33 @@
 
       &.heart {
         display: inline-block;
-        margin-top: 2vh * $scaler;
+        margin-top: 0.5vh * $scaler;
         margin-bottom: 0.5vh * $scaler;
         // line-height: 10vh * $scaler;
-        animation: beat 1.5s;
+        animation: beat 2s;
         animation-iteration-count: infinite;
 
-        &:nth-of-type(0) {
+        &:nth-child(0) {
           animation-delay: 0ms;
         }
 
-        &:nth-of-type(1) {
+        &:nth-child(1) {
           animation-delay: 200ms;
         }
 
-        &:nth-of-type(2) {
+        &:nth-child(2) {
           animation-delay: 400ms;
         }
 
-        &:nth-of-type(3) {
+        &:nth-child(3) {
           animation-delay: 600ms;
         }
 
-        &:nth-of-type(4) {
+        &:nth-child(4) {
           animation-delay: 800ms;
         }
 
-        &:nth-of-type(5) {
+        &:nth-child(5) {
           animation-delay: 1000ms;
         }
       }

@@ -14,7 +14,18 @@ declare global {
     plugins: any;
     device: any;
     TapticEngine: any;
-    ga: any;
+    ga: {
+      trackMetric: (key: number, value: number) => void;
+      trackEvent: (
+        category: string,
+        action: string,
+        label?: string,
+        value?: number,
+        newSession?: boolean,
+      ) => void;
+      trackView: (view: string) => void;
+      startTrackerWithId: (id: string, num?: number) => void;
+    };
     admob: any;
   }
 }

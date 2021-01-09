@@ -2,7 +2,7 @@ export function initAd(): void {
   if (window.admob) {
     var adUnits = {
       ios: {
-        banner: process.env.REACT_APP_BANNER_AD_ID,
+        banner: 'ca-app-pub-3940256099942544/6300978111', // process.env.REACT_APP_BANNER_AD_ID,
         interstitial: process.env.REACT_APP_INTERSTITIAL_AD_ID,
       },
       android: {
@@ -14,7 +14,7 @@ export function initAd(): void {
 
     window.admob.banner.config({
       id: admobid.banner,
-      isTesting: false,
+      isTesting: true,
       autoShow: true,
     });
 

@@ -3,3 +3,14 @@ $greyColor: #2b2b2b;
 $padding: 6vmin;
 $buttonWidth: 8vmin;
 $scaler: 1;
+
+@mixin safe-ios() {
+  padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
+  padding-top: env(safe-area-inset-top); /* iOS 11.2 */
+  padding-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
+  padding-bottom: env(safe-area-inset-bottom); /* iOS 11.2 */
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+  box-sizing: border-box;
+}

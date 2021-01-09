@@ -8,27 +8,31 @@ import '../../styles/adaptive.scss';
 
 import { GameStore } from '../../stores/gameStore';
 import { vibrate, VibrationType } from '../../helpers/vibrate';
+import { ShopStore } from '../../stores/shopStore';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
+  shopStore?: ShopStore;
 };
 
 @withRouter
-@inject('gameStore')
+@inject('gameStore', 'shopStore')
 @observer
 class Menu extends React.Component<PropsType> {
   private gameStore: GameStore;
+  private shopStore: ShopStore;
   private emoji = this.props.gameStore.randomSadOrHappyEmoticon;
 
   public constructor(props: PropsType) {
     super(props);
 
     this.gameStore = this.props.gameStore;
+    this.shopStore = this.props.shopStore;
   }
 
   public componentWillMount(): void {
     try {
-      window.admob?.banner.show();
+      // window.admob?.banner.show();
     } catch (err) {
       console.log(err);
     }
@@ -44,9 +48,14 @@ class Menu extends React.Component<PropsType> {
   private store = (): void => vibrate(VibrationType.tap) && this.props.history.push('store');
 
   public render(): React.ReactNode {
+    const { money } = this.shopStore;
+
     return (
       <div className="menu">
         <div className="logo">{this.emoji}</div>
+        <div className="money-holder">
+          <div className="blured highscore">{money} 💵</div>
+        </div>
         <div className="all-buttons">
           <div className="buttons">
             <button className="button play blured" onClick={this.start}>

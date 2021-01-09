@@ -1,10 +1,8 @@
 @import '../../styles/global.scss';
 
 .settings {
-  padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
-  padding-top: env(safe-area-inset-top); /* iOS 11.2 */
-  background:
-    linear-gradient(
+  @include safe-ios();
+  background: linear-gradient(
       331.31deg,
       #ff4d00 9.37%,
       #f90 25.15%,

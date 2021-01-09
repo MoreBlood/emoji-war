@@ -56,6 +56,7 @@ export class ShopStore {
   public buyItem(id: string): void {
     const item = this.storeItems.get(id);
     if (item && this.money >= item.price && !item.bought) {
+      window.ga?.trackView('Store');
       item.bought = true;
       this.money -= item.price;
       const newBought = [...this.boughtItems, id];

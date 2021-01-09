@@ -1,8 +1,7 @@
 @import '../../styles/global.scss';
 
 .menu {
-  padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
-  padding-top: env(safe-area-inset-top); /* iOS 11.2 */
+  @include safe-ios();
   background: radial-gradient(80.51% 80.51% at 50.13% 65%, #ffd600 0%, #ff00f5 72.09%), #fff;
   height: 100vh;
   display: flex;
@@ -31,5 +30,23 @@
     padding: 7.5vh * $scaler 0 22.5vh * $scaler;
     height: 15vh * $scaler;
     width: 11vh * $scaler;
+  }
+
+  .money-holder {
+    top: 0;
+    position: absolute;
+    width: 40vmax * $scaler;
+  }
+
+  .highscore {
+    color: white;
+    font-size: 3vh * $scaler;
+    border-radius: 2vh * $scaler;
+    padding: 1.5vh * $scaler 2vh * $scaler;
+    font-weight: 200;
+    position: absolute;
+    top: 5.75vh * $scaler;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
   }
 }

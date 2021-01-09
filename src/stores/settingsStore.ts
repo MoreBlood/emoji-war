@@ -31,7 +31,7 @@ export class SettingsStore {
           this.platform = window.device.platform;
 
           window.ga.startTrackerWithId(process.env.REACT_APP_GA_UA_ID);
-          initAd();
+          // initAd();
         },
         false,
       );

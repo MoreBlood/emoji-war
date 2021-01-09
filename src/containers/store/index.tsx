@@ -35,7 +35,7 @@ class Store extends React.Component<PropsType> {
   }
 
   public componentWillMount(): void {
-    // this.shopStore.initStore();
+    window.ga?.trackView('Store');
   }
 
   public componentWillUnmount(): void {}

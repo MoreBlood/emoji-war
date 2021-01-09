@@ -31,17 +31,24 @@ class GameOver extends React.Component<PropsType> {
     this.score = this.gameStore.scoreRight;
   }
 
-  public componentWillMount(): void {}
+  public componentWillMount(): void {
+    window.ga?.trackView('Game Over');
+    window.ga?.trackEvent('Game', 'Score', 'Game Over Score', this.score);
+  }
 
   public componentWillUnmount(): void {}
 
-  private start = (): void => this.props.history.push('/game');
+  private start = (): void => {
+    window.ga?.trackEvent('Game', 'Restart');
+    this.props.history.push('/game');
+  };
   private menu = (): void => this.props.history.push('/');
   private settings = (): void => this.props.history.push('/settings');
   private store = (): void => this.props.history.push('store');
   private share = (): void => {
     const { scoreRight } = this.gameStore;
     const { highScore } = this.settingsStore;
+    window.ga?.trackEvent('Game', 'Share');
 
     const message = `Hey, just scored ${scoreRight} in EmojiWar 🔥\nMy top is ${highScore} 👑\nhttps://moreblood.github.io/emoji-war/build/`;
 

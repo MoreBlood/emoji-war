@@ -62,6 +62,9 @@ class Game extends React.Component<PropsType, null> {
   };
 
   public componentWillMount(): void {
+    window.ga?.trackView('Game');
+    window.ga?.trackEvent('Game Type', this.settingsStore.gameMode.toString());
+
     this.gameStore.restart();
     document.addEventListener('pause', this.pause, false);
 
@@ -87,21 +90,31 @@ class Game extends React.Component<PropsType, null> {
     const { isPlaying } = this.gameStore;
     const { swipesDisabled } = this.settingsStore;
 
-    if (!isPlaying || swipesDisabled || !this.pairs.current) return;
+    const { current: yesRef } = this.yesRef;
+    const { current: noRef } = this.noRef;
+
+    if (!isPlaying || swipesDisabled || !this.pairs.current || !yesRef || !noRef) return;
     this.pairs.current.style.transition = '';
     this.isSwiping = true;
 
     this.offsetX = -e.deltaX;
     this.offsetY = -e.deltaY;
 
+    // this.isAnimating = true;
+
     const screenWidth = window.innerWidth / 2;
 
     const maxRotation = (this.offsetX / screenWidth) * 5;
+    const scale = Math.abs(this.offsetX / screenWidth) / 3;
     const maxColor = Math.abs(this.offsetX / screenWidth) + 0.5;
 
     if (this.offsetX / screenWidth > 0.2) {
       this.pairs.current.style.background = `rgba(104, 125, 247, ${maxColor})`;
+      yesRef.style.transform = `scale(${1 + scale})`;
+      noRef.style.transform = `scale(${1 - scale})`;
     } else if (this.offsetX / screenWidth < -0.2) {
+      yesRef.style.transform = `scale(${1 - scale})`;
+      noRef.style.transform = `scale(${1 + scale})`;
       this.pairs.current.style.background = `rgba(179, 31, 253, ${maxColor})`;
     } else {
       this.pairs.current.style.background = '';
@@ -114,6 +127,8 @@ class Game extends React.Component<PropsType, null> {
     this.isSwiping = false;
 
     if (!this.pairs.current) return;
+
+    // this.isAnimating = false;
 
     this.pairs.current.style.transition = 'all 0.2s linear';
     const screenWidth = window.innerWidth / 2;
@@ -142,6 +157,11 @@ class Game extends React.Component<PropsType, null> {
   };
 
   private resetPairsPosition(withAnimation = false): void {
+    const { current: yesRef } = this.yesRef;
+    const { current: noRef } = this.noRef;
+
+    if (!this.pairs.current || !yesRef || !noRef) return;
+
     if (!withAnimation) {
       this.pairs.current.style.transition = '';
     }
@@ -149,9 +169,15 @@ class Game extends React.Component<PropsType, null> {
     this.offsetX = 0;
     this.offsetY = 0;
 
+    yesRef.style.transform = `scale(1)`;
+    noRef.style.transform = `scale(1)`;
+
     this.pairs.current.style.background = '';
     this.pairs.current.style.transform = 'translateX(0px) rotate(0deg) scale(1)';
   }
+
+  private yesRef = React.createRef<HTMLDivElement>();
+  private noRef = React.createRef<HTMLDivElement>();
 
   private yes = (): void => this.gameStore.voteForPairs(true);
   private no = (): void => this.gameStore.voteForPairs(false);
@@ -278,20 +304,24 @@ class Game extends React.Component<PropsType, null> {
               </div>
             </Swipeable>
             <div className="blured buttons">
-              <button
-                disabled={!isPlaying || this.isAnimating}
-                className="thumb up"
-                onClick={this.no}
-              >
-                <Emoji>{`👎${skin[skinColor]}`}</Emoji>
-              </button>
-              <button
-                disabled={!isPlaying || this.isAnimating}
-                className="thumb down"
-                onClick={this.yes}
-              >
-                <Emoji>{`👍${skin[skinColor]}`}</Emoji>
-              </button>
+              <div className="buttons-wrapper" ref={this.noRef}>
+                <button
+                  disabled={!isPlaying || this.isAnimating}
+                  className="thumb up"
+                  onClick={this.no}
+                >
+                  <Emoji>{`👎${skin[skinColor]}`}</Emoji>
+                </button>
+              </div>
+              <div className="buttons-wrapper" ref={this.yesRef}>
+                <button
+                  disabled={!isPlaying || this.isAnimating}
+                  className="thumb down"
+                  onClick={this.yes}
+                >
+                  <Emoji>{`👍${skin[skinColor]}`}</Emoji>
+                </button>
+              </div>
             </div>
           </div>
         </div>

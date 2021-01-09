@@ -2,10 +2,11 @@
 
 .game {
   height: 100vh;
-  padding-top: constant(safe-area-inset-top);
+  @include safe-ios();
 
-  /* iOS 11.0 */
-  padding-top: env(safe-area-inset-top);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   /* iOS 11.2 */
   // height: fill-available;
@@ -165,6 +166,7 @@
     padding: 2vh * $scaler;
     transition: background 0.2s linear;
     will-change: transform, background;
+    pointer-events: none;
   }
 
   .gameField {
@@ -190,6 +192,10 @@
     position: absolute;
   }
 
+  .buttons-wrapper {
+    transition: transform linear 50ms;
+  }
+
   .thumb {
     background: #c0f;
     -webkit-appearance: none;
@@ -203,7 +209,7 @@
     touch-action: manipulation;
 
     &:active {
-      transform: scale(0.8);
+      transform: scale(0.8) !important;
       opacity: 1;
     }
 

@@ -1,5 +1,5 @@
 {
-  rules: { 'max-line-length': 100 },
+  rules: { 'max-line-length': 100, 'at-rule-no-unknown': null },
   extends: ['stylelint-config-standard'],
   ignoreFiles: ['**/*.ts', '**/*.tsx'],
 }

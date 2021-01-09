@@ -39,13 +39,14 @@ class About extends React.Component<PropsType, null> {
         <div className="thanks blured">
           <big>FAQ:</big> Compare shuffled emoticons from top to bottom <br />
           <big>Big</big> thanks to my friends for great advises and testing this little game <br />
-          <big className="heart">❤️</big>
-          <big className="heart">🧡</big>
-          <big className="heart">💛</big>
-          <big className="heart">💚</big>
-          <big className="heart">💙</big>
-          <big className="heart">💜</big>
-          <br />
+          <div>
+            <big className="heart">❤️</big>
+            <big className="heart">🧡</big>
+            <big className="heart">💛</big>
+            <big className="heart">💚</big>
+            <big className="heart">💙</big>
+            <big className="heart">💜</big>
+          </div>
           I’ve made this for fun.
           <br />
           Platform: {platform}

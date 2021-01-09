@@ -36,7 +36,10 @@ class Settings extends React.Component<PropsType> {
 
   private start = (): void => this.props.history.push('game');
   private switchGameType = (): void => this.settingsStore.switchGameSize();
-  private switchGameMode = (): void => this.settingsStore.switchGameMode();
+  private switchGameMode = (): void => {
+    window.ga?.trackEvent('Settings', 'Change Game Mode');
+    this.settingsStore.switchGameMode();
+  };
   private switchLGBTFriendly = (): void => this.settingsStore.switchLGBTFriendly();
   private switchSwipesDisabled = (): void => this.settingsStore.switchSwipesDisabled();
   private reset = (): void => this.settingsStore.reset();
