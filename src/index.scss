@@ -1,4 +1,5 @@
 @import './styles/global.scss';
+// @import '../node_modules/css-reset-and-normalize/scss/reset-and-normalize';
 
 body {
   margin: 0;
@@ -163,6 +164,15 @@ code {
   &.play {
     font-size: 10vh * $scaler;
   }
+}
+
+button {
+  color: initial;
+}
+
+button:disabled {
+  appearance: none;
+  opacity: 0.25;
 }
 
 .scale {
