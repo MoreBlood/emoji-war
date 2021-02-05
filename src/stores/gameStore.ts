@@ -63,7 +63,10 @@ export class GameStore {
   private decrease(): void {
     this.timer -= 1;
     if (this.timer < 0) {
-      this.scoredWrong = 1;
+      if (!this.settingsStore.isDemo) {
+        this.scoredWrong = 1;
+      }
+
       this.generate();
     }
   }

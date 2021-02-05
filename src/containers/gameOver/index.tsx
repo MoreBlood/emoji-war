@@ -65,7 +65,7 @@ class GameOver extends React.Component<PropsType> {
   };
 
   public render(): React.ReactNode {
-    const { highScore } = this.settingsStore;
+    const { highScore, isDemo } = this.settingsStore;
     const isTop = this.score === highScore;
     const showShare = window.plugins && window.plugins.socialsharing;
 
@@ -85,10 +85,10 @@ class GameOver extends React.Component<PropsType> {
             </button>
           </div>
           <div className="buttons">
-            <button className="button small blured" onClick={this.menu}>
+            <button disabled={isDemo} className="button small blured" onClick={this.menu}>
               🏠
             </button>
-            <button className="button small blured" onClick={this.store}>
+            <button disabled={isDemo} className="button small blured" onClick={this.store}>
               🛒
             </button>
             {showShare ? (
@@ -96,7 +96,7 @@ class GameOver extends React.Component<PropsType> {
                 🔗
               </button>
             ) : null}
-            <button className="button small blured" onClick={this.settings}>
+            <button disabled={isDemo} className="button small blured" onClick={this.settings}>
               ⚙️
             </button>
           </div>

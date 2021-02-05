@@ -192,6 +192,10 @@ class Game extends React.Component<PropsType, null> {
     this.gameStore.pause();
   };
 
+  private postPlay = (): void => {
+    parent.postMessage('isPlaying', location.origin);
+  };
+
   public render(): React.ReactNode {
     const {
       firstPair,
@@ -206,10 +210,10 @@ class Game extends React.Component<PropsType, null> {
       lastIsCorrect,
     } = this.gameStore;
 
-    const { gameSize } = this.settingsStore;
+    const { gameSize, isDemo } = this.settingsStore;
 
     return (
-      <div className="game">
+      <div className="game" onClick={this.postPlay}>
         <TransitionGroup>
           <CSSTransition
             key={isPaused ? 'paused' : 'not-paused'}
@@ -240,7 +244,11 @@ class Game extends React.Component<PropsType, null> {
             <div className="topBar" style={{ display: 'flex' }}>
               <div className="score-holder button-holder">
                 <div className="blured score">
-                  <button disabled={!isPlaying} className="thumb switch" onClick={this.menu}>
+                  <button
+                    disabled={!isPlaying || isDemo}
+                    className="thumb switch"
+                    onClick={this.menu}
+                  >
                     ⏪
                   </button>
                 </div>

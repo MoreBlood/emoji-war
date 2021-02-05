@@ -50,11 +50,9 @@ class Download extends React.Component<PropsType, null> {
         opacity: [1, 0],
         delay: 200,
         duration: 1000,
-        complete: (): void => {
-          this.isInteractingWithIframe = true;
-        },
       });
     }
+    this.isInteractingWithIframe = true;
   };
 
   public componentDidMount(): void {
@@ -78,6 +76,12 @@ class Download extends React.Component<PropsType, null> {
         newStyle.textContent =
           '.gameField, .gameOver, .about, .settings, .menu, .store { padding-top: 0vh; }';
         (ev.target as any).contentDocument.head.appendChild(newStyle);
+      });
+
+      window.addEventListener('message', e => {
+        if (e.data == 'isPlaying') {
+          this.onFrameClick();
+        }
       });
     }
 
@@ -248,11 +252,7 @@ class Download extends React.Component<PropsType, null> {
         </a>
         <div className="game-wrap" style={{ opacity: 0 }}>
           <div className="iphone"></div>
-          <iframe
-            onMouseOver={this.onFrameClick}
-            ref={this.iframe}
-            src="./#/game?mode=demo"
-          ></iframe>
+          <iframe ref={this.iframe} src="./#/game?mode=demo"></iframe>
           <div className={classNames('helper')}></div>
         </div>
       </div>
