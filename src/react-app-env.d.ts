@@ -14,6 +14,7 @@ declare global {
     plugins: any;
     device: any;
     TapticEngine: any;
+    webGa: any;
     ga: {
       trackMetric: (key: number, value: number) => void;
       trackEvent: (
