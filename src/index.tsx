@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider } from 'mobx-react';
 import ReactDOM from 'react-dom';
-import { Route, Router } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import Game from './containers/game';
@@ -16,7 +16,6 @@ import Download from './containers/download';
 import { CSSTransition } from 'react-transition-group';
 import { SettingsStore } from './stores/settingsStore';
 import { ShopStore } from './stores/shopStore';
-import { createBrowserHistory } from 'history';
 
 const shopStore = new ShopStore();
 const settingsStore = new SettingsStore(shopStore);
@@ -27,16 +26,6 @@ const stores = {
   gameStore,
   shopStore,
 };
-
-const history = createBrowserHistory();
-
-history.listen(location => {
-  if (window.webGa) {
-    const path = location.pathname + location.search;
-    window.webGa('set', 'page', path.replace('/emoji-war/build', ''));
-    window.webGa('send', 'pageview');
-  }
-});
 
 const routes = [
   { path: '/about', Component: About },
@@ -50,7 +39,7 @@ const routes = [
 
 const router = (
   <Provider {...stores}>
-    <Router history={history}>
+    <HashRouter>
       {routes.map(({ path, Component }) => (
         <Route key={path} exact path={path}>
           {({ match }: { match: string[] }) => (
@@ -62,7 +51,7 @@ const router = (
           )}
         </Route>
       ))}
-    </Router>
+    </HashRouter>
   </Provider>
 );
 
