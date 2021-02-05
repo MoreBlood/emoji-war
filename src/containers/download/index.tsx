@@ -26,7 +26,12 @@ class Download extends React.Component<PropsType, null> {
     this.settingsStore = this.props.settingsStore;
   }
 
-  public componentWillMount(): void {}
+  public componentWillMount(): void {
+    if (window.webGa) {
+      window.webGa('set', 'page', 'download');
+      window.webGa('send', 'pageview');
+    }
+  }
 
   public componentWillUnmount(): void {}
 
