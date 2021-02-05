@@ -63,7 +63,7 @@ export class GameStore {
   private decrease(): void {
     this.timer -= 1;
     if (this.timer < 0) {
-      // this.scoredWrong = 1;
+      this.scoredWrong = 1;
       this.generate();
     }
   }
@@ -124,6 +124,7 @@ export class GameStore {
     this.scoreWrong = 0;
     this.scoreRight = 0;
     this.logicChanges = [];
+    this.lastIsCorrect = null;
     this.lifes = this.gameLifes;
     this.settingsStore.resetGameSize();
     this.generate();
@@ -214,6 +215,8 @@ export class GameStore {
     }
   }
 
+  @observable public lastIsCorrect?: boolean = null;
+
   @action
   public voteForPairs(vote: boolean): void {
     if (this.gameState !== GameState.playing) return;
@@ -222,7 +225,9 @@ export class GameStore {
       this.scoreRight += this.settingsStore.gameSize;
       this.shopStore.money += this.settingsStore.gameSize;
       this.settingsStore.highScore = this.scoreRight;
+      this.lastIsCorrect = true;
     } else {
+      this.lastIsCorrect = false;
       this.scoredWrong = 1;
     }
     this.checkLogic();

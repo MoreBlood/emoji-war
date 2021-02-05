@@ -5,11 +5,12 @@
 .download {
   @include safe-ios();
 
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
 
   .background {
     position: absolute;
@@ -18,6 +19,15 @@
     width: 100%;
     height: 100%;
     background: #8453e3;
+    animation: background-change 10s linear;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+
+    &.gradient {
+      // z-index: 2;
+      animation: none;
+      background: radial-gradient(80% 80% at 50% 100%, transparent 10%, #fff 100%);
+    }
   }
 
   .top-text {
@@ -129,5 +139,15 @@
     &-wrap {
       margin-top: 2vh;
     }
+  }
+}
+
+@keyframes background-change {
+  0% {
+    background: #8453e3;
+  }
+
+  100% {
+    background: #0eedf1;
   }
 }

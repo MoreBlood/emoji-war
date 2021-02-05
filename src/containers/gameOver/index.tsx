@@ -50,7 +50,7 @@ class GameOver extends React.Component<PropsType> {
     const { highScore } = this.settingsStore;
     window.ga?.trackEvent('Game', 'Share');
 
-    const message = `Hey, just scored ${scoreRight} in EmojiWar 🔥\nMy top is ${highScore} 👑\nhttps://moreblood.github.io/emoji-war/build/`;
+    const message = `Hey, just scored ${scoreRight} in The Emoji Match 🔥\nMy top is ${highScore} 👑\nhttps://moreblood.github.io/emoji-war/build/#/download`;
 
     var options = {
       message, // not supported on some apps (Facebook, Instagram)
@@ -58,7 +58,7 @@ class GameOver extends React.Component<PropsType> {
       subject: message, // fi. for email
       // files: ['www/og-image.jpg'],
       // url: 'https://moreblood.github.io/emoji-war/build/',
-      chooserTitle: 'EmojiWar 🔥', // Android only, you can override the default share sheet title
+      chooserTitle: 'The Emoji Match 🔥', // Android only, you can override the default share sheet title
     };
 
     window.plugins.socialsharing.shareWithOptions(options);

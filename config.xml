@@ -26,6 +26,8 @@
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
+        <preference name="DisallowOverscroll" value="true" />
+        <preference name="ScrollEnabled" value="false" />
         <config-file target="*-Info.plist" parent="GADApplicationIdentifier">
             <string>ca-app-pub-4791893824376842~7821957577</string>
         </config-file>

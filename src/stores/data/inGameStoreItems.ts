@@ -9,12 +9,12 @@ export const inGameStoreItems = [
     icon: '🦶',
     price: 15 * priceMultiplier,
   }),
-  new StoreItem({
-    name: 'Covid nightmare',
-    id: 'COVID_GAME_MODE',
-    icon: '🦠',
-    price: 10 * priceMultiplier,
-  }),
+  // new StoreItem({
+  //   name: 'Covid nightmare',
+  //   id: 'COVID_GAME_MODE',
+  //   icon: '🦠',
+  //   price: 10 * priceMultiplier,
+  // }),
   new StoreItem({ name: 'Regular', id: 'REGULAR_GAME_MODE', icon: '🎲', price: 0, hidden: true }),
   new StoreItem({ name: 'Pew pew', id: 'PEW_GAME_MODE', icon: '👊', price: 15 * priceMultiplier }),
   new StoreItem({ name: 'Extra life', id: 'EXTRA_LIFE', icon: '❤️', price: 50 * priceMultiplier }),

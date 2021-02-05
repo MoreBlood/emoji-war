@@ -13,6 +13,7 @@ import Emoji from '../../components/emoji';
 import { skin } from '../../helpers/emojis';
 import { autorun, IReactionDisposer, observable } from 'mobx';
 import { SettingsStore } from '../../stores/settingsStore';
+import classNames from '../../helpers/classNames';
 
 type PropsType = RouteComponentProps<{ mode?: string }> & {
   gameStore: GameStore;
@@ -202,6 +203,7 @@ class Game extends React.Component<PropsType, null> {
       isPlaying,
       lifes,
       isPaused,
+      lastIsCorrect,
     } = this.gameStore;
 
     const { gameSize } = this.settingsStore;
@@ -271,11 +273,24 @@ class Game extends React.Component<PropsType, null> {
                 </div>
               </div>
             </div>
+            {lastIsCorrect && lastIsCorrect !== null ? (
+              <div key={`${scoreRight}_${lastIsCorrect}`} className="result nice">
+                ✅
+              </div>
+            ) : null}
+            {!lastIsCorrect && lastIsCorrect !== null ? (
+              <div key={`${scoreRight}_${lifes}_`} className="result fail">
+                ❌
+              </div>
+            ) : null}
             <Swipeable className="gameField" onSwiping={this.onSwipe} onSwiped={this.onSwiped}>
               <div ref={this.pairs} className="pairs blured">
                 {[firstPair, secondPair].map((pair, index) => {
                   return (
-                    <TransitionGroup key={`${index}`} className="pair-holder scale">
+                    <TransitionGroup
+                      key={`${index}`}
+                      className={classNames('pair-holder', 'scale', { first: index === 0 })}
+                    >
                       <CSSTransition
                         key={pair.hash}
                         timeout={500}
