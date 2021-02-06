@@ -291,7 +291,12 @@ class Game extends React.Component<PropsType, null> {
                 ❌
               </div>
             ) : null}
-            <Swipeable className="gameField" onSwiping={this.onSwipe} onSwiped={this.onSwiped}>
+            <Swipeable
+              trackMouse
+              className="gameField"
+              onSwiping={this.onSwipe}
+              onSwiped={this.onSwiped}
+            >
               <div ref={this.pairs} className="pairs blured">
                 {[firstPair, secondPair].map((pair, index) => {
                   return (

@@ -73,8 +73,7 @@ class Download extends React.Component<PropsType, null> {
           delay: 500,
         });
         const newStyle = document.createElement('style');
-        newStyle.textContent =
-          '.gameField, .gameOver, .about, .settings, .menu, .store { padding-top: 0vh; }';
+        newStyle.textContent = '.game { align-items: flex-start; padding-top: 3vh; }';
         (ev.target as any).contentDocument.head.appendChild(newStyle);
       });
 
