@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2dd673d00968ff0195b3c555ed1c1e33",
+    "revision": "6a2aa508678c7ec3666175d3fed77928",
     "url": "./index.html"
   },
   {
-    "revision": "8c7fef0cf05f4c0c48f7",
-    "url": "./static/css/main.23f4b54e.chunk.css"
+    "revision": "5c7118184b9e86883b9d",
+    "url": "./static/css/main.825e36f7.chunk.css"
   },
   {
     "revision": "cd9e19122187bcd457c9",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/js/2.202d9f7d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8c7fef0cf05f4c0c48f7",
-    "url": "./static/js/main.66625d67.chunk.js"
+    "revision": "5c7118184b9e86883b9d",
+    "url": "./static/js/main.f83e0fa9.chunk.js"
   },
   {
     "revision": "93eb3c81440d38f09b20",
@@ -32,7 +32,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/iphone-min.64b9f5c6.png"
   },
   {
-    "revision": "9d58ff0e05efdaac699d0e388145cf75",
-    "url": "./static/media/try.9d58ff0e.svg"
+    "revision": "37ca222e737bed874f46464daf59e20c",
+    "url": "./static/media/try2.37ca222e.svg"
   }
 ]);
