@@ -3,14 +3,26 @@
 @import '../../styles/global.scss';
 
 .download {
-  @include safe-ios();
+  @include safe-ios-only();
 
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
+  overflow-y: scroll;
+
+  .wrap {
+    padding-top: 5vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 100%;
+    // background: rebeccapurple;
+    position: relative;
+  }
 
   .background {
     position: absolute;
@@ -75,6 +87,7 @@
     justify-content: center;
     // margin-top: (100vh - $height) / 1.2;
     margin-top: 2vh;
+    margin-bottom: 20vh;
 
     iframe {
       // position: absolute;

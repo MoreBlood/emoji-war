@@ -232,27 +232,29 @@ class Download extends React.Component<PropsType, null> {
       <div className="download">
         <div className="background"></div>
         <div className="background gradient"></div>
-        <div className="text">
-          <div className="text-wrap first">
-            <h2 className="top-text">Decide</h2>
-            <p className="secondary-text">if the top emojies are the same as bottom</p>
+        <div className="wrap">
+          <div className="text">
+            <div className="text-wrap first">
+              <h2 className="top-text">Decide</h2>
+              <p className="secondary-text">if the top emojies are the same as bottom</p>
+            </div>
+            <div className="text-wrap second">
+              <h2 className="top-text">Be careful!</h2>
+              <p className="secondary-text">🖐️ = 🖐🏿 = 🖐🏻 = 🖐🏼 = 🖐🏽 = 🖐🏾</p>
+            </div>
+            <div className="text-wrap third">
+              <h2 className="top-text">New modes</h2>
+              <p className="secondary-text">earn coins and spend them in game store</p>
+            </div>
           </div>
-          <div className="text-wrap second">
-            <h2 className="top-text">Be careful!</h2>
-            <p className="secondary-text">🖐️ = 🖐🏿 = 🖐🏻 = 🖐🏼 = 🖐🏽 = 🖐🏾</p>
+          <a href="#" className="app-store-button-wrap">
+            <button className="app-store-button"></button>
+          </a>
+          <div className="game-wrap" style={{ opacity: 0 }}>
+            <div className="iphone"></div>
+            <iframe ref={this.iframe} src="./#/game?mode=demo"></iframe>
+            <div className={classNames('helper')}></div>
           </div>
-          <div className="text-wrap third">
-            <h2 className="top-text">New modes</h2>
-            <p className="secondary-text">earn coins and spend them in game store</p>
-          </div>
-        </div>
-        <a href="#" className="app-store-button-wrap">
-          <button className="app-store-button"></button>
-        </a>
-        <div className="game-wrap" style={{ opacity: 0 }}>
-          <div className="iphone"></div>
-          <iframe ref={this.iframe} src="./#/game?mode=demo"></iframe>
-          <div className={classNames('helper')}></div>
         </div>
       </div>
     );
