@@ -9,6 +9,7 @@ import '../../styles/adaptive.scss';
 import { GameStore } from '../../stores/gameStore';
 import { numberToEmojiString } from '../../helpers/emojis';
 import { SettingsStore } from '../../stores/settingsStore';
+import { vibrate, VibrationType } from '../../helpers/vibrate';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -47,6 +48,7 @@ class GameOver extends React.Component<PropsType> {
   }
 
   private leaderboard = (): void => {
+    vibrate(VibrationType.tap);
     var data = {
       leaderboardId: 'top_scores',
     };
@@ -60,13 +62,15 @@ class GameOver extends React.Component<PropsType> {
   public componentWillUnmount(): void {}
 
   private start = (): void => {
+    vibrate(VibrationType.tap);
     window.ga?.trackEvent('Game', 'Restart');
     this.props.history.push('/game');
   };
-  private menu = (): void => this.props.history.push('/');
-  private settings = (): void => this.props.history.push('/settings');
-  private store = (): void => this.props.history.push('store');
+  private menu = (): void => vibrate(VibrationType.tap) && this.props.history.push('/');
+  private settings = (): void => vibrate(VibrationType.tap) && this.props.history.push('/settings');
+  private store = (): void => vibrate(VibrationType.tap) && this.props.history.push('store');
   private share = (): void => {
+    vibrate(VibrationType.tap);
     const { scoreRight } = this.gameStore;
     const { highScore } = this.settingsStore;
     window.ga?.trackEvent('Game', 'Share');

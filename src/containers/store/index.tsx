@@ -11,6 +11,7 @@ import { SettingsStore } from '../../stores/settingsStore';
 import { ShopStore } from '../../stores/shopStore';
 import List from '../../components/list';
 import { ListItemInterface } from '../../types/listItem';
+import { vibrate, VibrationType } from '../../helpers/vibrate';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -40,11 +41,8 @@ class Store extends React.Component<PropsType> {
 
   public componentWillUnmount(): void {}
 
-  private start = (): void => this.props.history.push('game');
-  private switchGameType = (): void => this.settingsStore.switchGameSize();
-  private switchLGBTFriendly = (): void => this.settingsStore.switchLGBTFriendly();
-  private switchSwipesDisabled = (): void => this.settingsStore.switchSwipesDisabled();
   private menu = (): void => {
+    vibrate(VibrationType.tap);
     this.props.history.push('/');
   };
 
@@ -61,7 +59,7 @@ class Store extends React.Component<PropsType> {
           listItems={Array.from(storeItems.values())
             .filter(e => !e.hidden)
             .map((e: ListItemInterface) => {
-              e.onClick = (): void => this.shopStore.buyItem(e.id);
+              e.onClick = (): void => vibrate(VibrationType.tap) && this.shopStore.buyItem(e.id);
               return e;
             })}
         />

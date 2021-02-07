@@ -8,6 +8,7 @@ import '../../styles/adaptive.scss';
 
 import { GameStore } from '../../stores/gameStore';
 import { SettingsStore } from '../../stores/settingsStore';
+import { vibrate, VibrationType } from '../../helpers/vibrate';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -34,16 +35,17 @@ class Settings extends React.Component<PropsType> {
 
   public componentWillUnmount(): void {}
 
-  private start = (): void => this.props.history.push('game');
   private switchGameType = (): void => this.settingsStore.switchGameSize();
   private switchGameMode = (): void => {
+    vibrate(VibrationType.tap);
     window.ga?.trackEvent('Settings', 'Change Game Mode');
     this.settingsStore.switchGameMode();
   };
   private switchLGBTFriendly = (): void => this.settingsStore.switchLGBTFriendly();
-  private switchSwipesDisabled = (): void => this.settingsStore.switchSwipesDisabled();
-  private reset = (): void => this.settingsStore.reset();
-  private menu = (): void => this.props.history.push('/');
+  private switchSwipesDisabled = (): void =>
+    vibrate(VibrationType.tap) && this.settingsStore.switchSwipesDisabled();
+  private reset = (): void => vibrate(VibrationType.tap) && this.settingsStore.reset();
+  private menu = (): void => vibrate(VibrationType.tap) && this.props.history.push('/');
 
   public render(): React.ReactNode {
     const { /* gameSizeEmoji, */ swipesDisabled, gameModeItem } = this.settingsStore;

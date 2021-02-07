@@ -14,6 +14,7 @@ import { skin } from '../../helpers/emojis';
 import { autorun, IReactionDisposer, observable } from 'mobx';
 import { SettingsStore } from '../../stores/settingsStore';
 import classNames from '../../helpers/classNames';
+import { vibrate, VibrationType } from '../../helpers/vibrate';
 
 type PropsType = RouteComponentProps<{ mode?: string }> & {
   gameStore: GameStore;
@@ -183,9 +184,10 @@ class Game extends React.Component<PropsType, null> {
   private yes = (): void => this.gameStore.voteForPairs(true);
   private no = (): void => this.gameStore.voteForPairs(false);
   private switch = (): void => this.settingsStore.switchGameSize();
-  private menu = (): void => this.props.history.push('');
+  private menu = (): void => vibrate(VibrationType.tap) && this.props.history.push('');
   private over = (): void => this.props.history.push('/gameOver');
   private togglePause = (): void => {
+    vibrate(VibrationType.tap);
     if (!this.isAnimating) this.gameStore.switchPause();
   };
   private pause = (): void => {
