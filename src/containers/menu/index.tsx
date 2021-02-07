@@ -9,18 +9,21 @@ import '../../styles/adaptive.scss';
 import { GameStore } from '../../stores/gameStore';
 import { vibrate, VibrationType } from '../../helpers/vibrate';
 import { ShopStore } from '../../stores/shopStore';
+import { SettingsStore } from '../../stores/settingsStore';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
+  settingsStore?: SettingsStore;
   shopStore?: ShopStore;
 };
 
 @withRouter
-@inject('gameStore', 'shopStore')
+@inject('gameStore', 'shopStore', 'settingsStore')
 @observer
 class Menu extends React.Component<PropsType> {
   private gameStore: GameStore;
   private shopStore: ShopStore;
+  private settingsStore: SettingsStore;
   private emoji = this.props.gameStore.randomSadOrHappyEmoticon;
 
   public constructor(props: PropsType) {
@@ -28,6 +31,7 @@ class Menu extends React.Component<PropsType> {
 
     this.gameStore = this.props.gameStore;
     this.shopStore = this.props.shopStore;
+    this.settingsStore = this.props.settingsStore;
   }
 
   public componentWillMount(): void {
@@ -46,9 +50,21 @@ class Menu extends React.Component<PropsType> {
   private settings = (): void => vibrate(VibrationType.tap) && this.props.history.push('settings');
   private about = (): void => vibrate(VibrationType.tap) && this.props.history.push('about');
   private store = (): void => vibrate(VibrationType.tap) && this.props.history.push('store');
+  private leaderboard = (): void => {
+    vibrate(VibrationType.tap);
+    var data = {
+      leaderboardId: 'top_scores',
+    };
+    window.gamecenter?.showLeaderboard(
+      board => console.log(board),
+      err => console.log(err),
+      data,
+    );
+  };
 
   public render(): React.ReactNode {
     const { money } = this.shopStore;
+    const { platform } = this.settingsStore;
 
     return (
       <div className="menu">
@@ -72,6 +88,11 @@ class Menu extends React.Component<PropsType> {
             <button className="button small blured" onClick={this.settings}>
               ⚙️
             </button>
+            {platform === 'iOS' ? (
+              <button className="button small blured" onClick={this.leaderboard}>
+                🥇
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

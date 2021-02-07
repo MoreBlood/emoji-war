@@ -34,7 +34,28 @@ class GameOver extends React.Component<PropsType> {
   public componentWillMount(): void {
     window.ga?.trackView('Game Over');
     window.ga?.trackEvent('Game', 'Score', 'Game Over Score', this.score);
+
+    var data = {
+      score: this.score,
+      leaderboardId: 'top_scores',
+    };
+    window.gamecenter?.submitScore(
+      () => {},
+      () => {},
+      data,
+    );
   }
+
+  private leaderboard = (): void => {
+    var data = {
+      leaderboardId: 'top_scores',
+    };
+    window.gamecenter?.showLeaderboard(
+      board => console.log(board),
+      err => console.log(err),
+      data,
+    );
+  };
 
   public componentWillUnmount(): void {}
 
@@ -71,11 +92,15 @@ class GameOver extends React.Component<PropsType> {
 
     return (
       <div className="gameOver">
-        <button className="blured thanks">
+        <button onClick={this.leaderboard} className="blured thanks">
           {isTop ? '👑 ' : ''}
           {numberToEmojiString(this.score)}
         </button>
-        <div className="blured highscore" style={{ visibility: isTop ? 'hidden' : 'visible' }}>
+        <div
+          onClick={this.leaderboard}
+          className="blured highscore"
+          style={{ visibility: isTop ? 'hidden' : 'visible' }}
+        >
           👑 {highScore}
         </div>
         <div className="all-buttons">

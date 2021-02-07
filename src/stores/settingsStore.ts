@@ -31,6 +31,14 @@ export class SettingsStore {
           this.platform = window.device.platform;
 
           window.ga.startTrackerWithId(process.env.REACT_APP_GA_UA_ID);
+          window.gamecenter?.auth(
+            user => {
+              console.log(user);
+            },
+            err => {
+              console.log(err);
+            },
+          );
           // initAd();
         },
         false,

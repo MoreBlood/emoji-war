@@ -15,6 +15,24 @@ declare global {
     device: any;
     TapticEngine: any;
     webGa: any;
+    gamecenter?: {
+      auth: (success: (user: any) => void, fail: (err: any) => void) => void;
+      showLeaderboard: (
+        success: (board: any) => void,
+        fail: (err: any) => void,
+        data: {
+          leaderboardId: string;
+        },
+      ) => void;
+      submitScore: (
+        success: (board: any) => void,
+        fail: (err: any) => void,
+        data: {
+          leaderboardId: string;
+          score: number;
+        },
+      ) => void;
+    };
     ga: {
       trackMetric: (key: number, value: number) => void;
       trackEvent: (

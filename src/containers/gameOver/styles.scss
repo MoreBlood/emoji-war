@@ -39,7 +39,6 @@
     border-radius: 2vh * $scaler;
     letter-spacing: 0.6vh * $scaler;
     padding-left: 2.1vh * $scaler;
-    pointer-events: none;
 
     &.blured {
       box-shadow: 0 0 2vh * $scaler #ff2e00;
