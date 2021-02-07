@@ -89,6 +89,7 @@ class Game extends React.Component<PropsType, null> {
   }
 
   public onSwipe = (e: EventData): void => {
+    this.postPlay();
     const { isPlaying } = this.gameStore;
     const { swipesDisabled } = this.settingsStore;
 
