@@ -3,14 +3,26 @@
 @import '../../styles/global.scss';
 
 .download {
-  @include safe-ios();
+  @include safe-ios-only();
 
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
+  overflow-y: scroll;
+
+  .wrap {
+    padding-top: 5vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 100%;
+    // background: rebeccapurple;
+    position: relative;
+  }
 
   .background {
     position: absolute;
@@ -75,6 +87,7 @@
     justify-content: center;
     // margin-top: (100vh - $height) / 1.2;
     margin-top: 2vh;
+    margin-bottom: 20vh;
 
     iframe {
       // position: absolute;
@@ -103,18 +116,18 @@
 
     .helper {
       position: absolute;
-      right: -8vh;
+      right: -5vh;
       bottom: 20vh;
       background-image: url('./try2.svg');
-      width: 20vh;
-      height: 10vh;
+      width: 30vh;
+      height: 12vh;
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center left;
       z-index: 1;
       // transition: 0.5s ease-in-out opacity 1s, 0.5s ease-in-out transform 1s;
       pointer-events: none;
-      transform-origin: left bottom;
+      transform-origin: left center;
 
       &.hidden {
         opacity: 0;

@@ -1,0 +1,17 @@
+@use 'src/styles/buttons';
+
+@import '../../styles/global.scss';
+
+.privacy {
+  // @include safe-ios();
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 5vh;
+  padding-bottom: 20vh;
+  box-sizing: border-box;
+}

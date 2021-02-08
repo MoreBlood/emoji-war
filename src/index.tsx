@@ -16,6 +16,8 @@ import Download from './containers/download';
 import { CSSTransition } from 'react-transition-group';
 import { SettingsStore } from './stores/settingsStore';
 import { ShopStore } from './stores/shopStore';
+import Privacy from './containers/privacy';
+import Help from './containers/help';
 
 const shopStore = new ShopStore();
 const settingsStore = new SettingsStore(shopStore);
@@ -35,6 +37,8 @@ const routes = [
   { path: '/gameOver', Component: GameOver },
   { path: '/store', Component: Store },
   { path: '/download', Component: Download },
+  { path: '/privacy', Component: Privacy },
+  { path: '/help', Component: Help },
 ];
 
 const router = (

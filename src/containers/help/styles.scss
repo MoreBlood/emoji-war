@@ -1,0 +1,25 @@
+@use 'src/styles/buttons';
+
+@import '../../styles/global.scss';
+
+.help {
+  // @include safe-ios();
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  box-sizing: border-box;
+
+  iframe {
+    padding: 2vh;
+    width: 100%;
+    min-height: 1100px;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    flex-shrink: 0;
+  }
+}
