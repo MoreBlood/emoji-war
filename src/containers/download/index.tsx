@@ -246,7 +246,12 @@ class Download extends React.Component<PropsType, null> {
             <p className="secondary-text">earn coins and spend them in game store</p>
           </div>
         </div>
-        <a href="#" className="app-store-button-wrap">
+        <a
+          href="https://apps.apple.com/us/app/the-emoji-match/id1546614967"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="app-store-button-wrap"
+        >
           <button className="app-store-button"></button>
         </a>
         <div className="game-wrap" style={{ opacity: 0 }}>

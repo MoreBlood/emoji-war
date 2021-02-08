@@ -107,7 +107,7 @@ class Game extends React.Component<PropsType, null> {
     const screenWidth = window.innerWidth / 2;
 
     const maxRotation = (this.offsetX / screenWidth) * 5;
-    const scale = Math.abs(this.offsetX / screenWidth) / 3;
+    const scale = Math.min(Math.abs(this.offsetX / screenWidth) / 3, 1);
     const maxColor = Math.abs(this.offsetX / screenWidth) + 0.5;
 
     if (this.offsetX / screenWidth > 0.2) {
