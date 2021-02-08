@@ -56,7 +56,7 @@ class Privacy extends React.Component<PropsType, null> {
           Match. This policy is not applicable to any information collected offline or via channels
           other than this website. Our Privacy Policy was created with the help of the{' '}
           <a href="https://www.privacypolicyonline.com/privacy-policy-generator/">
-            Free Privacy Policy Generator
+            Free Privacy Policy Generator.
           </a>
         </p>
         <h2>Consent</h2>
