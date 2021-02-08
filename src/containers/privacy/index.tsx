@@ -58,7 +58,6 @@ class Privacy extends React.Component<PropsType, null> {
           <a href="https://www.privacypolicyonline.com/privacy-policy-generator/">
             Free Privacy Policy Generator
           </a>
-          .
         </p>
         <h2>Consent</h2>
         <p>
