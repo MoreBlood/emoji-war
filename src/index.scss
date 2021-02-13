@@ -276,6 +276,7 @@ button:disabled {
   display: none;
   margin-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
   margin-bottom: env(safe-area-inset-bottom); /* iOS 11.2 */
+  z-index: 10;
 
   &.visible {
     display: block;
@@ -288,6 +289,7 @@ button:disabled {
     font-weight: 600;
     font-size: 2.5vh;
     pointer-events: all;
+    padding: 0;
     padding-right: 2vh;
     height: 100%;
   }

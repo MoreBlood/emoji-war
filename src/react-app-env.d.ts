@@ -13,6 +13,7 @@ declare global {
   interface Window {
     plugins: any;
     device: any;
+    cordova: any;
     TapticEngine: any;
     webGa?: (...args) => void;
     gamecenter?: {

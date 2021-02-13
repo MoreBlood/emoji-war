@@ -104,4 +104,8 @@
   .buttons {
     margin: 1vh * $scaler;
   }
+
+  .list_holder {
+    flex-shrink: 0;
+  }
 }

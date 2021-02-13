@@ -29,6 +29,7 @@ export class SettingsStore {
         () => {
           console.log('deviceready');
           this.platform = window.device.platform;
+          window.open = window.cordova.InAppBrowser.open;
 
           window.ga.startTrackerWithId(process.env.REACT_APP_GA_UA_ID);
           window.gamecenter?.auth(
