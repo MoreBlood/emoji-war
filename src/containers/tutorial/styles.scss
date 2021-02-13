@@ -1,0 +1,179 @@
+@use 'src/styles/buttons';
+
+@import '../../styles/global.scss';
+
+.tutorial {
+  @include safe-ios-only();
+
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  .wrap {
+    padding-top: 5vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 100%;
+    // background: rebeccapurple;
+    position: relative;
+
+    .top-text {
+      font-size: 5vh;
+    }
+
+    .tutorial-logo {
+      margin-top: 20vh;
+      box-sizing: border-box;
+      width: 100%;
+      height: 30vh;
+      position: absolute;
+
+      .logo-big {
+        width: 100%;
+        height: 100%;
+        background-image: url('./logo.svg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      bottom: -30vh;
+      position: absolute;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+
+      .button.small {
+        color: white;
+        width: auto;
+        padding: 0 2vh;
+        white-space: nowrap;
+        font-size: 2vh;
+        font-weight: 100;
+        height: 6vh;
+      }
+    }
+
+    $width: 20vh;
+
+    .border {
+      width: $width;
+      margin: 3vh 0;
+      border-bottom: 0.5vh * $scaler dotted rgba(0, 0, 0, 0.4);
+      position: relative;
+
+      .equality {
+        position: absolute;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 3vh;
+        width: 10vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 3vh;
+        top: -1.5vh;
+
+        &.first {
+          left: -$width / 2;
+        }
+
+        &.second {
+          left: 0;
+        }
+
+        &.third {
+          right: 0;
+        }
+
+        &.fourth {
+          right: -$width / 2;
+        }
+      }
+    }
+
+    .pairs {
+      padding-top: 15vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pair {
+      width: $width;
+      height: $width;
+      position: relative;
+      margin: 2vh;
+      box-sizing: border-box;
+
+      .emoji__holder {
+        position: absolute;
+        padding: 1.5vh;
+
+        &.first {
+          top: 0;
+          left: 0;
+        }
+
+        &.second {
+          top: 0;
+          right: 0;
+        }
+
+        &.third {
+          bottom: 0;
+          left: 0;
+        }
+
+        &.fourth {
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
+  }
+
+  .text {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+
+    &-wrap {
+      &.second,
+      &.third,
+      &.fifth,
+      &.fourth {
+        position: absolute;
+        top: 0;
+      }
+    }
+  }
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./blueprint.svg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+  }
+
+  .navigation {
+    bottom: 0;
+    top: initial;
+  }
+}

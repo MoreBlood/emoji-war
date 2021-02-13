@@ -114,6 +114,18 @@ export class SettingsStore {
     this._swipesDisabled.value = value;
   }
 
+  private _firstTime = new SavedSettingProperty('firstTime', true, 'bool');
+
+  @computed
+  public get firstTime(): boolean {
+    const { value } = this._firstTime;
+    return value as boolean;
+  }
+
+  public set firstTime(value: boolean) {
+    this._firstTime.value = value;
+  }
+
   private _highScore = new SavedSettingProperty('highScore', 0, 'number');
 
   @computed

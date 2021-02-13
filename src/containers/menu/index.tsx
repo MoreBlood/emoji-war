@@ -32,6 +32,10 @@ class Menu extends React.Component<PropsType> {
     this.gameStore = this.props.gameStore;
     this.shopStore = this.props.shopStore;
     this.settingsStore = this.props.settingsStore;
+
+    if (this.settingsStore.firstTime) {
+      this.props.history.push('tutorial');
+    }
   }
 
   public componentWillMount(): void {
@@ -65,6 +69,10 @@ class Menu extends React.Component<PropsType> {
   public render(): React.ReactNode {
     const { money } = this.shopStore;
     const { platform } = this.settingsStore;
+
+    if (this.settingsStore.firstTime) {
+      return null;
+    }
 
     return (
       <div className="menu">

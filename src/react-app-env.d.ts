@@ -14,7 +14,7 @@ declare global {
     plugins: any;
     device: any;
     TapticEngine: any;
-    webGa: any;
+    webGa?: (...args) => void;
     gamecenter?: {
       auth: (success: (user: any) => void, fail: (err: any) => void) => void;
       showLeaderboard: (
@@ -33,7 +33,7 @@ declare global {
         },
       ) => void;
     };
-    ga: {
+    ga?: {
       trackMetric: (key: number, value: number) => void;
       trackEvent: (
         category: string,

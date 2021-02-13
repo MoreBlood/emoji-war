@@ -6,10 +6,11 @@ import './styles.scss';
 import '../../styles/global.scss';
 import '../../styles/adaptive.scss';
 import { SettingsStore } from '../../stores/settingsStore';
-import { isIOs } from '../../helpers/platform';
+import { isIOs, isNative } from '../../helpers/platform';
 import classNames from '../../helpers/classNames';
 import { observable } from 'mobx';
 import anime from 'animejs';
+import { vibrate, VibrationType } from '../../helpers/vibrate';
 
 type PropsType = RouteComponentProps<{}> & {
   settingsStore: SettingsStore;
@@ -33,6 +34,8 @@ class Privacy extends React.Component<PropsType, null> {
     }
   }
 
+  private about = (): void => vibrate(VibrationType.tap) && this.props.history.goBack();
+
   public componentWillUnmount(): void {}
 
   public componentDidMount(): void {}
@@ -40,6 +43,12 @@ class Privacy extends React.Component<PropsType, null> {
   public render(): React.ReactNode {
     return (
       <div className="privacy">
+        <div className="background"></div>
+        <div className={classNames('navigation', { visible: isNative() })}>
+          <button onClick={this.about} className="back">
+            {'<'} Back
+          </button>
+        </div>
         <h1>Privacy Policy for One Finger Apps</h1>
         <p>
           At The Emoji Match main priorities is the privacy of our visitors. This Privacy Policy

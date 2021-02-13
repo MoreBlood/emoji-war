@@ -18,6 +18,7 @@ import { SettingsStore } from './stores/settingsStore';
 import { ShopStore } from './stores/shopStore';
 import Privacy from './containers/privacy';
 import Help from './containers/help';
+import Tutorial from './containers/tutorial';
 
 const shopStore = new ShopStore();
 const settingsStore = new SettingsStore(shopStore);
@@ -39,6 +40,7 @@ const routes = [
   { path: '/download', Component: Download },
   { path: '/privacy', Component: Privacy },
   { path: '/help', Component: Help },
+  { path: '/tutorial', Component: Tutorial },
 ];
 
 const router = (

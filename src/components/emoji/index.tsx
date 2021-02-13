@@ -4,6 +4,7 @@ import './styles.scss';
 interface Props {
   emoji?: string;
   gameSize?: number;
+  className?: string;
 }
 
 const getClass = (size: number): string => {
@@ -18,7 +19,11 @@ const getClass = (size: number): string => {
 };
 
 const Emoji: React.FC<Props> = props => {
-  return <div className={`${getClass(props.gameSize)} emoji__holder`}>{props.children}</div>;
+  return (
+    <div className={`${getClass(props.gameSize)} emoji__holder ${props.className}`}>
+      {props.children}
+    </div>
+  );
 };
 
 export default Emoji;

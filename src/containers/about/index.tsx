@@ -8,6 +8,9 @@ import '../../styles/adaptive.scss';
 import { SettingsStore } from '../../stores/settingsStore';
 import { isIOs } from '../../helpers/platform';
 import { vibrate, VibrationType } from '../../helpers/vibrate';
+import List from '../../components/list';
+import { computed } from 'mobx';
+import { ListItemInterface } from '../../types/listItem';
 
 type PropsType = RouteComponentProps<{}> & {
   settingsStore: SettingsStore;
@@ -30,6 +33,35 @@ class About extends React.Component<PropsType, null> {
 
   private menu = (): void => vibrate(VibrationType.tap) && this.props.history.push('/');
 
+  @computed private get items(): ListItemInterface[] {
+    return [
+      {
+        icon: '🤔',
+        name: 'Tutorial',
+        number: '',
+        id: 'tutorial',
+        disabled: false,
+        onClick: (): void => vibrate(VibrationType.tap) && this.props.history.push('tutorial'),
+      },
+      {
+        icon: '🔒',
+        name: 'Privacy',
+        number: '',
+        id: 'privacy',
+        disabled: false,
+        onClick: (): void => vibrate(VibrationType.tap) && this.props.history.push('privacy'),
+      },
+      {
+        icon: '💁🏻',
+        name: 'Help & Feedback',
+        number: '',
+        id: 'help',
+        disabled: false,
+        onClick: (): void => vibrate(VibrationType.tap) && this.props.history.push('help'),
+      },
+    ];
+  }
+
   public render(): React.ReactNode {
     const { platform } = this.settingsStore;
 
@@ -37,7 +69,6 @@ class About extends React.Component<PropsType, null> {
       <div className="about">
         <div className="logo">🤔</div>
         <div className="thanks blured">
-          <big>FAQ:</big> Compare shuffled emoticons from top to bottom <br />
           <big>Big</big> thanks to my friends for great advises and testing this little game <br />
           <div>
             <big className="heart">❤️</big>
@@ -47,10 +78,8 @@ class About extends React.Component<PropsType, null> {
             <big className="heart">💙</big>
             <big className="heart">💜</big>
           </div>
-          I’ve made this for fun.
-          <br />
-          Platform: {platform}
         </div>
+        <List listItems={this.items} />
         <div className="all-buttons">
           <div className="buttons">
             <button className="button back blured" onClick={this.menu}>
