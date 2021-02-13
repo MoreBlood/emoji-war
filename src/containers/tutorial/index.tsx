@@ -29,7 +29,10 @@ class Tutorial extends React.Component<PropsType, null> {
     this.setup();
 
     this.isFirstTimeNative = !this.settingsStore.firstTime && isNative();
+    this.isFirstTime = this.settingsStore.firstTime;
   }
+
+  @observable private isPlaying = false;
 
   public componentWillMount(): void {
     if (window.webGa) {
@@ -43,6 +46,26 @@ class Tutorial extends React.Component<PropsType, null> {
 
   public playFirstPart = (): void => {
     // this.firstPartTimeline.play();
+
+    this.isPlaying = true;
+
+    anime({
+      targets: '.pairs',
+      scale: [0, 1],
+      opacity: [0, 1],
+    });
+
+    anime({
+      targets: '.start.buttons',
+      scale: [1, 0],
+      opacity: [1, 0],
+    });
+
+    anime({
+      targets: '.logo-big',
+      cale: [1, 0],
+      opacity: [1, 0],
+    });
 
     anime({
       targets: '.text-wrap.first > .top-text',
@@ -73,8 +96,31 @@ class Tutorial extends React.Component<PropsType, null> {
 
   private isFirstTimeNative: boolean = false;
 
+  private isFirstTime: boolean = false;
+
   public createFirstPart(): void {
     const firstAnimationStart = 0;
+
+    anime({
+      targets: '.text-wrap.first > .top-text',
+      translateX: '10vh',
+      opacity: 0,
+      duration: 0,
+    });
+
+    anime({
+      targets: '.pairs',
+      scale: 0,
+      opacity: 0,
+      duration: 0,
+    });
+
+    anime({
+      targets: '.logo-big',
+      scale: 1,
+      opacity: 1,
+      duration: 0,
+    });
 
     this.firstPartTimeline
       .add(
@@ -244,8 +290,8 @@ class Tutorial extends React.Component<PropsType, null> {
       .add(
         {
           targets: '.pairs',
-          opacity: [1, 0],
-          scale: [1, 0],
+          opacity: 0,
+          scale: 0,
         },
         duration * 10,
       )
@@ -267,9 +313,12 @@ class Tutorial extends React.Component<PropsType, null> {
       )
       .add(
         {
-          targets: '.buttons',
+          targets: '.end.buttons',
           opacity: [0, 1],
           scale: [0, 1],
+          begin: (): void => {
+            this.isPlaying = false;
+          },
         },
         duration * 10 + 1200,
       );
@@ -327,6 +376,11 @@ class Tutorial extends React.Component<PropsType, null> {
     ];
   }
 
+  private play = (): void => {
+    this.restart();
+    this.playFirstPart();
+  };
+
   private restart = (): void => {
     this.setup();
     this.firstPartTimeline = anime.timeline({ loop: false, autoplay: false });
@@ -335,8 +389,6 @@ class Tutorial extends React.Component<PropsType, null> {
 
     this.createFirstPart();
     this.createSecondPart();
-
-    this.playFirstPart();
   };
 
   private start = (): void => vibrate(VibrationType.tap) && this.props.history.push('game');
@@ -408,12 +460,30 @@ class Tutorial extends React.Component<PropsType, null> {
           </div>
           <div className="tutorial-logo">
             <div className="logo-big"></div>
-            <div className="buttons">
+            <div className="end buttons">
               <button className="button play blured" onClick={this.start}>
                 ▶️
               </button>
-              <button onClick={this.restart} className="button small blured">
+              <button
+                onClick={this.play}
+                disabled={this.isPlaying}
+                className="button small blured visible"
+              >
                 🔁 Repeat Tutorial
+              </button>
+            </div>
+            <div className="start buttons">
+              <button className="button play blured" onClick={this.play}>
+                📖
+              </button>
+              <button
+                onClick={this.start}
+                // disabled={this.isPlaying}
+                className={classNames('button small blured', {
+                  visible: this.isFirstTime,
+                })}
+              >
+                ⏭️ Skip Tutorial
               </button>
             </div>
           </div>
