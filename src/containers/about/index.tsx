@@ -57,7 +57,10 @@ class About extends React.Component<PropsType, null> {
         number: '',
         id: 'help',
         disabled: false,
-        onClick: (): void => vibrate(VibrationType.tap) && this.props.history.push('help'),
+        onClick: (): void => {
+          vibrate(VibrationType.tap);
+          window.open('https://emoji-match.fun/build/#/help', '_system');
+        },
       },
     ];
   }

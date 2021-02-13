@@ -29,6 +29,8 @@ class Tutorial extends React.Component<PropsType, null> {
     this.setup();
 
     this.isFirstTimeNative = !this.settingsStore.firstTime && isNative();
+
+    console.log(this.isFirstTimeNative);
   }
 
   public componentWillMount(): void {

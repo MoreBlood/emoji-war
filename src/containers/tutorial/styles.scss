@@ -176,4 +176,8 @@
     bottom: 0;
     top: initial;
   }
+
+  .list_holder {
+    flex-shrink: 0;
+  }
 }
