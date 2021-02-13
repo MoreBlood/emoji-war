@@ -115,7 +115,7 @@ export class SettingsStore {
     this._swipesDisabled.value = value;
   }
 
-  private _firstTime = new SavedSettingProperty('firstTime', true, 'bool');
+  private _firstTime = new SavedSettingProperty('firstTime_', true, 'bool');
 
   @computed
   public get firstTime(): boolean {
