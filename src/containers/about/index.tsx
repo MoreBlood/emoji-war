@@ -40,6 +40,7 @@ class About extends React.Component<PropsType, null> {
         name: 'Tutorial',
         number: '',
         id: 'tutorial',
+        visible: true,
         disabled: false,
         onClick: (): void => vibrate(VibrationType.tap) && this.props.history.push('tutorial'),
       },
@@ -48,6 +49,7 @@ class About extends React.Component<PropsType, null> {
         name: 'Privacy',
         number: '',
         id: 'privacy',
+        visible: true,
         disabled: false,
         onClick: (): void => vibrate(VibrationType.tap) && this.props.history.push('privacy'),
       },
@@ -57,12 +59,25 @@ class About extends React.Component<PropsType, null> {
         number: '',
         id: 'help',
         disabled: false,
+        visible: true,
         onClick: (): void => {
           vibrate(VibrationType.tap);
           window.open('https://emoji-match.fun/build/#/help');
         },
       },
-    ];
+      {
+        icon: '⭐',
+        name: 'Rate',
+        number: '',
+        id: 'rate',
+        disabled: false,
+        visible: isIOs(),
+        onClick: (): void => {
+          vibrate(VibrationType.tap);
+          window.cordova?.plugins?.InAppRatingsReview?.requestReview();
+        },
+      },
+    ].filter(a => a.visible);
   }
 
   public render(): React.ReactNode {

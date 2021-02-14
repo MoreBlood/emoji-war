@@ -4,5 +4,6 @@ export interface ListItemInterface {
   number: string;
   id: string;
   disabled: boolean;
+  visible?: boolean;
   onClick?(): void;
 }

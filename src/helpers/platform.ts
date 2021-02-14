@@ -42,8 +42,6 @@ export const isIOs = (): boolean => {
   }
   const platform: Platform = Parser.parseEnum(window.device.platform, Platform);
 
-  console.log(platform);
-
   switch (platform) {
     case Platform.ios:
     case Platform.ipad:

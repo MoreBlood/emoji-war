@@ -10,6 +10,7 @@ import { GameStore } from '../../stores/gameStore';
 import { vibrate, VibrationType } from '../../helpers/vibrate';
 import { ShopStore } from '../../stores/shopStore';
 import { SettingsStore } from '../../stores/settingsStore';
+import { isIOs } from '../../helpers/platform';
 
 type PropsType = RouteComponentProps<{}> & {
   gameStore?: GameStore;
@@ -96,7 +97,7 @@ class Menu extends React.Component<PropsType> {
             <button className="button small blured" onClick={this.settings}>
               ⚙️
             </button>
-            {platform === 'iOS' ? (
+            {isIOs() ? (
               <button className="button small blured" onClick={this.leaderboard}>
                 🥇
               </button>
